@@ -1,18 +1,13 @@
-@use '_variable' as *;
-
-@mixin mono($size: 0.6875rem, $weight: 400) {
-  font-family: $font-mono;
-  font-size: $size;
-  font-weight: $weight;
+@mixin center-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@mixin hard-shadow($offset: $shadow-sm, $color: $navy) {
-  box-shadow: $offset $offset 0 $color;
-}
-
-@mixin focus-ring {
-  &:focus-visible {
-    outline: 3px solid $cyan;
-    outline-offset: 2px;
-  }
+@mixin button-style {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
 }
