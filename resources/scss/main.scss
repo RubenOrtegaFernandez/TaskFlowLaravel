@@ -1,6 +1,36 @@
-@use 'variable';
-@use 'mixins';
-@use 'botons';
-@use 'encapçalament';
-@use 'peus_de_pàgina';
-@use 'responsivitat';
+// Importa les variables
+@import 'variables';
+
+// Importa els mixins
+@import 'mixins';
+
+// Importa els estils de botons
+@import 'botons';
+
+// Importa els estils de l'encapçalament
+@import 'encapçalament';
+
+// Importa els estils del peu de pàgina
+@import 'peus_de_pàgina';
+
+// Importa els estils de resposivitat
+@import 'responsiut';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: $font-body;
+  background: linear-gradient(135deg, $color-light, $color-secondary);
+}
+
+.page {
+  @include center-element;
+  flex: 1;
+  padding: 40px 20px;
+}

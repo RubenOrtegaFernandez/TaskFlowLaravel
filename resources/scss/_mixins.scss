@@ -1,0 +1,15 @@
+// Centra un element (mixin del PDF)
+@mixin center-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Vora doble reutilitzable
+@mixin neo-border {
+  background-color: $color-white;
+  border: 3px solid $color-primary;
+  box-shadow:
+    0 0 0 4px $color-secondary,
+    3px 5px 0 4px rgba($color-primary, 0.35);
+}
