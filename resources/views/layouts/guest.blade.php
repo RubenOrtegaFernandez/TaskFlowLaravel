@@ -19,11 +19,6 @@
         </a>
     </header>
 
-    <section class="hero">
-        <h1 class="hero__title">Gestiona les teves tasques<br>amb eficiència</h1>
-        <p class="hero__subtitle">Coordina el teu equip, resol incidències a l'instant i escala la productivitat des d'un sol lloc.</p>
-    </section>
-
     <main class="page">
         @yield('content')
     </main>

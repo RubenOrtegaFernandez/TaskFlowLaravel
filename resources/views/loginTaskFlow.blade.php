@@ -6,9 +6,6 @@
 <div class="login-wrap">
     <form class="login-card" method="POST" action="#">
         @csrf
-        <h2 class="login-card__title">Benvingut de nou</h2>
-        <p class="login-card__sub">// Inicia sessió al teu compte</p>
-
         <div class="field">
             <label class="field__label" for="email">
                 <span>[ Correu electrònic ]</span>
@@ -28,20 +25,6 @@
                 <input class="field__input" type="password" id="password" name="password" placeholder="Contrasenya" required>
             </div>
         </div>
-
-        <div class="login-options">
-            <label class="login-options__remember">
-                <input type="checkbox" name="remember" checked> Recorda'm
-            </label>
-            <a href="#">Has oblidat la contrasenya?</a>
-        </div>
-
-        <button type="submit" class="btn btn--primary">Iniciar sessió</button>
-
-        <div class="divider">O</div>
-
-        <button type="button" class="btn btn--outline">Continuar amb Google</button>
-
         <p class="login-card__register">No tens compte? <a href="#">Registra't</a></p>
     </form>
 </div>
