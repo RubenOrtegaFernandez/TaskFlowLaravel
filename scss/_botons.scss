@@ -1,0 +1,24 @@
+@use '_variable' as *;
+@use '_mixins' as *;
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border: $border-w solid $navy;
+  cursor: pointer;
+  text-align: center;
+  text-transform: uppercase;
+  color: $navy;
+  @include mono(0.6875rem, 600);
+  @include hard-shadow($shadow-sm);
+  @include focus-ring;
+
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 $navy;
+  }
+
+  &--primary { background: $cyan; }
+  &--outline { background: $white; }
+}

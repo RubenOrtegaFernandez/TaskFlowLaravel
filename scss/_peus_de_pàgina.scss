@@ -1,0 +1,13 @@
+@use '_variable' as *;
+@use '_mixins' as *;
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.95rem $page-gutter;
+  background: $white;
+  border-top: $border-w solid $navy;
+  color: $navy;
+  @include mono(0.625rem);
+}

@@ -1,0 +1,24 @@
+@forward '_variable';
+@forward '_mixins';
+@forward '_botons';
+@forward '_encapçalament';
+@forward '_peus_de_pàgina';
+
+@use '_variable' as *;
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: $bg;
+  color: $navy;
+  font-family: $font-mono;
+  border: 1px solid #6b7fa0;
+}
+
+.page { flex: 1; }
+a { color: $link; }
