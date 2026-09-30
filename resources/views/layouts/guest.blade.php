@@ -11,12 +11,9 @@
 </head>
 <body>
     <header class="header">
-        <a href="{{ url('/') }}" class="header__logo" aria-label="TaskFlow">
-            LOGO
-            <span class="header__logo-text">
-                <!-- AQUI VA EL LOGOOOOOO -->
-            </span>
-        </a>
+    <a href="{{ url('/') }}" class="header__logo" aria-label="TaskFlow">
+        <img class="header__logo-img" src="{{ asset('img/logo_text.svg') }}" alt="TaskFlow">
+    </a>
     </header>
 
     <main class="page">

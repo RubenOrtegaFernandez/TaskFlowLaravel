@@ -3,10 +3,10 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build",
-        "dev": "vite",
-        "sass:build": "sass resources/sass/app.scss public/css/main.css --style=compressed",
-        "sass:watch": "sass --watch resources/sass/app.scss:public/css/main.css"
+    "build": "vite build",
+    "dev": "vite",
+    "sass:build": "sass resources/scss/main.scss public/css/main.css --style=compressed",
+    "sass:watch": "sass --watch resources/scss/main.scss:public/css/main.css"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
