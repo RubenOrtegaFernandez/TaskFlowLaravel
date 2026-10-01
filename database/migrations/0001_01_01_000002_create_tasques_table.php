@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nom_tas', 25);
             $table->string('descripcio', 255);
             $table->timestamp('data_inici');
-            $table->timestamp('data_final');
+            $table->timestamp('data_final')->nullable();
             $table->enum('prioritat', ['baixa','mitja', 'alta', 'urgent']);
             $table->string('categoria', 25);
             $table->foreignId('id_usr_creador')->nullable();

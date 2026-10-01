@@ -9,7 +9,7 @@
         <h1 class="login-title__text">Inici de sessió</h1>
     </div>
 
-    <form class="login-card" method="POST" action="#">
+    <form class="login-card" method="POST" action="/login">
         @csrf
 
         <div class="deco deco--top" aria-hidden="true">
@@ -19,15 +19,15 @@
         </div>
 
         <div class="field">
-            <label class="field__label" for="email">Correu electrònic</label>
-            <input class="field__input field__input--right" type="email" id="email" name="email" placeholder="Correu electrònic" autocomplete="email" required>
             <span class="field__icon field__icon--correu" aria-hidden="true"></span>
+            <label class="field__label" for="email">Correu electrònic</label>
+            <input class="field__input" type="email" id="email" name="correu" placeholder="Correu electrònic" autocomplete="email" required>
         </div>
 
         <div class="field">
             <span class="field__icon field__icon--clau" aria-hidden="true"></span>
             <label class="field__label" for="password">Contrasenya</label>
-            <input class="field__input" type="password" id="password" name="password" placeholder="Contrasenya" autocomplete="current-password" required>
+            <input class="field__input" type="password" id="password" name="contrasenya" placeholder="Contrasenya" autocomplete="current-password" required>
         </div>
 
         <div class="login-actions">
