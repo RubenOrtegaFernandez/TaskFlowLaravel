@@ -32,7 +32,7 @@
 
         <div class="login-actions">
             <div class="login-actions__options">
-                <a class="login-actions__link" href="#">Has oblidat la contrasenya?</a>
+                <a class="login-actions__link" href="/contrasenya/oblidada">Has oblidat la contrasenya?</a>
                 <label class="remember">
                     <input class="remember__check" type="checkbox" name="remember">
                     <span>Recorda'm en el dispositiu</span>
@@ -48,7 +48,7 @@
         </div>
     </form>
 
-    <p class="login-register">No tens compte? <a href="#">Registra't</a></p>
+    <p class="login-register">No tens compte? <a href="/registre">Registra't</a></p>
 
 </div>
 @endsection

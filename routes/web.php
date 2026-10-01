@@ -18,3 +18,11 @@ Route::get('/cap', function () {
 Route::get('/client', function () {
     return 'Pàgina del client';
 });
+
+Route::get('/contrasenya/oblidada', function () {
+    return view('contrasenyaOblidada');
+});
+
+Route::get('/registre', function () {
+    return view('registre');
+});
