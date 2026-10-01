@@ -10,6 +10,9 @@
 // Importa els estils de l'encapçalament
 @import 'encapçalament';
 
+// Importa els estils del login
+@import 'login';
+
 // Importa els estils del peu de pàgina
 @import 'peus_de_pàgina';
 
@@ -25,12 +28,25 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: $font-body;
-  background: linear-gradient(135deg, $color-light, $color-secondary);
+  font-family: $font-cos;
+  background-color: $color-clar;
+
+  // Fons difuminat amb efecte vidre
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(rgba($color-clar, 0.55), rgba($color-clar, 0.55)),
+      url($imatge-fons) center / cover no-repeat;
+    filter: blur(6px);
+    transform: scale(1.05); // evita vores clares per culpa del blur
+  }
 }
 
 .page {
-  @include center-element;
+  @include centrar-element;
   flex: 1;
   padding: 40px 20px;
 }

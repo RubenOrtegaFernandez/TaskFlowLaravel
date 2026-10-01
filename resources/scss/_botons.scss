@@ -1,0 +1,25 @@
+.btn {
+  flex-shrink: 0;
+  min-width: 128px;
+  height: 49px;
+  padding: 0 0 0 0.2em;
+  background-color: $color-secundari;
+  border: 4px solid $color-primari;
+  border-radius: 12px;
+  color: $color-blanc;
+  font-family: $font-cos;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-primari;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $color-primari;
+    outline-offset: 3px;
+  }
+}

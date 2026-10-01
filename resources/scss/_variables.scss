@@ -1,9 +1,21 @@
 // Variables per als colors
-$color-primary: #7bc6eb;
-$color-secondary: #a6daf4;
-$color-light: #eaf8ff;
-$color-white: #ffffff;
+$color-primari: #7bc6eb;
+$color-secundari: #a6daf4;
+$color-clar: #eaf8ff;
+$color-suau: #9dd4f0;
+$color-blanc: #ffffff;
+$color-ombra: #0c1e27;
 
 // Variables per a tipografies
-$font-heading: 'Syne', sans-serif;
-$font-body: 'IBM Plex Mono', monospace;
+$font-titol: 'Lalezar', sans-serif;
+$font-cos: 'Martian Mono', monospace;
+
+// Imatge de fons (ruta relativa a public/css/main.css)
+$imatge-fons: '../img/fons.png';
+
+// Icones SVG (ruta relativa a public/css/main.css)
+$icona-correu: '../img/email-1-svgrepo-com.svg';
+$icona-clau: '../img/key-svgrepo-com.svg';
+
+// Amplades (px) de les barres decoratives del login
+$amplades-barres: (68, 239, 170, 196, 62, 220, 181, 314);
