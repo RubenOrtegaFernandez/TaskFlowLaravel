@@ -23,43 +23,42 @@
   box-sizing: border-box;
 }
 
-// 1rem = 10px al disseny. La mida s'adapta a la finestra:
-// així tota la pàgina hi cap sense fer scroll (ni en alçada ni en amplada).
 html {
-  font-size: min(calc(100vh / 98), calc(100vw / 64));
+  height: 100%;
+  font-size: 10px; // PROVISIONAL: esborra-ho quan tots els fitxers estiguin en px
 }
 
 // Marc de focus per a tots els elements (teclat)
 :focus-visible {
-  outline: 0.3rem solid $color-primari;
-  outline-offset: 0.3rem;
+  outline: 3px solid $color-primari;
+  outline-offset: 3px;
 }
 
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   font-family: $font-cos;
-  font-size: 1.6rem; // 16px al disseny
+  font-size: 16px;
   background-color: $color-clar;
 
   // Fons difuminat amb efecte vidre
   &::before {
     content: '';
     position: fixed;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     z-index: -1;
-    background:
-      linear-gradient(rgba($color-clar, 0.55), rgba($color-clar, 0.55)),
-      url($imatge-fons) center / cover no-repeat;
-    filter: blur(6px);
-    transform: scale(1.05); // evita vores clares per culpa del blur
+    background-size: cover;
+    background-position: center;
   }
 }
 
 .page {
   @include centrar-element;
   flex: 1;
-  padding: 2rem;
+  padding: 20px;
 }

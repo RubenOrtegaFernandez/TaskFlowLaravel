@@ -1,15 +1,15 @@
 .header {
-  padding: 2rem 4rem 0;
+  padding: 20px 40px 0;
 
   &__logo {
     @include centrar-element;
     @include caixa;
-    padding: 1rem 2rem;
+    padding: 10px 20px;
   }
 
   &__logo-img {
     display: block;
-    height: 4.4rem;
+    height: 44px;
     width: auto;
   }
 }
