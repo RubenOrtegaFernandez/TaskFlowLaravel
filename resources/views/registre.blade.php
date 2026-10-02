@@ -22,7 +22,7 @@
         <button type="submit">Registrar-se</button>
     </form>
 
-    <a href="/">Tornar al login</a>
+    <a href="/login">Tornar al login</a>
 </main>
 
 @endsection

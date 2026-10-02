@@ -263,7 +263,7 @@ body {
   flex-direction: column;
   font-family: "Martian Mono", monospace;
   font-size: 16px;
-  background-color: #eaf8ff;
+  background-image: url("../img/fons.png");
 }
 body::before {
   content: "";

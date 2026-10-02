@@ -18,7 +18,7 @@
         <button type="submit">Enviar</button>
     </form>
 
-    <a href="/">Tornar al login</a>
+    <a href="/login">Tornar al login</a>
 </main>
 
 @endsection
