@@ -8,16 +8,16 @@ Route::get('/login', fn () => view('loginTaskFlow'));
 
 Route::post('/login', [ControladorLogin::class, 'iniciarSessio']);
 
-Route::get('/admin', function () {
-    return 'Pàgina de l\'administrador';
+Route::get('/dashboard.admin', function () {
+    return view('dashboardAdmin');
 });
 
-Route::get('/cap', function () {
-    return 'Pàgina del cap';
+Route::get('/dashboard.cap', function () {
+    return view('dashboardCap');
 });
 
-Route::get('/client', function () {
-    return 'Pàgina del client';
+Route::get('/dashboard.client', function () {
+    return view('dashboardClient');
 });
 
 Route::get('/contrasenya/oblidada', function () {
@@ -25,7 +25,7 @@ Route::get('/contrasenya/oblidada', function () {
 });
 
 Route::get('/registre', function () {
-    return view('registre');
+    return view('registreTaskFlow');
 });
 
-Route::post('/registre', [ControladorRegistre::class, 'registrarUsuari']);
+Route::post('/registreTaskFlow', [ControladorRegistre::class, 'registrarUsuari']);
