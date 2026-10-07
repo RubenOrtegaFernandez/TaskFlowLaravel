@@ -13,6 +13,9 @@
 // Importa els estils del login
 @import 'login';
 
+// Importa els estils de l'admin
+@import 'admin';
+
 // Importa els estils del peu de pàgina
 @import 'peus_de_pàgina';
 
@@ -24,7 +27,6 @@
 
 html {
   height: 100%;
-  font-size: 10px; // PROVISIONAL: esborra-ho quan tots els fitxers estiguin en px
 }
 
 // Marc de focus per a tots els elements (teclat)
@@ -40,24 +42,30 @@ body {
   flex-direction: column;
   font-family: $font-cos;
   font-size: 16px;
+  background: $color-blanc;
 
-
-  // Fons difuminat amb efecte vidre
-  &::before {
+  &::before,
+  &::after {
     content: '';
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     z-index: -1;
-    background-size: cover;
-    background-position: center;
+    pointer-events: none;
+  }
+
+  &::before {
+    background: url($imatge-fons) center / cover no-repeat;
+    filter: blur(40px);
+    transform: scale(1.15);
+  }
+
+  &::after {
+    background: rgba($color-blanc, 0.55);
   }
 }
 
 .page {
   @include centrar-element;
   flex: 1;
-  padding: 20px;
+  padding: 36px 20px 42px;
 }

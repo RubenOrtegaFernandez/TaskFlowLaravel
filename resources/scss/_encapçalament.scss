@@ -1,15 +1,13 @@
 .header {
-  padding: 20px 40px 0;
+  width: 100%;
+  padding: 20px 20px 0;
 
-  &__logo {
-    @include centrar-element;
-    @include caixa;
-    padding: 10px 20px;
-  }
-
-  &__logo-img {
+  &__label {
     display: block;
-    height: 44px;
-    width: auto;
+    color: rgba($color-ombra, 0.28);
+    font-family: $font-cos;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 20px;
   }
 }

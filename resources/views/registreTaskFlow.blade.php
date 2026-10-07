@@ -2,18 +2,16 @@
 
 @section('title', 'Registre · TaskFlow')
 
-@section('content')
+@section('header-label', 'REGISTRE')
 
-<main>
-    <h1>Crear compte</h1>
+@section('content')
+<div class="login-wrap">
+    <img class="login-logo" src="{{ asset('img/logo_text.svg') }}" alt="TaskFlow">
 
     @include('components.formulario-registro')
 
     @if (session('error'))
-        <div>
-            {{ session('error') }}
-        </div>
+        <p class="login-register">{{ session('error') }}</p>
     @endif
-</main>
-
+</div>
 @endsection

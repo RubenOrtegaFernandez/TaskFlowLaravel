@@ -25,7 +25,7 @@
     </main>
 
     <footer class="footer">
-        <spam></spam>
+        <span></span>
     </footer>
 
     <script src="{{ asset('js/app.js') }}"></script>

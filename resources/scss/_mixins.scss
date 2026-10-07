@@ -5,28 +5,26 @@
   align-items: center;
 }
 
-// Targeta gran (títol i formulari)
+// Targeta gran (formulari): vidre, sense vora gruixuda
 @mixin targeta($fons) {
   background: $fons;
-  border: 4px solid $color-secundari;
   border-radius: 35px;
-  box-shadow: 0 0 4px 2px rgba($color-ombra, 0.3);
+  box-shadow: 0 0 4px 2px rgba($color-ombra, 0.25);
 }
 
-// Caixa blanca (capçalera, camps, icones, títol, accions)
+// Caixa (capçalera, camps, icones, accions)
 @mixin caixa {
-  background-color: $color-blanc;
-  border: 4px solid $color-secundari;
+  background-color: rgba($color-blanc, 0.21);
+  border: 2px solid $color-secundari;
   border-radius: 24px;
   box-shadow: 8px 8px 4px rgba($color-ombra, 0.22);
 }
 
-// Barra decorativa
-@mixin barra {
-  background-color: $color-clar;
-  border: 4px solid $color-secundari;
+@mixin caixa-admin($vora: $color-secundari) {
+  background-color: $color-vidre-accio;
+  border: 1px solid $vora;
   border-radius: 24px;
-  box-shadow: 5px 5px 6px rgba($color-ombra, 0.24);
+  box-shadow: 8px 8px 4px rgba($color-ombra, 0.22);
 }
 
 // Pinta un SVG amb el color del text (el SVG fa de màscara)

@@ -1,16 +1,16 @@
 <form class="login-card" method="POST" action="/registre">
     @csrf
 
+    <h1 class="login-title">Crear compte</h1>
+
     @error('contrasenya')
-        <small style="color: red; display: block; margin-top: 5px;">
-            {{ $message }}
-        </small>
+        <small style="color: red; display: block;">{{ $message }}</small>
     @enderror
-    
+
     <div class="field">
         <span class="field__icon field__icon--nom" aria-hidden="true"></span>
         <label class="field__label" for="nom_usu">Nom</label>
-        <input class="field__input" type="text" id="nom_usu" name="nom_usu" placeholder="Nom" autocomplete="nom" required>
+        <input class="field__input" type="text" id="nom_usu" name="nom_usu" placeholder="Nom" autocomplete="name" required>
     </div>
 
     <div class="field">
@@ -22,12 +22,12 @@
     <div class="field">
         <span class="field__icon field__icon--clau" aria-hidden="true"></span>
         <label class="field__label" for="password">Contrasenya</label>
-        <input class="field__input" type="password" id="password" name="contrasenya" placeholder="Contrasenya" autocomplete="current-password" required>
+        <input class="field__input" type="password" id="password" name="contrasenya" placeholder="Contrasenya" autocomplete="new-password" required>
     </div>
 
-    <div class="login-actions">
+    <div class="login-actions login-actions--sol">
         <button class="btn" type="submit">Enviar</button>
     </div>
 
-    <span class="field__icon field__icon--tornar" aria-hidden="true"><a href="/login">Tornar al login</a></span>
+    <p class="login-register"><a href="/login">Tornar al login</a></p>
 </form>

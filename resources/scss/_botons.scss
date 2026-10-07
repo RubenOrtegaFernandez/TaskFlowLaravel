@@ -1,16 +1,16 @@
 .btn {
   flex-shrink: 0;
-  min-width: 128px;
+  width: 128px;
   height: 49px;
   padding: 0 16px;
   background-color: $color-secundari;
-  border: 4px solid $color-primari;
+  border: 1px solid $color-primari;
   border-radius: 12px;
   color: $color-blanc;
-  font-family: $font-cos;
+  font-family: $font-boto;
   font-weight: 700;
   font-size: 18px;
-  letter-spacing: 0.2em;
+  letter-spacing: 3.6px;
   text-transform: uppercase;
   cursor: pointer;
 

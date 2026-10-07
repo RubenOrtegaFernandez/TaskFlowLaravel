@@ -1,17 +1,11 @@
 <form class="login-card" method="POST" action="/login">
     @csrf
 
-    @error('contrasenya')
-        <small style="color: red; display: block; margin-top: 5px;">
-            {{ $message }}
-        </small>
-    @enderror
+    <h1 class="login-title">Inici de Sessió</h1>
 
-    <div class="deco deco--top" aria-hidden="true">
-        <div class="deco__row"><span class="deco__bar deco__bar--68"></span><span class="deco__bar deco__bar--239"></span><span class="deco__bar deco__bar--170"></span></div>
-        <div class="deco__row"><span class="deco__bar deco__bar--196"></span><span class="deco__bar deco__bar--62"></span><span class="deco__bar deco__bar--220"></span></div>
-        <div class="deco__row"><span class="deco__bar deco__bar--181"></span><span class="deco__bar deco__bar--314"></span></div>
-    </div>
+    @error('contrasenya')
+        <small style="color: red; display: block;">{{ $message }}</small>
+    @enderror
 
     <div class="field">
         <span class="field__icon field__icon--correu" aria-hidden="true"></span>
@@ -36,9 +30,5 @@
         <button class="btn" type="submit">Enviar</button>
     </div>
 
-    <div class="deco deco--bottom" aria-hidden="true">
-        <div class="deco__row"><span class="deco__bar deco__bar--314"></span><span class="deco__bar deco__bar--181"></span></div>
-        <div class="deco__row"><span class="deco__bar deco__bar--220"></span><span class="deco__bar deco__bar--62"></span><span class="deco__bar deco__bar--196"></span></div>
-        <div class="deco__row"><span class="deco__bar deco__bar--170"></span><span class="deco__bar deco__bar--239"></span><span class="deco__bar deco__bar--68"></span></div>
-    </div>
+    <p class="login-register"><a href="/registre">Registra't aquí</a></p>
 </form>

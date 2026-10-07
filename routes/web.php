@@ -12,13 +12,25 @@ Route::get('/dashboard.admin', function () {
     return view('dashboardAdmin');
 })->name('admin.dashboard');
 
+Route::get('/admin', function () {
+    return view('dashboardAdmin');
+})->name('admin');
+
 Route::get('/dashboard.cap', function () {
     return view('dashboardCap');
 })->name('cap.dashboard');
 
+Route::get('/cap', function () {
+    return view('dashboardCap');
+})->name('cap');
+
 Route::get('/dashboard.client', function () {
     return view('dashboardClient');
 })->name('client.dashboard');
+
+Route::get('/treballador', function () {
+    return view('dashboardTreballador');
+})->name('treballador');
 
 Route::get('/contrasenya/oblidada', function () {
     return view('contrasenyaOblidada');
