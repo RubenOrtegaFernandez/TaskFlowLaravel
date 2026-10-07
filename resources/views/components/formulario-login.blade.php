@@ -1,6 +1,12 @@
 <form class="login-card" method="POST" action="/login">
     @csrf
 
+    @error('contrasenya')
+        <small style="color: red; display: block; margin-top: 5px;">
+            {{ $message }}
+        </small>
+    @enderror
+
     <div class="deco deco--top" aria-hidden="true">
         <div class="deco__row"><span class="deco__bar deco__bar--68"></span><span class="deco__bar deco__bar--239"></span><span class="deco__bar deco__bar--170"></span></div>
         <div class="deco__row"><span class="deco__bar deco__bar--196"></span><span class="deco__bar deco__bar--62"></span><span class="deco__bar deco__bar--220"></span></div>

@@ -2,25 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuari;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
 
 class ControladorRegistre extends Controller
 {
-    public function register(Request $request){
+    public function registrarUsuari(Request $request)
+    {
         $request->validate([
             'nom_usu'     => ['required', 'string', 'max:25'],
-            'correu'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'contrasenya' => ['required', 'string', 'min:8', 'confirmed'],
+            'correu'      => ['required', 'string', 'email', 'max:255'],
+            'contrasenya' => ['required', 'string', 'min:8'],
         ]);
 
-        $user = User::create([
-            'nom_usu'     => $request->name,
-            'correu'    => $request->email,
-            'contrasenya' => Hash::make($request->password)
-        ]);
-        Auth::login($user);
-        return redirect()->route('dashboard');
+        $esValid = null;
+
+        $usuariExisteix = Usuari::where('correu', $request->correu)->exists();
+
+        if ($usuariExisteix) {
+            $esValid = back()->with('error', 'Aquest correu ja està registrat. Prova de iniciar sessió.');
+        } else {
+            $usuari = Usuari::create([
+                'nom_usu'      => $request->nom_usu,
+                'correu'       => $request->correu,
+                'contrasenya'  => Hash::make($request->contrasenya),
+                'rol_tipus' => 'client',
+            ]);
+
+            Auth::login($usuari);
+            $request->session()->regenerate();
+
+            $esValid = redirect()->route('login');
+        }
+
+        return $esValid;
     }
 }

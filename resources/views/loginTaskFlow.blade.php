@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('layouts.logarse')
 
 @section('title', 'Inicia sessió · TaskFlow')
 

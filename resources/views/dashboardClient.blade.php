@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('title', 'Dashboard · TaskFlow')
 
@@ -6,7 +6,7 @@
 <div class="container" style="padding: 2rem;">
 
     <h1>Dashboard POR CAMBIAR</h1>
-    <p>Benvingut/da al teu panel de control, <strong>{{ Auth::user()->nom ?? 'Client' }}</strong>.</p>
+    <p>Benvingut/da al teu panel de control, <strong>{{ Auth::user()->nom_usu ?? 'Client' }}</strong>.</p>
 
 </div>
 

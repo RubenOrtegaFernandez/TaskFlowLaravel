@@ -23,15 +23,14 @@ class ControladorLogin extends Controller
 
             $esValid = back()->with('error', 'Aquest usuari no existeix, si us plau, registreu-vos');
 
-        } elseif (Auth::attempt($credencials)){
+        }elseif (Auth::attempt(['correu' => $credencials['correu'],'password' => $credencials['contrasenya']])){
 
             $request->session()->regenerate();
             $usuari = Auth::user();
 
             if (is_null($usuari->rol_assignat)) {
-                $usuari->update([
-                    'rol_assignat' => 'client',
-                ]);
+                
+                $usuari->update(['rol_tipus' => 'client']);
 
                 $esValid = redirect()->route('client.dashboard')
                     ->with('Benvingut, si no ets un treballador recomanem avisar al teu administrador');
