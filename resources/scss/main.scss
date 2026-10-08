@@ -42,7 +42,7 @@ body {
   flex-direction: column;
   font-family: $font-cos;
   font-size: 16px;
-  background: $color-blanc;
+  
 
   &::before,
   &::after {
@@ -68,4 +68,5 @@ body {
   @include centrar-element;
   flex: 1;
   padding: 36px 20px 42px;
+  background: url($imatge-fons);
 }

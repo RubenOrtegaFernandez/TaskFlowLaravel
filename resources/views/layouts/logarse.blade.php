@@ -14,7 +14,7 @@
 </head>
 <body>
     <header class="header">
-        <span class="header__label">@yield('header-label', 'LOGIN')</span>
+        
     </header>
 
     <main class="page">
