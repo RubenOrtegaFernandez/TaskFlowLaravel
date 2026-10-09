@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Usuari;
+use Illuminate\Support\Facades\Cookie;
 
 class ControladorLogin extends Controller
 {
@@ -28,17 +29,20 @@ class ControladorLogin extends Controller
             $request->session()->regenerate();
             $usuari = Auth::user();
 
-            if (is_null($usuari->rol_assignat)) {
-                
+            $missatge = $request->cookie('missatge_visto');
+
+            if (!$missatge && is_null($usuari->rol_assignat)) {
                 $usuari->update(['rol_tipus' => 'client']);
 
-                $esValid = redirect()->route('client.dashboard')
-                    ->with('Benvingut, si no ets un treballador recomanem avisar al teu administrador');
+                Cookie::queue('missatge_vist', 'true', 99999999); // <- Nosecuantos Años que dura la cookie
+
+                return redirect()->route('treballador')
+                    ->with('status', 'Benvingut, si no ets un treballador recomanem avisar al teu administrador');
             } else {
                 $rutaLogin = match ($usuari->rol_assignat) {
-                    'admin'  => 'admin.dashboard',
-                    'cap'    => 'cap.dashboard',
-                    default  => 'client.dashboard',
+                    'admin'  => 'admin',
+                    'cap'    => 'treballador',
+                    default  => 'treballador',
                 };
 
                 $esValid = redirect()->route($rutaLogin);

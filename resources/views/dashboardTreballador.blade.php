@@ -1,8 +1,14 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 
 @section('title', 'Treballador · TaskFlow')
 
 @section('content')
+@if (session('status'))
+    <div class="alert alert-warning">
+        {{ session('status') }}
+        <button onclick="this.parentElement.remove()" class="btn">X</button>
+    </div>
+@endif
 <section class="admin-panel admin-panel--highlight">
     <h2 class="admin-panel__title">En procés</h2>
 

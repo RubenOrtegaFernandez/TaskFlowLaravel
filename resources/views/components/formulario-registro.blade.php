@@ -25,7 +25,9 @@
         <input class="field__input" type="password" id="password" name="contrasenya" placeholder="Contrasenya" autocomplete="new-password" required>
     </div>
 
-    <div class="login-actions login-actions--sol">
+    <div class="login-actions enviar-altern">
+        <span>Ja tens compte?</span>
+        <a class="login-actions__link" href="/login">Inicia sessió aquí</a>
         <button class="btn" type="submit">Enviar</button>
     </div>
 

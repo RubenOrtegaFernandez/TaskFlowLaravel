@@ -172,6 +172,30 @@
   color: #7bc6eb;
 }
 
+.enviar-altern {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-width: 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 82px;
+  padding: 8px 16px;
+}
+.enviar-altern__options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.enviar-altern__link {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.8px;
+  text-decoration: underline;
+  color: #7bc6eb;
+}
+
 .remember {
   display: flex;
   align-items: center;
@@ -431,7 +455,7 @@ body {
   flex-direction: column;
   font-family: "Libre Franklin", sans-serif;
   font-size: 16px;
-  background: url("../img/background.jpg") center/cover no-repeat fixed;
+  background: url("../img/background.jpeg") center/cover no-repeat fixed;
 }
 
 .page {
