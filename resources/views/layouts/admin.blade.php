@@ -15,7 +15,7 @@
     <div class="admin-shell">
         <header class="admin-header">
             <a class="admin-header__logo" href="{{ url('/') }}" aria-label="TaskFlow">
-                <img src="{{ asset('img/logo_text.svg') }}" alt="TaskFlow">
+                <img src="{{ asset('img/svg/logo.svg') }}" alt="TaskFlow">
             </a>
 
             <h1 class="admin-header__title">Dashboard</h1>

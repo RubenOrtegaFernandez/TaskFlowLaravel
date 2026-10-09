@@ -16,7 +16,7 @@
 <body>
     <header class="header">
         <a href="{{ url('/') }}" class="header__logo" aria-label="TaskFlow">
-            <img class="header__logo-img" src="{{ asset('img/logo_text.svg') }}" alt="TaskFlow">
+            <img class="header__logo-img" src="{{ asset('img/svg/logo.svg') }}" alt="TaskFlow">
         </a>
     </header>
 

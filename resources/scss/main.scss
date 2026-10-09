@@ -19,14 +19,12 @@
 // Importa els estils del peu de pàgina
 @import 'peus_de_pàgina';
 
-
-
 * {
   box-sizing: border-box;
 }
 
 html {
-  height: 100%;
+  min-height: 100%;
 }
 
 // Marc de focus per a tots els elements (teclat)
@@ -37,36 +35,16 @@ html {
 
 body {
   margin: 0;
-  min-height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-family: $font-cos;
   font-size: 16px;
-  
-
-  &::before,
-  &::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-  }
-
-  &::before {
-    background: url($imatge-fons) center / cover no-repeat;
-    filter: blur(40px);
-    transform: scale(1.15);
-  }
-
-  &::after {
-    background: rgba($color-blanc, 0.55);
-  }
+  background: url($imatge-fons) center / cover no-repeat fixed;
 }
 
 .page {
   @include centrar-element;
   flex: 1;
   padding: 36px 20px 42px;
-  background: url($imatge-fons);
 }
