@@ -1,0 +1,210 @@
+.login-wrap {
+  width: 100%;
+  max-width: 590px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 31px;
+}
+
+.login-logo {
+  width: 387px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Targeta de vidre
+.login-card {
+  @include targeta(rgba($color-clar, 0.2));
+  width: 590px;
+  max-width: 100%;
+  min-height: 580px;
+  border: 1px solid rgba($color-secundari, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 50px 36px 27px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.login-title {
+  margin: 0;
+  font-family: $font-titol;
+  font-weight: 700;
+  font-size: 61px;
+  line-height: 74px;
+  letter-spacing: -2.44px;
+  color: $color-fosc;
+}
+
+// Camp: caixa única amb icona + input dins
+.field {
+  @include caixa;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  height: 78px;
+  padding: 0 25px 0 23px;
+
+  &:focus-within {
+    outline: 3px solid $color-primari;
+    outline-offset: 3px;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    color: $color-primari;
+
+    &--correu { @include icona($icona-correu, 54px); }
+    &--clau { @include icona($icona-clau, 43px); }
+    &--nom { @include icona($icona-correu, 54px); }
+  }
+
+  &__label {
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  &__input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    outline: none;
+    font-family: $font-cos;
+    font-weight: 300;
+    font-size: 26px;
+    letter-spacing: -1.04px;
+    color: $color-fosc;
+
+    &::placeholder {
+      color: $color-suau;
+      opacity: 1;
+    }
+  }
+}
+
+// Caixa blanca: enllaç + recordar a l'esquerra, botó a la dreta
+.login-actions {
+  @include caixa;
+  width: 100%;
+  background-color: rgba($color-blanc, 0.8);
+  border-width: 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 82px;
+  padding: 8px 16px;
+
+  &__options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__link {
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.8px;
+    text-decoration: underline;
+    color: $color-primari;
+  }
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: -0.64px;
+  color: $color-fosc;
+  cursor: pointer;
+
+  &__check {
+    width: 28px;
+    height: 28px;
+    margin: 0;
+    accent-color: $color-primari;
+  }
+}
+
+.login-register {
+  margin: 0;
+  text-align: center;
+
+  a {
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.8px;
+    text-decoration: underline;
+    color: $color-fosc;
+  }
+}
+
+.login-actions--solo,
+.login-actions--sol {
+  justify-content: flex-end;
+}
+
+@media (max-width: 680px) {
+  .login-card {
+    padding: 38px 24px 26px;
+  }
+
+  .login-title {
+    font-size: 44px;
+    line-height: 54px;
+  }
+
+  .field {
+    height: 68px;
+    gap: 16px;
+    padding: 0 18px;
+
+    &__icon--correu,
+    &__icon--nom {
+      width: 42px;
+      height: 42px;
+    }
+
+    &__icon--clau {
+      width: 36px;
+      height: 36px;
+    }
+
+    &__input {
+      font-size: 20px;
+    }
+  }
+
+  .login-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .btn {
+    align-self: flex-end;
+  }
+}
+
+.login-text {
+  margin: 0;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: -0.64px;
+  color: $color-fosc;
+}
+
+.login-actions--sol {
+  justify-content: flex-end;
+}

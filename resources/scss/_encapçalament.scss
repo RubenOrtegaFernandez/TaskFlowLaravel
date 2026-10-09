@@ -1,0 +1,13 @@
+.header {
+  width: 100%;
+  padding: 20px 20px 0;
+
+  &__label {
+    display: block;
+    color: rgba($color-ombra, 0.28);
+    font-family: $font-cos;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 20px;
+  }
+}

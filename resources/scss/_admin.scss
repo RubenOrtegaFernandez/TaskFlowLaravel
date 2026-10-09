@@ -1,0 +1,228 @@
+.admin-body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.admin-shell {
+  width: 100%;
+  height: 100vh;
+  min-height: 0;
+  padding: 24px 33px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.admin-header {
+  @include targeta(rgba($color-clar, 0.2));
+  width: 100%;
+  min-height: 96px;
+  padding: 14px 39px;
+  display: grid;
+  grid-template-columns: minmax(180px, 231px) 1fr 69px;
+  align-items: center;
+  gap: 24px;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    width: 231px;
+    max-width: 100%;
+  }
+
+  &__logo img {
+    display: block;
+    width: 231px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  &__title {
+    margin: 0;
+    color: $color-fosc;
+    font-family: $font-titol;
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 61px;
+    letter-spacing: -4.5px;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0 0 0 rgba($color-clar, 0.31);
+  }
+
+  &__avatar {
+    width: 69px;
+    height: 69px;
+    border-radius: 146px;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.admin-main {
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 23px;
+}
+
+.admin-panel {
+  @include targeta(rgba($color-clar, 0.2));
+  height: 100%;
+  min-height: 0;
+  padding: 20px 41px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 46px;
+
+  &__title {
+    margin: 0;
+    width: 100%;
+    color: $color-fosc;
+    font-family: $font-titol;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 63px;
+    letter-spacing: -2.08px;
+    text-align: center;
+  }
+
+  &__title--compact {
+    line-height: 41px;
+  }
+
+  &__title--tight {
+    line-height: 34px;
+  }
+
+  &__content {
+    width: 100%;
+    max-width: 507px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &__content--simple {
+    max-width: 467px;
+  }
+
+  &__description {
+    min-height: 40px;
+    margin: 0;
+    color: $color-fosc;
+    font-family: $font-cos;
+    font-size: 21px;
+    font-weight: 300;
+    line-height: 25px;
+    letter-spacing: -0.84px;
+    text-align: center;
+  }
+
+  &__action {
+    @include caixa-admin($color-secundari);
+    min-height: 82px;
+    padding: 16px 14px 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  &__action-text {
+    color: $color-primari;
+    font-family: $font-cos;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -0.8px;
+  }
+
+  &--highlight &__action {
+    border-color: $color-fosc;
+  }
+}
+
+@media (max-width: 1040px) {
+  .admin-body {
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+  }
+
+  .admin-shell {
+    height: auto;
+    min-height: 100vh;
+    padding: 24px 20px 40px;
+    gap: 32px;
+  }
+
+  .admin-header {
+    grid-template-columns: 1fr 69px;
+  }
+
+  .admin-header__title {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 42px;
+    line-height: 52px;
+    letter-spacing: -3.78px;
+  }
+
+  .admin-panel {
+    min-height: 620px;
+  }
+}
+
+@media (max-width: 560px) {
+  .admin-header {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 22px;
+  }
+
+  .admin-header__title {
+    grid-column: auto;
+    grid-row: auto;
+    font-size: 34px;
+    line-height: 42px;
+    letter-spacing: -3.06px;
+  }
+
+  .admin-main {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-panel {
+    min-height: 520px;
+    padding: 24px 20px 32px;
+    gap: 46px;
+  }
+
+  .admin-panel__title {
+    font-size: 38px;
+    line-height: 46px;
+    letter-spacing: -1.52px;
+  }
+
+  .admin-panel__title--compact {
+    line-height: 38px;
+  }
+
+  .admin-panel__title--tight {
+    line-height: 34px;
+  }
+
+  .admin-panel__action {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-panel__action .btn {
+    align-self: flex-end;
+  }
+}

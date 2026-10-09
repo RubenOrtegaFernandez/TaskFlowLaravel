@@ -1,6 +1,72 @@
+// Importa les variables
 @import 'variables';
+
+// Importa els mixins
 @import 'mixins';
+
+// Importa els estils de botons
 @import 'botons';
+
+// Importa els estils de l'encapçalament
 @import 'encapçalament';
+
+// Importa els estils del login
+@import 'login';
+
+// Importa els estils de l'admin
+@import 'admin';
+
+// Importa els estils del peu de pàgina
 @import 'peus_de_pàgina';
-@import 'responsiut';
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+// Marc de focus per a tots els elements (teclat)
+:focus-visible {
+  outline: 3px solid $color-primari;
+  outline-offset: 3px;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: $font-cos;
+  font-size: 16px;
+  
+
+  &::before,
+  &::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  &::before {
+    background: url($imatge-fons) center / cover no-repeat;
+    filter: blur(40px);
+    transform: scale(1.15);
+  }
+
+  &::after {
+    background: rgba($color-blanc, 0.55);
+  }
+}
+
+.page {
+  @include centrar-element;
+  flex: 1;
+  padding: 36px 20px 42px;
+  background: url($imatge-fons);
+}

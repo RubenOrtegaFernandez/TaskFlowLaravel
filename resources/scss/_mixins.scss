@@ -1,13 +1,37 @@
-@mixin center-element {
+// Centra un element (mixin del PDF)
+@mixin centrar-element {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-@mixin button-style {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
+// Targeta gran (formulari): vidre, sense vora gruixuda
+@mixin targeta($fons) {
+  background: $fons;
+  border-radius: 35px;
+  box-shadow: 0 0 4px 2px rgba($color-ombra, 0.25);
+}
+
+// Caixa (capçalera, camps, icones, accions)
+@mixin caixa {
+  background-color: rgba($color-blanc, 0.21);
+  border: 2px solid $color-secundari;
+  border-radius: 24px;
+  box-shadow: 8px 8px 4px rgba($color-ombra, 0.22);
+}
+
+@mixin caixa-admin($vora: $color-secundari) {
+  background-color: $color-vidre-accio;
+  border: 1px solid $vora;
+  border-radius: 24px;
+  box-shadow: 8px 8px 4px rgba($color-ombra, 0.22);
+}
+
+// Pinta un SVG amb el color del text (el SVG fa de màscara)
+@mixin icona($ruta, $mida) {
+  width: $mida;
+  height: $mida;
+  background-color: currentColor;
+  -webkit-mask: url($ruta) center / contain no-repeat;
+  mask: url($ruta) center / contain no-repeat;
 }
