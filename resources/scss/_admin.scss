@@ -15,7 +15,7 @@
   @include targeta(rgba($color-clar, 0.2));
   padding: 14px 39px;
   display: grid;
-  grid-template-columns: 231px 1fr 69px;
+  grid-template-columns: 231px auto 1fr 69px;
   align-items: center;
   gap: 24px;
 
@@ -26,7 +26,7 @@
   }
 
   &__title {
-    margin: 0;
+    margin: auto;
     color: $color-fosc;
     font-family: $font-titol;
     font-size: 50px;
@@ -42,6 +42,28 @@
     height: 69px;
     border-radius: 50%;
     object-fit: cover;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px 32px;
+  }
+
+  &__link {
+    font-family: $font-titol;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: $color-fosc;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -125,18 +147,32 @@
   .admin-header {
     grid-template-columns: 1fr 69px;
 
+    &__avatar {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
     &__title {
       grid-column: 1 / -1;
       font-size: 42px;
       line-height: 52px;
     }
+
+    &__nav {
+      grid-column: 1 / -1;
+    }
   }
 }
 
 @media (max-width: 560px) {
-  .admin-header {
+    .admin-header {
     grid-template-columns: 1fr;
     justify-items: center;
+
+    &__avatar {
+      grid-column: auto;
+      grid-row: auto;
+    }
 
     &__title {
       font-size: 34px;
