@@ -1,10 +1,18 @@
+/*
+@mixin caixa {
+  background-color: rgba($color-blanc, 0.21);
+  border: 2px solid $color-clar;
+  border-radius: 24px;
+  box-shadow: 8px 8px 4px rgba($color-ombra, 0.22);
+}
+*/
 .btn {
   flex-shrink: 0;
   width: 128px;
   height: 49px;
   padding: 0 16px;
-  background-color: #a6daf4;
-  border: 1px solid #7bc6eb;
+  background-color: #0b1225;
+  border: 1px solid #0c1e27;
   border-radius: 12px;
   color: #ffffff;
   font-family: "Martian Mono", monospace;
@@ -15,7 +23,7 @@
   cursor: pointer;
 }
 .btn:hover {
-  background-color: #7bc6eb;
+  background-color: #4a5265;
 }
 
 .header {
@@ -55,8 +63,8 @@
   max-width: 100%;
   min-height: 580px;
   border: 1px solid rgba(166, 218, 244, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 50px 36px 27px;
   display: flex;
   flex-direction: column;
@@ -70,14 +78,28 @@
   font-size: 61px;
   line-height: 74px;
   letter-spacing: -2.44px;
-  color: #67b0d4;
+  color: #eaf8ff;
 }
 
 .field {
+  position: relative;
   background-color: rgba(255, 255, 255, 0.21);
-  border: 2px solid #a6daf4;
   border-radius: 24px;
   box-shadow: 8px 8px 4px rgba(12, 30, 39, 0.22);
+}
+.field::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.15) 40%, rgba(255, 255, 255, 0.05) 60%, rgba(12, 30, 39, 0.45) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.field {
   width: 100%;
   display: flex;
   align-items: center;
@@ -86,12 +108,12 @@
   padding: 0 25px 0 23px;
 }
 .field:focus-within {
-  outline: 3px solid #7bc6eb;
+  outline: 3px solid #eaf8ff;
   outline-offset: 3px;
 }
 .field__icon {
   flex-shrink: 0;
-  color: #7bc6eb;
+  color: #eaf8ff;
 }
 .field__icon--correu {
   width: 54px;
@@ -133,24 +155,38 @@
   font-weight: 300;
   font-size: 26px;
   letter-spacing: -1.04px;
-  color: #67b0d4;
+  color: #eaf8ff;
 }
 .field__input::-moz-placeholder {
-  color: #9dd4f0;
+  color: #eaf8ff;
   opacity: 1;
 }
 .field__input::placeholder {
-  color: #9dd4f0;
+  color: #eaf8ff;
   opacity: 1;
 }
 
 .login-actions {
+  position: relative;
   background-color: rgba(255, 255, 255, 0.21);
-  border: 2px solid #a6daf4;
   border-radius: 24px;
   box-shadow: 8px 8px 4px rgba(12, 30, 39, 0.22);
+}
+.login-actions::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.15) 40%, rgba(255, 255, 255, 0.05) 60%, rgba(12, 30, 39, 0.45) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.login-actions {
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.3);
   border-width: 1px;
   display: flex;
   justify-content: space-between;
@@ -169,7 +205,7 @@
   font-size: 20px;
   letter-spacing: -0.8px;
   text-decoration: underline;
-  color: #7bc6eb;
+  color: #eaf8ff;
 }
 
 .enviar-altern {
@@ -193,7 +229,7 @@
   font-size: 20px;
   letter-spacing: -0.8px;
   text-decoration: underline;
-  color: #7bc6eb;
+  color: #eaf8ff;
 }
 
 .remember {
@@ -203,7 +239,7 @@
   font-weight: 300;
   font-size: 16px;
   letter-spacing: -0.64px;
-  color: #67b0d4;
+  color: #eaf8ff;
   cursor: pointer;
 }
 .remember__check {
@@ -222,7 +258,7 @@
   font-size: 20px;
   letter-spacing: -0.8px;
   text-decoration: underline;
-  color: #67b0d4;
+  color: #eaf8ff;
 }
 
 .login-actions--solo,
@@ -267,7 +303,7 @@
   font-weight: 300;
   font-size: 16px;
   letter-spacing: -0.64px;
-  color: #67b0d4;
+  color: #eaf8ff;
 }
 
 .login-actions--sol {
@@ -455,7 +491,7 @@ body {
   flex-direction: column;
   font-family: "Libre Franklin", sans-serif;
   font-size: 16px;
-  background: url("../img/background.jpeg") center/cover no-repeat fixed;
+  background: url("../img/background2.jpg") center/cover no-repeat fixed;
 }
 
 .page {
