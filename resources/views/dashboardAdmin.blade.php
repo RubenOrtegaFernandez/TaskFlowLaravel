@@ -3,6 +3,9 @@
 @section('title', 'Admin · TaskFlow')
 
 @section('content')
+@if (session('status'))
+    <p class="admin-panel__description">{{ session('status') }}</p>
+@endif
 <section class="admin-panel admin-panel--highlight">
     <h2 class="admin-panel__title">Tasques Urgents</h2>
 

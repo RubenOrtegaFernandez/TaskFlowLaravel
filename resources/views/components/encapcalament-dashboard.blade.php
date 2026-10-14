@@ -9,10 +9,10 @@
         @hasSection('header-nav')
             @yield('header-nav')
         @else
-            <a class="admin-header__link" href="/tasques">Tasques</a>
-            <a class="admin-header__link" href="/departaments">Departaments</a>
-            <a class="admin-header__link" href="/treballadors">Treballadors</a>
-            <a class="admin-header__link" href="/categories">Categories</a>
+            <a class="admin-header__link" href="{{ route('tasca.index') }}">Tasques</a>
+            <a class="admin-header__link" href="{{ route('departament.index') }}">Departaments</a>
+            <a class="admin-header__link" href="{{ route('usuari.index') }}">Treballadors</a>
+            <a class="admin-header__link" href="{{ route('categoria.index') }}">Categories</a>
         @endif
     </nav>
 
