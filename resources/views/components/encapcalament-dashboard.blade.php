@@ -6,10 +6,14 @@
     <h1 class="admin-header__title">@yield('header-title', 'Dashboard')</h1>
 
     <nav class="admin-header__nav">
-        <a class="admin-header__link" href="/tasques">Tasques</a>
-        <a class="admin-header__link" href="/departaments">Departaments</a>
-        <a class="admin-header__link" href="/treballadors">Treballadors</a>
-        <a class="admin-header__link" href="/categories">Categories</a>
+        @hasSection('header-nav')
+            @yield('header-nav')
+        @else
+            <a class="admin-header__link" href="/tasques">Tasques</a>
+            <a class="admin-header__link" href="/departaments">Departaments</a>
+            <a class="admin-header__link" href="/treballadors">Treballadors</a>
+            <a class="admin-header__link" href="/categories">Categories</a>
+        @endif
     </nav>
 
     <img class="admin-header__avatar" src="{{ asset('img/default.png') }}" alt="Perfil">

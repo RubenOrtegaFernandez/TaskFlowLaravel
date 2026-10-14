@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\ControladorLogin;
 use App\Http\Controllers\ControladorRegistre;
+use App\Http\Controllers\TascaController;
 use Illuminate\Support\Facades\Route;
+
+Route::resource('tasca', TascaController::class)->only(['create', 'store']);
 
 Route::redirect('/', '/login');
 
