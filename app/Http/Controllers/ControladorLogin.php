@@ -31,17 +31,16 @@ class ControladorLogin extends Controller
 
             $missatge = $request->cookie('missatge_visto');
 
-            if (!$missatge && is_null($usuari->rol_assignat)) {
-                $usuari->update(['rol_tipus' => 'client']);
+            if (!$missatge && $usuari->rol_tipus === 'client') {
 
                 Cookie::queue('missatge_vist', 'true', 99999999); // <- Nosecuantos Años que dura la cookie
 
-                return redirect()->route('treballador')
+                $esValid = redirect()->route('treballador')
                     ->with('status', 'Benvingut, si no ets un treballador recomanem avisar al teu administrador');
             } else {
-                $rutaLogin = match ($usuari->rol_assignat) {
+                $rutaLogin = match ($usuari->rol_tipus) {
                     'admin'  => 'admin',
-                    'cap'    => 'treballador',
+                    'cap'    => 'cap',
                     default  => 'treballador',
                 };
 

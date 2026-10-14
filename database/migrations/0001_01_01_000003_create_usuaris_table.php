@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id('id_correu')->autoIncrement();
             $table->string('nom_usu',25);
             $table->string('correu', 255)->unique();
-            $table->enum('rol_tipus', ['admin', 'cap', 'client']);
+            $table->enum('rol_tipus', ['admin', 'cap', 'client'])->default('client');
             $table->string('foto_perfil', 255)->default('img/default.png');
             $table->string('contrasenya', 255);
             $table->foreignId('id_dep')->nullable();

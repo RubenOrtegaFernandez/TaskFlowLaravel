@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tasques', function (Blueprint $table) {
             $table->id('id_tas')->autoIncrement();
-            $table->enum('estat', ['pendent', 'en_curs', 'fet', 'revisat']);
+            $table->enum('estat', ['pendent', 'en_curs', 'fet', 'revisat'])->default('pendent');
             $table->string('nom_tas', 25);
             $table->string('descripcio', 255);
             $table->timestamp('data_inici');
@@ -24,6 +24,8 @@ return new class extends Migration
             $table->foreign('id_usr_creador')->references('id_correu')->on('usuaris');
             $table->foreignId('id_dep_assignat')->nullable();
             $table->foreign('id_dep_assignat')->references('id_dep')->on('departaments');
+            $table->foreignId('id_usr_assignat')->nullable();
+            $table->foreign('id_usr_assignat')->references('id_correu')->on('usuaris');
         });
     }
 

@@ -22,6 +22,7 @@ class Tasca extends Model
         'categoria',
         'id_usr_creador',
         'id_dep_assignat',
+        'id_usr_assignat'
     ];
 
     public function creador()
@@ -32,5 +33,10 @@ class Tasca extends Model
     public function departament()
     {
         return $this->belongsTo(Departament::class, 'id_dep_assignat', 'id_dep');
+    }
+
+    public function assignat()
+    {
+        return $this->belongsTo(Usuari::class, 'id_usr_assignat', 'id_correu');
     }
 }
