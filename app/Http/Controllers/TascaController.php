@@ -92,4 +92,32 @@ class TascaController extends Controller
 
         return $esValid;
     }
+
+    public function index()
+    {
+    $esValid = null;
+
+    if (!Auth::check()) {
+
+        $esValid = redirect()->route('login');
+
+    } elseif (Auth::user()->rol_tipus === 'client') {
+
+        $esValid = redirect()->route('treballador');
+
+    } else {
+
+        $tasques = Tasca::orderBy('data_final');
+
+        if (Auth::user()->rol_tipus === 'cap') {
+            $tasques = Tasca::where('id_dep_assignat', Auth::user()->id_dep)->orderBy('data_final');
+        }
+
+        $esValid = view('tasca.llistaTasques', array(
+            'tasques' => $tasques->get(),
+        ));
+    }
+
+    return $esValid;
+    }
 }

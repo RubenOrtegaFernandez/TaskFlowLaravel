@@ -61,5 +61,9 @@ class DatabaseSeeder extends Seeder
             'contrasenya' => Hash::make('pedro123'),
             'id_dep' => $informatica->id_dep,
         ]);
+
+        $this->call([
+            TascaSeeder::class,
+        ]);
     }
 }

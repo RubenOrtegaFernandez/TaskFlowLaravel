@@ -6,6 +6,7 @@ use App\Http\Controllers\TascaController;
 use Illuminate\Support\Facades\Route;
 
 Route::resource('tasca', TascaController::class)->only(['create', 'store']);
+Route::get('/tasques', [TascaController::class, 'index'])->name('tasca.index');
 
 Route::redirect('/', '/login');
 
