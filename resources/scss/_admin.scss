@@ -14,7 +14,7 @@
 
 
 .admin-header {
-    @include targeta(rgba($color-clar, 0.2));
+    @include targeta(transparent);
 
     min-height: 104px;
     box-sizing: border-box;
@@ -35,7 +35,7 @@
 
     &__title {
         margin: 0;
-        color: #67B0D4;
+        color: $color-clar;
         font-family: 'Libre Franklin', sans-serif;
         font-size: 50px;
         font-weight: 800;
@@ -64,7 +64,7 @@
         white-space: nowrap;
 
         &:hover {
-            color: $color-primari;
+            color: $color-clar;
         }
     }
 
@@ -86,7 +86,7 @@
 }
 
 .admin-panel {
-  @include targeta(rgba($color-clar, 0.2));
+  @include targeta(transparent);
   padding: 20px 41px 30px;
   display: flex;
   flex-direction: column;
@@ -95,7 +95,7 @@
 
   &__title {
     margin: 0;
-    color: $color-fosc;
+    color: $color-clar;
     font-family: $font-titol;
     font-size: 52px;
     font-weight: 700;
@@ -114,7 +114,7 @@
 
   &__description {
     margin: 0;
-    color: $color-fosc;
+    color: $color-clar;
     font-family: $font-cos;
     font-size: 21px;
     font-weight: 300;
@@ -134,7 +134,7 @@
   }
 
   &__action-text {
-    color: $color-primari;
+    color: $color-clar;
     font-family: $font-cos;
     font-size: 20px;
     font-weight: 700;
@@ -210,4 +210,43 @@
       align-items: stretch;
     }
   }
+}
+
+/* Efecte Liquid Glass */
+
+.admin-header,
+.admin-panel {
+  position: relative;
+  background: transparent;
+  border: 1px solid rgba($color-clar, 0.18);
+  box-shadow: 0 8px 32px rgba($color-ombra, 0.12);
+}
+
+.admin-header,
+.admin-panel,
+.admin-panel__action {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.admin-header__link,
+.admin-header__logo,
+.admin-header__avatar,
+.admin-panel__action {
+  position: relative;
+  z-index: 1;
+}
+
+.admin-header__link {
+  transition: color 0.2s ease;
+}
+
+.admin-header__link:hover {
+  color: $color-clar;
+}
+
+.admin-panel__action {
+  background: transparent;
+  border: 1px solid rgba($color-clar, 0.18);
+  box-shadow: none;
 }
