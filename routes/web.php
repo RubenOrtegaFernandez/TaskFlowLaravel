@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Route;
 Route::resource('tasca', TascaController::class)->only(['create', 'store']);
 Route::get('/tasques', [TascaController::class, 'index'])->name('tasca.index');
 
+Route::get('/departaments', fn () => 'Departaments')->name('departament.index');
+Route::get('/usuaris', fn () => 'Treballadors')->name('usuari.index');
+Route::get('/categories', fn () => 'Categories')->name('categoria.index');
+
 Route::redirect('/', '/login');
 
 Route::get('/login', fn () => view('loginTaskFlow'))->name('login');

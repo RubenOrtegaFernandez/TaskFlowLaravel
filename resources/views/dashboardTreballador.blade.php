@@ -2,49 +2,39 @@
 
 @section('title', 'Treballador · TaskFlow')
 
+@section('header-nav')
+    <a class="admin-header__link" href="{{ route('tasca.index') }}">Tasques</a>
+    <a class="admin-header__link" href="{{ route('departament.index') }}">Departaments</a>
+    <a class="admin-header__link" href="{{ route('usuari.index') }}">Treballadors</a>
+    
+
+@endsection
+
 @section('content')
 @if (session('status'))
-    <div class="alert alert-warning">
-        {{ session('status') }}
-        <button onclick="this.parentElement.remove()" class="btn">X</button>
-    </div>
+    <p class="admin-panel__description">{{ session('status') }}</p>
 @endif
 <section class="admin-panel admin-panel--highlight">
-    <h2 class="admin-panel__title">En procés</h2>
+    <h2 class="admin-panel__title">Tasques Urgents</h2>
 
-    <div class="admin-panel__content">
-        <p class="admin-panel__description">Aquí es mostraran totes les tasques.</p>
-
-        <div class="admin-panel__action">
-            <span class="admin-panel__action-text">Vols veure-les totes? ves-hi!</span>
-            <button class="btn" type="button">Veure</button>
-        </div>
+    <div class="admin-panel__content admin-panel__content--simple">
+        <p class="admin-panel__description">Aquí es mostraran les teves tasques a punt de finalitzar.</p>
     </div>
 </section>
 
-<section class="admin-panel admin-panel--highlight">
-    <h2 class="admin-panel__title admin-panel__title--tight">Urgents</h2>
+<section class="admin-panel">
+    <h2 class="admin-panel__title">Tasques Pendents</h2>
 
-    <div class="admin-panel__content">
-        <p class="admin-panel__description">Aquí es mostraran les tasques finalitzades pendents de revisió.</p>
-
-        <div class="admin-panel__action">
-            <span class="admin-panel__action-text">Vols veure-les totes? ves-hi!</span>
-            <button class="btn" type="button">Veure</button>
-        </div>
+    <div class="admin-panel__content admin-panel__content--simple">
+        <p class="admin-panel__description">Aquí es mostraran les tasques que tens assignades.</p>
     </div>
 </section>
 
-<section class="admin-panel admin-panel--highlight">
-    <h2 class="admin-panel__title">Pendents de Revisió</h2>
+<section class="admin-panel">
+    <h2 class="admin-panel__title">Tasques Finalitzades</h2>
 
-    <div class="admin-panel__content">
-        <p class="admin-panel__description">Aquí podràs veure totes les tasques finalitzades pendents de revisió.</p>
-
-        <div class="admin-panel__action">
-            <span class="admin-panel__action-text">Vols veure-les totes? ves-hi!</span>
-            <button class="btn" type="button">Veure</button>
-        </div>
+    <div class="admin-panel__content admin-panel__content--simple">
+        <p class="admin-panel__description">Aquí es mostraran les tasques que has finalitzat.</p>
     </div>
 </section>
 @endsection

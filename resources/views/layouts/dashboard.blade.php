@@ -13,15 +13,7 @@
 </head>
 <body class="admin-body">
     <div class="admin-shell">
-        <header class="admin-header">
-            <a class="admin-header__logo" href="{{ url('/') }}" aria-label="TaskFlow">
-                <img src="{{ asset('img/logo_blanc_taskflow.png') }}" alt="TaskFlow">
-            </a>
-
-            <h1 class="admin-header__title">Dashboard</h1>
-
-            <img class="admin-header__avatar" src="{{ asset('img/default.png') }}" alt="Perfil">
-        </header>
+        @include('components.encapcalament-dashboard')
 
         <main class="admin-main">
             @yield('content')
