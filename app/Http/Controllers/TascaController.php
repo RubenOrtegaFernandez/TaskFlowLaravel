@@ -19,9 +19,8 @@ class TascaController extends Controller
 
             $esValid = redirect()->route('login');
 
-        } elseif (Auth::user()->rol_tipus === 'client') {
-
-            $esValid = redirect()->route('treballador');
+        } elseif (Auth::user()->rol_tipus != 'admin' && Auth::user()->rol_tipus != 'cap') {
+                $esValid = redirect()->route('treballador');
 
         } else {
 

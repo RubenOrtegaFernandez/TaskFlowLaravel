@@ -54,14 +54,29 @@
     outline-offset: 3px;
   }
 
-  &__icon {
+  
+&__icon {
     flex-shrink: 0;
     color: $color-clar;
+    width: 54px;
+    height: 54px;
 
-    &--correu { @include icona($icona-correu, 54px); }
-    &--clau { @include icona($icona-clau, 43px); }
-    &--nom { @include icona($icona-correu, 54px); }
-  }
+    &--correu {
+        width: 54px;
+        height: 54px;
+    }
+
+    &--clau {
+        width: 43px;
+        height: 43px;
+    }
+
+    &--nom {
+        width: 54px;
+        height: 54px;
+    }
+}
+
 
   &__label {
     width: 1px;
@@ -122,7 +137,6 @@
 
 .enviar-altern{
   width: 100%;
-  background-color: rgba($color-blanc, 0.8);
   border-width: 1px;
   display: flex;
   justify-content: space-between;

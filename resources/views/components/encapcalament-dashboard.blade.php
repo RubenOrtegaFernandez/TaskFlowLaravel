@@ -1,5 +1,5 @@
 <header class="admin-header">
-    <a class="admin-header__logo" href="{{ url('/') }}" aria-label="TaskFlow">
+    <a class="admin-header__logo" href="{{ url('img/logo_blanc_taskflow.png') }}" aria-label="TaskFlow">
         <img src="{{ asset('img/svg/logo.svg') }}" alt="TaskFlow">
     </a>
 

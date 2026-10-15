@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 <body class="admin-body">
+    
     <div class="admin-shell">
         @include('components.encapcalament-dashboard')
 

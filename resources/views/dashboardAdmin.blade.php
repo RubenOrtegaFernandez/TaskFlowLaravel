@@ -14,7 +14,7 @@
 
         <div class="admin-panel__action">
             <span class="admin-panel__action-text">Vols afegir tasques? fes-ho aquí</span>
-            <button class="btn" type="button">Afegir</button>
+            <a href="{{ route('tasca.create') }}" class="btn">Afegir</a>
         </div>
     </div>
 </section>
@@ -27,7 +27,7 @@
 
         <div class="admin-panel__action">
             <span class="admin-panel__action-text">Vols afegir tasques? fes-ho aquí</span>
-            <button class="btn" type="button">Afegir</button>
+            <a href="{{ route('tasca.create') }}" class="btn">Afegir</a>
         </div>
     </div>
 </section>
@@ -40,7 +40,7 @@
 
         <div class="admin-panel__action">
             <span class="admin-panel__action-text">Vols afegir tasques? fes-ho aquí</span>
-            <button class="btn" type="button">Afegir</button>
+            <a href="{{ route('tasca.create') }}" class="btn">Afegir</a>
         </div>
     </div>
 </section>

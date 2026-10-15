@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 <body>
+
     <header class="header">
             
     </header>
