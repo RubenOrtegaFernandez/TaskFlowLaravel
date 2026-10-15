@@ -14,7 +14,9 @@
         <p class="login-text">Introdueix el teu correu electrònic i t'enviarem les instruccions per recuperar la contrasenya.</p>
 
         <div class="field">
-            <span class="field__icon field__icon--correu" aria-hidden="true"></span>
+            <svg class="field__icon field__icon--correu" aria-hidden="true">
+                <use xlink:href="#icon-email"></use>
+            </svg>
             <label class="field__label" for="correu">Correu electrònic</label>
             <input class="field__input" type="email" id="correu" name="correu" placeholder="Correu electrònic" autocomplete="email" required>
         </div>

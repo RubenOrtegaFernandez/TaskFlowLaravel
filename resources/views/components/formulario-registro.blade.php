@@ -10,7 +10,7 @@
 
     <div class="field">
         <svg class="field__icon field__icon--nom" aria-hidden="true">
-            <use href="#icon-name"></use>
+            <use xlink:href="#icon-name"></use>
         </svg>
 
         <label class="field__label" for="nom_usu">Nom</label>
@@ -19,7 +19,7 @@
 
     <div class="field">
         <svg class="field__icon field__icon--correu" aria-hidden="true">
-            <use href="#icon-email"></use>
+            <use xlink:href="#icon-email"></use>
         </svg>
 
         <label class="field__label" for="email">Correu electrònic</label>
@@ -28,7 +28,7 @@
 
     <div class="field">
         <svg class="field__icon field__icon--clau" aria-hidden="true">
-            <use href="#icon-key"></use>
+            <use xlink:href="#icon-key"></use>
         </svg>
 
         <label class="field__label" for="password">Contrasenya</label>

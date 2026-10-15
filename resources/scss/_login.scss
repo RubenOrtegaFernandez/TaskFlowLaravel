@@ -211,15 +211,13 @@
     gap: 16px;
     padding: 0 18px;
 
-    &__icon--correu,
-    &__icon--nom {
-      width: 42px;
-      height: 42px;
-    }
+      &__icon {
+    flex-shrink: 0;
+    color: $color-clar;
 
-    &__icon--clau {
-      width: 36px;
-      height: 36px;
+    &--correu { @include icona('../img/svg/icon-email.svg', 54px); }
+    &--clau   { @include icona('../img/svg/icon-key.svg', 43px); }
+    &--nom    { @include icona('../img/svg/icon-name.svg', 54px); }
     }
 
     &__input {
