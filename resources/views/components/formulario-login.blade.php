@@ -1,12 +1,7 @@
-
-<form class="login-card" method="POST" action="/login">
+<form class="login-card" id="form-login" method="POST" action="/login" novalidate>
     @csrf
 
     <h1 class="login-title">Inici de Sessió</h1>
-
-    @error('contrasenya')
-        <small style="color: red; display: block;">{{ $message }}</small>
-    @enderror
 
     <div class="field">
         <svg class="field__icon field__icon--correu" aria-hidden="true">
@@ -14,7 +9,7 @@
         </svg>
 
         <label class="field__label" for="email">Correu electrònic</label>
-        <input class="field__input" type="email" id="email" name="correu" placeholder="Correu electrònic" autocomplete="email" required>
+        <input class="field__input" type="email" id="email" name="correu" placeholder="Correu electrònic" value="{{ old('correu') }}" autocomplete="email">
     </div>
 
     <div class="field">
@@ -23,7 +18,7 @@
         </svg>
 
         <label class="field__label" for="password">Contrasenya</label>
-        <input class="field__input" type="password" id="password" name="contrasenya" placeholder="Contrasenya" autocomplete="current-password" required>
+        <input class="field__input" type="password" id="password" name="contrasenya" placeholder="Contrasenya" autocomplete="current-password">
     </div>
 
     <div class="login-actions">
@@ -44,4 +39,26 @@
     <p class="login-register">
         <a href="/registre">Registra't aquí</a>
     </p>
+
+    {{-- Missatges d'error per JavaScript --}}
+    <p id="error-login" style="color: #ff5555; display: block; margin-bottom: 12px; font-weight: bold; text-align: center;" hidden></p>
+
+    {{-- Missatges d'errors de Laravel --}}
+    @if (session('error'))
+        <p style="color: #ff5555; display: block; margin-bottom: 12px; font-weight: bold; text-align: center;">
+            {{ session('error') }}
+        </p>
+    @endif
+
+    @if (session('status'))
+        <p style="color: #55ff55; display: block; margin-bottom: 12px; font-weight: bold; text-align: center;">
+            {{ session('status') }}
+        </p>
+    @endif
+
+    @if ($errors->any())
+        <p style="color: #ff5555; display: block; margin-bottom: 12px; font-weight: bold; text-align: center;">
+            {{ $errors->first() }}
+        </p>
+    @endif
 </form>

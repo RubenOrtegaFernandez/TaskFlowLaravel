@@ -8,7 +8,7 @@ use App\Models\Usuari;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class TascaController extends Controller
+class ControladorTasques
 {
 
     public function create()

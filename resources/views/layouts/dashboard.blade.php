@@ -12,15 +12,17 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 <body class="admin-body">
-    
+    @include('partials.icons')
+
     <div class="admin-shell">
         @include('components.encapcalament-dashboard')
 
         <main class="admin-main">
             @yield('content')
         </main>
+
     </div>
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/registre.js') }}"></script>
 </body>
 </html>

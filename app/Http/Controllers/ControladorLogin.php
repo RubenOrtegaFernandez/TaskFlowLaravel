@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Usuari;
 use Illuminate\Support\Facades\Cookie;
 
-class ControladorLogin extends Controller
+class ControladorLogin
 {
     public function iniciarSessio(Request $request)
     {
@@ -22,14 +22,14 @@ class ControladorLogin extends Controller
 
         if (!$usuariExisteix){
 
-            $esValid = back()->with('error', 'Aquest usuari no existeix, si us plau, registreu-vos');
+            $esValid = back()->withErrors(['correu' => 'Aquest usuari no existeix, si us plau, registreu-vos'])->withInput();
 
         }elseif (Auth::attempt(['correu' => $credencials['correu'],'password' => $credencials['contrasenya']])){
 
             $request->session()->regenerate();
             $usuari = Auth::user();
 
-            $missatge = $request->cookie('missatge_visto');
+            $missatge = $request->cookie('missatge_vist');
 
             if (!$missatge && $usuari->rol_tipus === 'client') {
 
@@ -39,17 +39,17 @@ class ControladorLogin extends Controller
                     ->with('status', 'Benvingut, si no ets un treballador recomanem avisar al teu administrador');
             } else {
                 $rutaLogin = match ($usuari->rol_tipus) {
-                    'admin'  => 'admin',
-                    'cap'    => 'cap',
-                    default  => 'treballador',
-                };
+                'admin' => 'dashboardadmin.index',
+                'cap' => 'dashboardcap.index',
+                default => 'dashboardtreballador.index',
+            };
 
-                $esValid = redirect()->route($rutaLogin);
+            $esValid = redirect()->route($rutaLogin);
             }
 
         } else {
 
-            $esValid = back()->with('error', 'Contraseña incorrecta.');
+           $esValid = back()->withErrors(['contrasenya' => 'Contrasenya incorrecta.'])->withInput();
 
         }
         return $esValid;

@@ -15,18 +15,11 @@
 </head>
 <body>
     @include('partials.icons')
-    <header class="header">
-            
-    </header>
 
     <main class="page">
         @yield('content')
     </main>
 
-    <footer class="footer">
-        <span></span>
-    </footer>
-
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/registre.js') }}"></script>
 </body>
 </html>

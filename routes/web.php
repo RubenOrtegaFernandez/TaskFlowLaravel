@@ -2,14 +2,23 @@
 
 use App\Http\Controllers\ControladorLogin;
 use App\Http\Controllers\ControladorRegistre;
-use App\Http\Controllers\TascaController;
+use App\Http\Controllers\ControladorTasques;
 use Illuminate\Support\Facades\Route;
 
-Route::resource('tasca', TascaController::class)->only(['create', 'store']);
-Route::get('/tasques', [TascaController::class, 'index'])->name('tasca.index');
+Route::resource('tasca', ControladorTasques::class)->only(['create', 'store']);
+
+Route::get('/dashboard/admin', fn () => view('dashboardAdmin'))->name('dashboardadmin.index');
+
+Route::get('/dashboard/cap', fn () => view('dashboardCap'))->name('dashboardcap.index');
+
+Route::get('/dashboard/treballador', fn () => view('dashboardTreballador'))->name('dashboardtreballador.index');
+
+Route::get('/tasca/llistat-tasques', [ControladorTasques::class, 'index'])->name('tasca.index');
 
 Route::get('/departaments', fn () => 'Departaments')->name('departament.index');
+
 Route::get('/usuaris', fn () => 'Treballadors')->name('usuari.index');
+
 Route::get('/categories', fn () => 'Categories')->name('categoria.index');
 
 Route::redirect('/', '/login');
@@ -18,21 +27,7 @@ Route::get('/login', fn () => view('loginTaskFlow'))->name('login');
 
 Route::post('/login', [ControladorLogin::class, 'iniciarSessio']);
 
-Route::get('/admin', function () {
-    return view('dashboardAdmin');
-})->name('admin');
-
-Route::get('/cap', function () {
-    return view('dashboardCap');
-})->name('cap');
-
-Route::get('/treballador', function () {
-    return view('dashboardTreballador');
-})->name('treballador');
-
-Route::get('/contrasenya/oblidada', function () {
-    return view('contrasenyaOblidada');
-});
+Route::get('/contrasenya/oblidada', fn () => view('contrasenyaOblidada'));
 
 Route::view('/registre', 'registreTaskFlow')->name('registre');
 

@@ -1,6 +1,6 @@
 <header class="admin-header">
-    <a class="admin-header__logo" href="{{ url('img/logo_blanc_taskflow.png') }}" aria-label="TaskFlow">
-        <img src="{{ asset('img/logo_blanc_taskflow.png') }}" alt="TaskFlow">
+    <a class="admin-header__logo" href="{{ asset('/login') }}" aria-label="TaskFlow">
+        <img class="login-logo" src="{{ asset('img/logo_blanc_taskflow.png') }}" alt="TaskFlow">
     </a>
 
     <h1 class="admin-header__title">@yield('header-title', 'Dashboard')</h1>

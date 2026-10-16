@@ -1,120 +1,270 @@
-// ==========================================
-// FORMULARI CREAR TASCA - LAYOUT HORIZONTAL (FIGMA)
-// ==========================================
+.admin-main:has(.tasca-card) {
+  overflow-y: hidden;
+}
+
+.admin-body {
+  height: 100%;
+  overflow: hidden;
+}
 
 .tasca-card {
-  width: 90vw;
-  max-width: 1500px;
-  max-height: calc(100vh - 140px);
-  margin: 0 auto;
-  padding: 30px 50px;
-  background: rgba(234, 248, 255, 0.2);
-  box-shadow: 0px 0px 4px 2px rgba(12, 30, 39, 0.25);
-  border-radius: 35px;
-  backdrop-filter: blur(10px);
+  zoom: 0.8;
+}
+
+.tasca-card {
+  @include targeta(rgba($color-clar, 0.2));
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  width: 1660px;
+  min-height: 808px;
+  margin: 35px auto 0;
+  padding: 46px 77px 30px 20px;
+  align-self: start;
+  font: 100 21px/25px $font-cos;
+  letter-spacing: -0.84px;
+  color: $color-clar;
+
+  input,
+  select,
+  textarea {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    resize: none;
+  }
+
+  ::placeholder {
+    color: $color-clar;
+    opacity: 1;
+  }
 
   &__header {
-    margin-bottom: 15px;
+    margin: 0 0 24px 12px;
 
-    .login-title {
-      font-size: 2.8rem;
-      margin: 0 0 6px 0;
-      color: #EAF8FF;
-    }
-
-    .tasca-subtitle {
-      color: #EAF8FF;
-      font-size: 1.05rem;
-      font-weight: 300;
+    p {
       margin: 0;
+      font-weight: 300;
+    }
+
+    small {
+      display: block;
+      margin-top: 8px;
+      font-size: 16px;
+      color: #ff8080;
     }
   }
 
-  &__error {
-    color: #ff8080;
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  // Distribución en 2 columnas horizontales iguales
   &__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: start;
+    grid-template-columns: 564px 945px;
+    gap: 54px;
+  }
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    min-width: 0;
   }
 }
 
-.tasca-col {
+.tasca-caixa {
+  @include caixa;
+  box-sizing: border-box;
+  height: 50px;
   display: flex;
+  align-items: center;
+
+  input[type='text'] {
+    padding: 0 24px 0 34px;
+  }
+
+  &:focus-within {
+    outline: 3px solid $color-clar;
+  }
+}
+
+.tasca-descripcio {
+  width: 945px;
+  height: 185px;
+
+  textarea {
+    padding: 12px 24px;
+  }
+}
+
+.tasca-dates {
+  display: grid;
+  grid-template-columns: 266px 266px;
+  gap: 32px;
+}
+
+.tasca-data {
+  height: 265px;
+  padding-top: 14px;
   flex-direction: column;
-  gap: 16px;
 }
 
-.field-group {
-  display: flex;
-  gap: 16px;
+.tasca-treballadors {
+  width: 564px;
+  height: 259px;
+  padding: 9px 8px 9px 16px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
 
-  .field {
+  label {
+    @include caixa;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  div {
+    @include caixa;
     flex: 1;
+    min-height: 0;
   }
-}
 
-// Eliminación estricta de bordes/marcos azules
-.field__input,
-.field__textarea,
-select.field__input {
-  &:focus,
-  &:focus-visible,
-  &:active {
-    outline: none !important;
-    box-shadow: 0px 0px 6px rgba(234, 248, 255, 0.4) !important;
+  select {
+    padding: 8px;
+    overflow-y: auto;
+    scrollbar-color: rgba($color-clar, 0.5) transparent;
   }
-}
-
-// Adaptación de la caja de texto sin deformación
-.field__textarea {
-  height: 110px;
-  resize: none;
-  padding-top: 10px;
-}
-
-// Botón de envío alineado a la derecha como en Figma
-.tasca-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 15px;
-
-  .btn--enviar {
-    width: 199px;
-    height: 54px;
-    font-family: 'Martian Mono', monospace, sans-serif;
-    letter-spacing: 0.3em;
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-}
-
-// Selects con flecha estilizada
-select.field__input {
-  cursor: pointer;
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EAF8FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 1em;
-  padding-right: 2.5rem;
 
   option {
-    background-color: #0C1E27;
-    color: #EAF8FF;
+    padding: 6px 16px;
+  }
+
+  option:checked {
+    background: rgba($color-clar, 0.3);
+    color: $color-clar;
   }
 }
 
-input[type="date"].field__input {
-  color-scheme: dark;
+.tasca-desplegables {
+  display: grid;
+  grid-template-columns: 286px 266px 266px;
+  gap: 28px;
+  margin: 7px 0 0 36px;
+}
+
+.tasca-desplegable {
+  position: relative;
+
+  select {
+    padding: 0 64px 0 16px;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  option {
+    background-color: $color-ombra;
+  }
+
+  span {
+    @include targeta(rgba($color-clar, 0.2));
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  svg {
+    width: 20px;
+    height: 10px;
+  }
+}
+
+.btn--enviar {
+  width: 199px;
+  min-height: 58px;
+  margin: 30px 73px 0 auto;
+}
+
+@media (max-width: 1700px) {
+  .tasca-card {
+    width: calc(100% - 40px);
+  }
+
+  .tasca-card__grid {
+    grid-template-columns: minmax(0, 564fr) minmax(0, 945fr);
+    gap: 32px;
+  }
+
+  .tasca-descripcio,
+  .tasca-treballadors {
+    width: 100%;
+  }
+
+  .tasca-dates {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .tasca-desplegables {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .admin-body {
+    height: auto;
+    overflow: auto;
+  }
+
+  .tasca-card {
+    width: 100%;
+    min-height: 0;
+    margin-top: 24px;
+    padding: 30px 20px;
+  }
+
+  .tasca-card__grid,
+  .tasca-desplegables {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .tasca-descripcio {
+    width: 100%;
+  }
+
+  .tasca-desplegables {
+    margin: 20px 0 0;
+  }
+
+  .btn--enviar {
+    margin: 20px 0 0 auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .tasca-card {
+    padding: 24px 16px;
+  }
+
+  .tasca-dates {
+    grid-template-columns: 1fr;
+  }
+
+  .tasca-data {
+    height: 220px;
+  }
+
+  .btn--enviar {
+    width: 100%;
+    margin: 20px 0 0;
+  }
 }
