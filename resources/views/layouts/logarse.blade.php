@@ -16,10 +16,11 @@
 <body>
     @include('partials.icons')
 
-    <main class="page">
+     <main class="page @yield('page-class')" @yield('page-attrs')>
         @yield('content')
     </main>
 
-    <script src="{{ asset('js/registre.js') }}"></script>
+    @include('partials.js-registre')
+    @yield('scripts')
 </body>
 </html>

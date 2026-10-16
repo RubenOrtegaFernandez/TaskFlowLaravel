@@ -1,3 +1,14 @@
+// LOGIN · el vidre de la targeta el dibuixa public/js/vidre.js
+// Aquí només hi ha layout i colors.
+
+// Caixes interiors (camps i accions). No poden ser vidre: la llibreria no admet vidre niuat.
+%caixa-suau {
+  background: rgba($color-blanc, 0.15);
+  border: 1px solid rgba($color-blanc, 0.35);
+  border-radius: 24px;
+}
+
+// Encara l'usen registre i contrasenya oblidada
 .login-wrap {
   width: 100%;
   max-width: 590px;
@@ -7,26 +18,51 @@
   gap: 31px;
 }
 
+// Arrel del liquid glass: fons + logo + targeta
+.page--vidre {
+  position: relative;
+  flex-direction: column;
+  gap: 31px;
+}
+
+.vidre-fons {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
 .login-logo {
+  position: relative;
+  z-index: 1;
   width: 387px;
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-// Targeta de vidre
 .login-card {
-  @include targeta(rgba($color-clar, 0.2));
+  z-index: 1;
   width: 590px;
   max-width: 100%;
   min-height: 580px;
-  border: 1px solid rgba($color-secundari, 0.5);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   padding: 50px 36px 27px;
   display: flex;
   flex-direction: column;
   gap: 28px;
+  border-radius: $radi-vidre;
+
+  // Reserva (sense JS/WebGL) i pàgines encara no migrades (registre, etc.)
+  &:not(.is-liquid) {
+    background: rgba($color-clar, 0.2);
+    border: 1px solid rgba($color-secundari, 0.5);
+    box-shadow: 0 0 4px 2px rgba($color-ombra, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
 }
 
 .login-title {
@@ -39,44 +75,36 @@
   color: $color-clar;
 }
 
-// Camp: caixa única amb icona + input dins
+.login-text {
+  margin: 0;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: -0.64px;
+  color: $color-clar;
+}
+
 .field {
-  @include caixa;
+  @extend %caixa-suau;
   width: 100%;
+  height: 78px;
+  padding: 0 25px 0 23px;
   display: flex;
   align-items: center;
   gap: 25px;
-  height: 78px;
-  padding: 0 25px 0 23px;
 
   &:focus-within {
     outline: 3px solid $color-clar;
     outline-offset: 3px;
   }
 
-  
-&__icon {
+  &__icon {
     flex-shrink: 0;
     color: $color-clar;
     width: 54px;
     height: 54px;
 
-    &--correu {
-        width: 54px;
-        height: 54px;
-    }
-
-    &--clau {
-        width: 43px;
-        height: 43px;
-    }
-
-    &--nom {
-        width: 54px;
-        height: 54px;
-    }
-}
-
+    &--clau { width: 43px; height: 43px; }
+  }
 
   &__label {
     width: 1px;
@@ -107,43 +135,17 @@
   }
 }
 
-// Caixa blanca: enllaç + recordar a l'esquerra, botó a la dreta
 .login-actions {
-  @include caixa;
+  @extend %caixa-suau;
   width: 100%;
-  background-color: rgba($color-blanc, 0.3);
-  border-width: 1px;
+  min-height: 82px;
+  padding: 8px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  min-height: 82px;
-  padding: 8px 16px;
 
-  &__options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  &__link {
-    font-weight: 700;
-    font-size: 20px;
-    letter-spacing: -0.8px;
-    text-decoration: underline;
-    color: $color-clar;
-  }
-}
-
-.enviar-altern{
-  width: 100%;
-  border-width: 1px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  min-height: 82px;
-  padding: 8px 16px;
+  &--sol { justify-content: flex-end; }
 
   &__options {
     display: flex;
@@ -191,15 +193,8 @@
   }
 }
 
-.login-actions--solo,
-.login-actions--sol {
-  justify-content: flex-end;
-}
-
 @media (max-width: 680px) {
-  .login-card {
-    padding: 38px 24px 26px;
-  }
+  .login-card { padding: 38px 24px 26px; }
 
   .login-title {
     font-size: 44px;
@@ -211,38 +206,13 @@
     gap: 16px;
     padding: 0 18px;
 
-      &__icon {
-    flex-shrink: 0;
-    color: $color-clar;
-
-    &--correu { @include icona('../img/svg/icon-email.svg', 54px); }
-    &--clau   { @include icona('../img/svg/icon-key.svg', 43px); }
-    &--nom    { @include icona('../img/svg/icon-name.svg', 54px); }
-    }
-
-    &__input {
-      font-size: 20px;
-    }
+    &__input { font-size: 20px; }
   }
 
   .login-actions {
-    align-items: stretch;
     flex-direction: column;
+    align-items: stretch;
   }
 
-  .btn {
-    align-self: flex-end;
-  }
-}
-
-.login-text {
-  margin: 0;
-  font-weight: 300;
-  font-size: 16px;
-  letter-spacing: -0.64px;
-  color: $color-clar;
-}
-
-.login-actions--sol {
-  justify-content: flex-end;
+  .btn { align-self: flex-end; }
 }

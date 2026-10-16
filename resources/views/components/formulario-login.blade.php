@@ -1,4 +1,4 @@
-<form class="login-card" id="form-login" method="POST" action="/login" novalidate>
+<form class="login-card" data-vidre id="form-login" method="POST" action="/login" novalidate>
     @csrf
 
     <h1 class="login-title">Inici de Sessió</h1>
