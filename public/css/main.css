@@ -21,6 +21,10 @@
   letter-spacing: 3.6px;
   text-transform: uppercase;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 .btn:hover {
   background-color: #4a5265;
@@ -271,13 +275,30 @@
     gap: 16px;
     padding: 0 18px;
   }
-  .field__icon--correu, .field__icon--nom {
-    width: 42px;
-    height: 42px;
+  .field__icon {
+    flex-shrink: 0;
+    color: #eaf8ff;
+  }
+  .field__icon--correu {
+    width: 54px;
+    height: 54px;
+    background-color: currentColor;
+    -webkit-mask: url("../img/svg/icon-email.svg") center/contain no-repeat;
+    mask: url("../img/svg/icon-email.svg") center/contain no-repeat;
   }
   .field__icon--clau {
-    width: 36px;
-    height: 36px;
+    width: 43px;
+    height: 43px;
+    background-color: currentColor;
+    -webkit-mask: url("../img/svg/icon-key.svg") center/contain no-repeat;
+    mask: url("../img/svg/icon-key.svg") center/contain no-repeat;
+  }
+  .field__icon--nom {
+    width: 54px;
+    height: 54px;
+    background-color: currentColor;
+    -webkit-mask: url("../img/svg/icon-name.svg") center/contain no-repeat;
+    mask: url("../img/svg/icon-name.svg") center/contain no-repeat;
   }
   .field__input {
     font-size: 20px;
@@ -319,7 +340,6 @@
   background: rgba(234, 248, 255, 0.2);
   border-radius: 35px;
   box-shadow: 0 0 4px 2px rgba(12, 30, 39, 0.25);
-  min-height: 104px;
   box-sizing: border-box;
   padding: 17px 54px;
   display: grid;
@@ -336,7 +356,7 @@
 }
 .admin-header__title {
   margin: 0;
-  color: #67B0D4;
+  color: #eaf8ff;
   font-family: "Libre Franklin", sans-serif;
   font-size: 50px;
   font-weight: 800;
@@ -353,7 +373,7 @@
   gap: 24px;
 }
 .admin-header__link {
-  color: #67B0D4;
+  color: #eaf8ff;
   font-family: "Libre Franklin", sans-serif;
   font-size: 29px;
   font-weight: 600;
@@ -393,7 +413,7 @@
 }
 .admin-panel__title {
   margin: 0;
-  color: #67b0d4;
+  color: #eaf8ff;
   font-family: "Libre Franklin", sans-serif;
   font-size: 52px;
   font-weight: 700;
@@ -410,7 +430,7 @@
 }
 .admin-panel__description {
   margin: 0;
-  color: #67b0d4;
+  color: #eaf8ff;
   font-family: "Libre Franklin", sans-serif;
   font-size: 21px;
   font-weight: 300;
@@ -429,9 +449,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  margin-top: auto;
 }
 .admin-panel__action-text {
-  color: #7bc6eb;
+  color: #eaf8ff;
   font-family: "Libre Franklin", sans-serif;
   font-size: 20px;
   font-weight: 700;
@@ -489,6 +510,112 @@
     align-items: stretch;
   }
 }
+.tasca-card {
+  width: 90vw;
+  max-width: 1500px;
+  max-height: calc(100vh - 140px);
+  margin: 0 auto;
+  padding: 30px 50px;
+  background: rgba(234, 248, 255, 0.2);
+  box-shadow: 0px 0px 4px 2px rgba(12, 30, 39, 0.25);
+  border-radius: 35px;
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.tasca-card__header {
+  margin-bottom: 15px;
+}
+.tasca-card__header .login-title {
+  font-size: 2.8rem;
+  margin: 0 0 6px 0;
+  color: #EAF8FF;
+}
+.tasca-card__header .tasca-subtitle {
+  color: #EAF8FF;
+  font-size: 1.05rem;
+  font-weight: 300;
+  margin: 0;
+}
+.tasca-card__error {
+  color: #ff8080;
+  display: block;
+  margin-bottom: 10px;
+}
+.tasca-card__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.tasca-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field-group {
+  display: flex;
+  gap: 16px;
+}
+.field-group .field {
+  flex: 1;
+}
+
+.field__input:focus, .field__input:focus-visible, .field__input:active,
+.field__textarea:focus,
+.field__textarea:focus-visible,
+.field__textarea:active,
+select.field__input:focus,
+select.field__input:focus-visible,
+select.field__input:active {
+  outline: none !important;
+  box-shadow: 0px 0px 6px rgba(234, 248, 255, 0.4) !important;
+}
+
+.field__textarea {
+  height: 110px;
+  resize: none;
+  padding-top: 10px;
+}
+
+.tasca-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+.tasca-actions .btn--enviar {
+  width: 199px;
+  height: 54px;
+  font-family: "Martian Mono", monospace, sans-serif;
+  letter-spacing: 0.3em;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+select.field__input {
+  cursor: pointer;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EAF8FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+}
+select.field__input option {
+  background-color: #0C1E27;
+  color: #EAF8FF;
+}
+
+input[type=date].field__input {
+  color-scheme: dark;
+}
+
 .footer {
   min-height: 16px;
   text-align: center;
@@ -501,6 +628,14 @@
 
 html {
   min-height: 100%;
+  overflow: hidden;
+}
+
+.login-wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 :focus-visible {

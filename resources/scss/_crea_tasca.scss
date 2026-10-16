@@ -1,0 +1,120 @@
+// ==========================================
+// FORMULARI CREAR TASCA - LAYOUT HORIZONTAL (FIGMA)
+// ==========================================
+
+.tasca-card {
+  width: 90vw;
+  max-width: 1500px;
+  max-height: calc(100vh - 140px);
+  margin: 0 auto;
+  padding: 30px 50px;
+  background: rgba(234, 248, 255, 0.2);
+  box-shadow: 0px 0px 4px 2px rgba(12, 30, 39, 0.25);
+  border-radius: 35px;
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__header {
+    margin-bottom: 15px;
+
+    .login-title {
+      font-size: 2.8rem;
+      margin: 0 0 6px 0;
+      color: #EAF8FF;
+    }
+
+    .tasca-subtitle {
+      color: #EAF8FF;
+      font-size: 1.05rem;
+      font-weight: 300;
+      margin: 0;
+    }
+  }
+
+  &__error {
+    color: #ff8080;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  // Distribución en 2 columnas horizontales iguales
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+}
+
+.tasca-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field-group {
+  display: flex;
+  gap: 16px;
+
+  .field {
+    flex: 1;
+  }
+}
+
+// Eliminación estricta de bordes/marcos azules
+.field__input,
+.field__textarea,
+select.field__input {
+  &:focus,
+  &:focus-visible,
+  &:active {
+    outline: none !important;
+    box-shadow: 0px 0px 6px rgba(234, 248, 255, 0.4) !important;
+  }
+}
+
+// Adaptación de la caja de texto sin deformación
+.field__textarea {
+  height: 110px;
+  resize: none;
+  padding-top: 10px;
+}
+
+// Botón de envío alineado a la derecha como en Figma
+.tasca-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+
+  .btn--enviar {
+    width: 199px;
+    height: 54px;
+    font-family: 'Martian Mono', monospace, sans-serif;
+    letter-spacing: 0.3em;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+}
+
+// Selects con flecha estilizada
+select.field__input {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EAF8FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+
+  option {
+    background-color: #0C1E27;
+    color: #EAF8FF;
+  }
+}
+
+input[type="date"].field__input {
+  color-scheme: dark;
+}
