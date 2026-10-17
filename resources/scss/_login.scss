@@ -1,15 +1,18 @@
-// LOGIN · el vidre de la targeta el dibuixa public/js/vidre.js
-// Aquí només hi ha layout i colors.
 
-// Caixes interiors (camps i accions). No poden ser vidre: la llibreria no admet vidre niuat.
+ // LOGIN · LiquidGlass es gestionat per public/js/vidre.js
+ // Aquí es defineixen el layout, els colors i els estils interiors.
+
+// Caixes interiors
 %caixa-suau {
-  background: rgba($color-blanc, 0.15);
-  border: 1px solid rgba($color-blanc, 0.35);
+  background: rgba($color-blanc, 0.08);
+  border: 1px solid rgba($color-blanc, 0.18);
   border-radius: 24px;
 }
 
-// Encara l'usen registre i contrasenya oblidada
+// Contenidor del registre i de recuperar contrasenya
 .login-wrap {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 590px;
   display: flex;
@@ -18,7 +21,7 @@
   gap: 31px;
 }
 
-// Arrel del liquid glass: fons + logo + targeta
+// Arrel del LiquidGlass
 .page--vidre {
   position: relative;
   flex-direction: column;
@@ -45,6 +48,7 @@
 }
 
 .login-card {
+  position: relative;
   z-index: 1;
   width: 590px;
   max-width: 100%;
@@ -55,14 +59,9 @@
   gap: 28px;
   border-radius: $radi-vidre;
 
-  // Reserva (sense JS/WebGL) i pàgines encara no migrades (registre, etc.)
-  &:not(.is-liquid) {
-    background: rgba($color-clar, 0.2);
-    border: 1px solid rgba($color-secundari, 0.5);
-    box-shadow: 0 0 4px 2px rgba($color-ombra, 0.25);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .login-title {
@@ -84,18 +83,19 @@
 }
 
 .field {
-  @extend %caixa-suau;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 24px;
   width: 100%;
   height: 78px;
   padding: 0 25px 0 23px;
   display: flex;
   align-items: center;
   gap: 25px;
-
-  &:focus-within {
-    outline: 3px solid $color-clar;
-    outline-offset: 3px;
-  }
+  background: transparent;
+  border: 1px solid rgba($color-blanc, 0.12);
+  box-shadow: none;
 
   &__icon {
     flex-shrink: 0;
@@ -103,7 +103,10 @@
     width: 54px;
     height: 54px;
 
-    &--clau { width: 43px; height: 43px; }
+    &--clau {
+      width: 43px;
+      height: 43px;
+    }
   }
 
   &__label {
@@ -120,8 +123,9 @@
     height: 100%;
     padding: 0;
     background: transparent;
-    border: 0;
+    border: none;
     outline: none;
+    box-shadow: none;
     font-family: $font-cos;
     font-weight: 300;
     font-size: 26px;
@@ -132,11 +136,25 @@
       color: $color-clar;
       opacity: 1;
     }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-text-fill-color: $color-clar;
+      transition: background-color 9999s ease-in-out 0s;
+      box-shadow: 0 0 0 1000px transparent inset;
+    }
+
+    &:focus {
+      outline: none;
+      border: none;
+      box-shadow: none;
+    }
   }
 }
 
 .login-actions {
-  @extend %caixa-suau;
   width: 100%;
   min-height: 82px;
   padding: 8px 16px;
@@ -144,8 +162,14 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
+  background: transparent;
+  border: 1px solid rgba($color-blanc, 0.12);
+  border-radius: 24px;
+  box-shadow: none;
 
-  &--sol { justify-content: flex-end; }
+  &--sol {
+    justify-content: flex-end;
+  }
 
   &__options {
     display: flex;
@@ -194,7 +218,9 @@
 }
 
 @media (max-width: 680px) {
-  .login-card { padding: 38px 24px 26px; }
+  .login-card {
+    padding: 38px 24px 26px;
+  }
 
   .login-title {
     font-size: 44px;
@@ -206,7 +232,9 @@
     gap: 16px;
     padding: 0 18px;
 
-    &__input { font-size: 20px; }
+    &__input {
+      font-size: 20px;
+    }
   }
 
   .login-actions {
@@ -214,5 +242,7 @@
     align-items: stretch;
   }
 
-  .btn { align-self: flex-end; }
+  .btn {
+    align-self: flex-end;
+  }
 }

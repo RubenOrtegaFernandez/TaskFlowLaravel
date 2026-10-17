@@ -4,40 +4,33 @@
   width: 128px;
   height: 49px;
   padding: 0 16px;
-  background-color: $color-negre;
-  border: 1px solid $color-ombra;
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
   border-radius: 12px;
-  color: $color-blanc;
+  color: $color-clar;
   font-family: $font-boto;
   font-weight: 700;
   font-size: 18px;
   letter-spacing: 3.6px;
   text-transform: uppercase;
   cursor: pointer;
-
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  transition: filter 0.2s ease;
 
-  &:hover {
-    background-color: $color-negre-sec;
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border: none;
+    box-shadow: none;
   }
-}
-
-.btn--enviar {
-  width: 199px;
-  height: 58px;
-  margin: auto -24px 17px auto;
-  background-color: rgba($color-secundari, 0.73);
-  border: 0;
-  border-radius: 24px;
-  box-shadow: 0 0 34px rgba(0, 0, 0, 0.35);
-  color: rgba($color-ombra, 0.64);
-  font-size: 23px;
-  letter-spacing: 0.37em;
 
   &:hover {
-    background-color: $color-secundari;
+    background: transparent;
+    filter: brightness(1.15);
   }
 }

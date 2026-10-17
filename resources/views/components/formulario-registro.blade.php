@@ -1,5 +1,5 @@
 
-<form id="form-regisr" class="login-card" method="POST" action="/registre" novalidate>
+<form id="form-regisr" class="login-card" data-vidre method="POST" action="/registre" novalidate>
     @csrf
 
     <h1 class="login-title">Crear compte</h1>
