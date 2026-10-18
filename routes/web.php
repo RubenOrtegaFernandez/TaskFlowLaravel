@@ -4,14 +4,36 @@ use App\Http\Controllers\ControladorLogin;
 use App\Http\Controllers\ControladorRegistre;
 use App\Http\Controllers\ControladorTasques;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::resource('tasca', ControladorTasques::class)->only(['create', 'store']);
 
-Route::get('/dashboard/admin', fn () => view('dashboardAdmin'))->name('dashboardadmin.index');
+
+Route::get('/dashboard/admin', function () {
+    $destino = '/login';
+    $mensaje = null;
+
+    if (Auth::check() && Auth::user()->rol_tipus === 'admin') {
+        $destino = 'dashboardAdmin';
+    } else {
+        $mensaje = 'Logeate como admin para poder entrar.';
+    }
+
+    if ($destino === 'dashboardAdmin') {
+        $resultado = view($destino);
+    } else {
+        $resultado = redirect($destino)->with('error', $mensaje);
+    }
+
+    return $resultado;
+})->name('dashboardadmin.index');
+
 
 Route::get('/dashboard/cap', fn () => view('dashboardCap'))->name('dashboardcap.index');
 
 Route::get('/dashboard/treballador', fn () => view('dashboardTreballador'))->name('dashboardtreballador.index');
+
+Route::get('/categories', fn () => 'Categories')->name('categoria.index');
 
 Route::get('/tasca/llistat-tasques', [ControladorTasques::class, 'index'])->name('tasca.index');
 

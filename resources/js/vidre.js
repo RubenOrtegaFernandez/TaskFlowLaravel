@@ -1,4 +1,3 @@
-
 import { LiquidGlass } from 'https://cdn.jsdelivr.net/npm/@ybouane/liquidglass@1.0.3/dist/index.js';
 
 const configuracioVidre = {
@@ -21,84 +20,96 @@ const configuracioVidre = {
   bevelMode: 0,
 };
 
-function iniciaVidre() {
-  const arrel = document.querySelector('[data-vidre-arrel]');
-  const targeta = arrel
-    ? arrel.querySelector('[data-vidre]')
-    : null;
+const configuracioBoto = Object.assign({}, configuracioVidre, {
+  button: true,
+  opacity: 0.65,
+  edgeHighlight: 0.15,
+  specular: 0.15,
+  tintStrength: 0,
+});
 
-  const camps = targeta
-    ? targeta.querySelectorAll('.field')
-    : [];
+// Aplica el vidre a un element
+function aplicaVidre(element, root, defaults) {
+  let configuracio = configuracioVidre;
 
-  const accions = targeta
-    ? targeta.querySelectorAll('.login-actions')
-    : [];
-
-  const botoEnviar = targeta
-    ? targeta.querySelector('button.btn')
-    : null;
-
-  // Targeta del formulari
-  if (arrel && targeta) {
-    LiquidGlass.init({
-      root: targeta.parentElement,
-      glassElements: [targeta],
-      defaults: configuracioVidre,
-    });
-
-    targeta.classList.add('is-liquid');
+  if (defaults) {
+    configuracio = defaults;
   }
 
-  // Camps de nom, correu i contrasenya
-  camps.forEach((camp) => {
-    LiquidGlass.init({
-      root: camp.parentElement,
-      glassElements: [camp],
-      defaults: configuracioVidre,
-    });
-
-    camp.classList.add('is-liquid');
+  LiquidGlass.init({
+    root: root,
+    glassElements: [element],
+    defaults: configuracio,
   });
 
-  // Zona inferior del formulari
-  accions.forEach((accio) => {
-    LiquidGlass.init({
-      root: accio.parentElement,
-      glassElements: [accio],
-      defaults: configuracioVidre,
+  element.classList.add('is-liquid');
+}
+
+// Login i registre
+function iniciaLogin(arrel) {
+  const targeta = arrel.querySelector('[data-vidre]');
+
+  if (targeta) {
+    aplicaVidre(targeta, targeta.parentElement);
+
+    const camps = targeta.querySelectorAll('.field');
+    camps.forEach(function (camp) {
+      aplicaVidre(camp, camp.parentElement);
     });
 
-    accio.classList.add('is-liquid');
-  });
-
-  // Botó Enviar
-  if (botoEnviar) {
-    LiquidGlass.init({
-      root: botoEnviar.parentElement,
-      glassElements: [botoEnviar],
-      defaults: {
-        ...configuracioVidre,
-        button: true,
-        opacity: 0.65,
-        edgeHighlight: 0.15,
-        specular: 0.15,
-        tintStrength: 0,
-      },
+    const accions = targeta.querySelectorAll('.login-actions');
+    accions.forEach(function (accio) {
+      aplicaVidre(accio, accio.parentElement);
     });
 
-    botoEnviar.classList.add('is-liquid');
+    const botoEnviar = targeta.querySelector('button.btn');
+    if (botoEnviar) {
+      aplicaVidre(botoEnviar, botoEnviar.parentElement, configuracioBoto);
+    }
   }
 }
 
-if (document.readyState === 'complete') {
+// Dashboard de l'admin
+function iniciaAdmin(shell) {
+  const header = shell.querySelector('.admin-header[data-vidre]');
+  if (header) {
+    aplicaVidre(header, shell);
+  }
+
+  const panells = shell.querySelectorAll('.admin-panel');
+  panells.forEach(function (panell) {
+    aplicaVidre(panell, panell.parentElement);
+  });
+
+  const caixes = shell.querySelectorAll('.admin-panel__action');
+  caixes.forEach(function (caixa) {
+    aplicaVidre(caixa, caixa.parentElement);
+  });
+
+  const botons = shell.querySelectorAll('.admin-panel__action .btn');
+  botons.forEach(function (boto) {
+    aplicaVidre(boto, boto.parentElement, configuracioBoto);
+  });
+}
+
+// Decideix quina pàgina és
+function iniciaVidre() {
+  const arrel = document.querySelector('[data-vidre-arrel]');
+  const shell = document.querySelector('.admin-shell');
+
+  if (arrel) {
+    iniciaLogin(arrel);
+  } else if (shell) {
+    iniciaAdmin(shell);
+  }
+}
+
+function alCarregar() {
   requestAnimationFrame(iniciaVidre);
+}
+
+if (document.readyState === 'complete') {
+  alCarregar();
 } else {
-  window.addEventListener(
-    'load',
-    () => {
-      requestAnimationFrame(iniciaVidre);
-    },
-    { once: true }
-  );
+  window.addEventListener('load', alCarregar, { once: true });
 }

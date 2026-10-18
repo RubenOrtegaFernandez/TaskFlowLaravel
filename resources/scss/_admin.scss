@@ -4,6 +4,7 @@
 }
 
 .admin-shell {
+  position: relative; // NUEVO: contexto para la imagen .vidre-fons
   height: 100vh;
   padding: 24px 33px;
   display: flex;
@@ -12,7 +13,12 @@
 }
 
 .admin-header {
-  @include targeta(rgba($color-clar, 0.2));
+  position: relative; // NUEVO
+  z-index: 1;         // NUEVO: por encima de la imagen de fondo
+  background: transparent;
+  border-radius: 35px;
+  // box-shadow eliminada: la dibuja el cristal
+
   box-sizing: border-box;
   padding: 17px 54px;
   display: grid;
@@ -73,6 +79,8 @@
 }
 
 .admin-main {
+  position: relative; // NUEVO
+  z-index: 1;         // NUEVO
   flex: 1;
   min-height: 0;
   display: grid;
@@ -82,6 +90,14 @@
 
 .admin-panel {
   @include targeta(rgba($color-clar, 0.2));
+
+  // NUEVO: el cristal lo dibuja LiquidGlass (igual que .login-card)
+  position: relative;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: $radi-vidre;
+
   padding: 20px 41px 30px;
   display: flex;
   flex-direction: column;
@@ -99,16 +115,10 @@
     text-align: center;
   }
 
-  &__content {
-    width: 100%;
-    max-width: 507px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-
   &__description {
     margin: 0;
+    width: 100%;
+    max-width: 507px;
     color: $color-clar;
     font-family: $font-cos;
     font-size: 21px;
@@ -120,6 +130,16 @@
 
   &__action {
     @include caixa-admin(rgba($color-blanc, 0.3));
+
+    // NUEVO: igual que .field y .login-actions
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 24px;
+
     min-height: 82px;
     padding: 16px 14px 16px 18px;
     display: flex;
@@ -127,6 +147,9 @@
     justify-content: space-between;
     gap: 16px;
     margin-top: auto;
+
+    width: 100%;
+    max-width: 507px;
   }
 
   &__action-text {

@@ -1,4 +1,4 @@
-<header class="admin-header">
+<header class="admin-header" data-vidre>
     <a class="admin-header__logo" href="{{ asset('/login') }}" aria-label="TaskFlow">
         <img class="login-logo" src="{{ asset('img/logo_blanc_taskflow.png') }}" alt="TaskFlow">
     </a>
@@ -9,10 +9,10 @@
         @hasSection('header-nav')
             @yield('header-nav')
         @else
-            <a class="admin-header__link" href="{{ route('tasca.index') }}">Tasques</a>
-            <a class="admin-header__link" href="{{ route('departament.index') }}">Departaments</a>
-            <a class="admin-header__link" href="{{ route('usuari.index') }}">Treballadors</a>
-            <a class="admin-header__link" href="{{ route('categoria.index') }}">Categories</a>
+            <a class="admin-header__link" href="{{ route('tasca.index') }}">TASQUES</a>
+            <a class="admin-header__link" href="{{ route('departament.index') }}">DEPARTAMENTS</a>
+            <a class="admin-header__link" href="{{ route('usuari.index') }}">TREBALLADORS</a>
+            <a class="admin-header__link" href="{{ route('categoria.index') }}">CATEGORÍES</a>
         @endif
     </nav>
 
