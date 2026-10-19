@@ -1,3 +1,5 @@
+@props(['tasques'])
+
 <table class="llista-tasques__taula">
     <thead>
         <tr>
@@ -9,18 +11,21 @@
             <th>Categoria</th>
             <th>Departament</th>
             <th>Data final</th>
+            <th>Creador</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($tasques as $tasca)
             <tr>
                 <td>{{ $tasca->nom_tas }}</td>
+                <td>{{ $tasca->descripcio }}</td>
                 <td>{{ $tasca->data_inici }}</td>
                 <td>{{ $tasca->data_final }}</td>
                 <td>{{ $tasca->estat }}</td>
                 <td>{{ $tasca->prioritat }}</td>
                 <td>{{ $tasca->categoria }}</td>
                 <td>{{ $tasca->departament->nom ?? '—' }}</td>
+                <td>{{ $tasca->creador->nom_usu ?? '—' }}</td>
             </tr>
         @endforeach
     </tbody>

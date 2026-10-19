@@ -83,7 +83,7 @@ class ControladorTasques
 
             Tasca::create($dades);
 
-            $rutaTornada = Auth::user()->rol_tipus === 'admin' ? 'admin' : 'cap';
+            $rutaTornada = Auth::user()->rol_tipus === 'admin' ? 'dashboardadmin.index' : 'dashboardcap.index';
 
             $esValid = redirect()->route($rutaTornada)
                 ->with('status', 'Tasca creada correctament!');
