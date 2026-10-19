@@ -62,6 +62,14 @@ class DatabaseSeeder extends Seeder
             'id_dep' => $informatica->id_dep,
         ]);
 
+        Usuari::create([
+            'nom_usu' => 'Manolo',
+            'correu' => 'manolo@taskflow.com',
+            'rol_tipus' => 'client',
+            'contrasenya' => Hash::make('manolo123'),
+            'id_dep' => $informatica->id_dep,
+        ]);
+
         $this->call([
             TascaSeeder::class,
         ]);

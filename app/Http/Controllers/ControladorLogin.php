@@ -35,7 +35,7 @@ class ControladorLogin
 
                 Cookie::queue('missatge_vist', 'true', 99999999); // <- Nosecuantos Años que dura la cookie
 
-                $esValid = redirect()->route('treballador')
+                $esValid = redirect()->route('dashboardtreballador.index')
                     ->with('status', 'Benvingut, si no ets un treballador recomanem avisar al teu administrador');
             } else {
                 $rutaLogin = match ($usuari->rol_tipus) {

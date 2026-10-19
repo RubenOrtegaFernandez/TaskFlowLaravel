@@ -20,7 +20,7 @@ class ControladorTasques
             $esValid = redirect()->route('login');
 
         } elseif (Auth::user()->rol_tipus != 'admin' && Auth::user()->rol_tipus != 'cap') {
-                $esValid = redirect()->route('treballador');
+                $esValid = redirect()->route('dashboardtreballador.index');
 
         } else {
 
@@ -59,7 +59,7 @@ class ControladorTasques
 
         } elseif (Auth::user()->rol_tipus === 'client') {
 
-            $esValid = redirect()->route('treballador');
+            $esValid = redirect()->route('dashboardtreballador.index');
 
         } else {
 
@@ -102,7 +102,7 @@ class ControladorTasques
 
     } elseif (Auth::user()->rol_tipus === 'client') {
 
-        $esValid = redirect()->route('treballador');
+        $esValid = redirect()->route('dashboardtreballador.index');
 
     } else {
 

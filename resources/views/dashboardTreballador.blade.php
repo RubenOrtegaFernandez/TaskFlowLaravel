@@ -2,18 +2,17 @@
 
 @section('title', 'Treballador · TaskFlow')
 
-@section('header-nav')
-    <a class="admin-header__link" href="{{ route('tasca.index') }}">Tasques</a>
-    <a class="admin-header__link" href="{{ route('departament.index') }}">Departaments</a>
-    <a class="admin-header__link" href="{{ route('usuari.index') }}">Treballadors</a>
-    
+@section('header-title', 'TASQUES')
 
+@section('header-nav')
+    <a class="admin-header__link" href="{{ route('departament.index') }}">DEPARTAMENTS</a>
+    <a class="admin-header__link" href="{{ route('usuari.index') }}">TREBALLADORS</a>
 @endsection
 
 @section('content')
-@if (session('status'))
-    <p class="admin-panel__description">{{ session('status') }}</p>
-@endif
+    @if (session('status'))
+        <p class="admin-panel__description">{{ session('status') }}</p>
+    @endif
 <section class="admin-panel admin-panel--highlight">
     <h2 class="admin-panel__title">Tasques Urgents</h2>
 
