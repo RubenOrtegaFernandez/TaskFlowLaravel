@@ -776,6 +776,31 @@
   color: #67b0d4;
 }
 
+.llistat {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  color: #eaf8ff;
+}
+.llistat th,
+.llistat td {
+  color: #eaf8ff;
+  padding: 10px 12px;
+  text-align: center;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.llistat th {
+  text-align: center;
+  font-weight: 600;
+  width: 10%;
+}
+.llistat .col-accions {
+  width: 10%;
+  white-space: nowrap;
+}
+
 * {
   box-sizing: border-box;
 }

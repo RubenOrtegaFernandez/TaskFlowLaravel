@@ -30,4 +30,14 @@ class Usuari extends Authenticatable
     {
         return $this->contrasenya;
     }
+
+    public function getEmailForPasswordReset()
+    {
+        return $this->correu;
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['contrasenya'] = $value;
+    }
 }

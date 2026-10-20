@@ -48,6 +48,9 @@ class ControladorTasques
         return $esValid;
     }
 
+    public function show(Tasca $tasca){
+        return view('tasca.veureTasca', compact('tasca'));
+    }
 
     public function store(Request $request)
     {

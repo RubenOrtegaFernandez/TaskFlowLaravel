@@ -1,17 +1,18 @@
 @props(['tasques'])
 
-<table class="llista-tasques__taula">
+<table class="llistat">
     <thead>
         <tr>
             <th>Nom</th>
+            <th>Descripció</th>
             <th>Data Inici</th>
             <th>Data Final</th>
             <th>Estat</th>
             <th>Prioritat</th>
             <th>Categoria</th>
             <th>Departament</th>
-            <th>Data final</th>
             <th>Creador</th>
+            <th colspan="3">Accions</th>
         </tr>
     </thead>
     <tbody>
@@ -21,11 +22,28 @@
                 <td>{{ $tasca->descripcio }}</td>
                 <td>{{ $tasca->data_inici }}</td>
                 <td>{{ $tasca->data_final }}</td>
-                <td>{{ $tasca->estat }}</td>
-                <td>{{ $tasca->prioritat }}</td>
+                <td>{{ ucfirst(str_replace('_', ' ', $tasca->estat)) }}</td>
+                <td>{{ ucfirst($tasca->prioritat) }}</td>
                 <td>{{ $tasca->categoria }}</td>
-                <td>{{ $tasca->departament->nom ?? '—' }}</td>
+                <td>{{ $tasca->departament->nom ?? 'Sense departament' }}</td>
                 <td>{{ $tasca->creador->nom_usu ?? '—' }}</td>
+                <td class="col-accions">
+                    <a href="{{ route('tasca.show', $tasca) }}" title="Veure">
+                        <svg class="field__icon" aria-hidden="true">
+                            <use xlink:href="#icon-ull"></use>
+                        </svg>
+                    </a>
+                    <a href="{{ route('tasca.show', $tasca) }}" title="Veure">
+                        <svg class="field__icon" aria-hidden="true">
+                            <use xlink:href="#icon-ull"></use>
+                        </svg>
+                    </a>
+                    <a href="{{ route('tasca.show', $tasca) }}" title="Veure">
+                        <svg class="field__icon" aria-hidden="true">
+                            <use xlink:href="#icon-ull"></use>
+                        </svg>
+                    </a>
+                </td>
             </tr>
         @endforeach
     </tbody>

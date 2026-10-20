@@ -1,4 +1,3 @@
-
 @extends('layouts.logarse')
 
 @section('title', 'Recuperar contrasenya · TaskFlow')
@@ -14,8 +13,26 @@
 
     <img class="login-logo" src="{{ asset('img/logo_blanc_taskflow.png') }}" alt="TaskFlow">
 
-    <form class="login-card" data-vidre method="POST" action="#">
+    <form class="login-card" data-vidre method="POST" action="{{ route('contrasenya.oblidada.enviar') }}">
         @csrf
+
+        @if ($errors->any())
+            <p class="login-text">
+                {{ $errors->first() }}
+            </p>
+        @endif
+
+        @if (session('error'))
+            <p class="login-text">
+                {{ session('error') }}
+            </p>
+        @endif
+
+        @if (session('status'))
+            <p class="login-text">
+                {{ session('status') }}
+            </p>
+        @endif
 
         <h1 class="login-title">Recuperar contrasenya</h1>
 

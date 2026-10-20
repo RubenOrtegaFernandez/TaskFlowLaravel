@@ -3,6 +3,7 @@
 use App\Http\Controllers\ControladorLogin;
 use App\Http\Controllers\ControladorRegistre;
 use App\Http\Controllers\ControladorTasques;
+use App\Http\Controllers\ControladorRecuperacio;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,6 +49,10 @@ Route::get('/dashboard/treballador', function () {
     ));
 })->name('dashboardtreballador.index');
 
+Route::get('/tasca/llistat-tasques', [ControladorTasques::class, 'index'])->name('tasca.index');
+
+Route::get('/tasca/{tasca}', [ControladorTasques::class, 'show'])->name('tasca.show');
+
 Route::get('/categories', fn () => 'Categories')->name('categoria.index');
 
 Route::get('/tasca/llistat-tasques', [ControladorTasques::class, 'index'])->name('tasca.index');
@@ -64,7 +69,17 @@ Route::get('/login', fn () => view('loginTaskFlow'))->name('login');
 
 Route::post('/login', [ControladorLogin::class, 'iniciarSessio']);
 
-Route::get('/contrasenya/oblidada', fn () => view('contrasenyaOblidada'));
+Route::get('/contrasenya/oblidada', [ControladorRecuperacio::class, 'mostrarFormulari'])
+    ->name('contrasenya.oblidada');
+
+Route::post('/contrasenya/oblidada', [ControladorRecuperacio::class, 'enviarEnllac'])
+    ->name('contrasenya.oblidada.enviar');
+
+Route::get('/restablir-contrasenya/{token}', [ControladorRecuperacio::class, 'mostrarRestabliment'])
+    ->name('contrasenya.restablir');
+
+Route::post('/restablir-contrasenya/{token}', [ControladorRecuperacio::class, 'restablir'])
+    ->name('contrasenya.actualitzar');
 
 Route::view('/registre', 'registreTaskFlow')->name('registre');
 

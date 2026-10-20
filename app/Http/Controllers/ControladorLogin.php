@@ -24,8 +24,9 @@ class ControladorLogin
 
             $esValid = back()->withErrors(['correu' => 'Aquest usuari no existeix, si us plau, registreu-vos'])->withInput();
 
-        }elseif (Auth::attempt(['correu' => $credencials['correu'],'password' => $credencials['contrasenya']])){
-
+        } elseif (Auth::attempt(['correu' => $credencials['correu'], 'password' => $credencials['contrasenya']],
+            $request->boolean('remember')
+            )) {
             $request->session()->regenerate();
             $usuari = Auth::user();
 
