@@ -1,3 +1,4 @@
+
 import { LiquidGlass } from 'https://cdn.jsdelivr.net/npm/@ybouane/liquidglass@1.0.3/dist/index.js';
 
 const configuracioVidre = {
@@ -5,7 +6,7 @@ const configuracioVidre = {
   refraction: 0.8,
   chromAberration: 0.3,
   edgeHighlight: 0.43,
-  specular: 0,
+  specular: 0.15,
   fresnel: 1,
   cornerRadius: 40,
   zRadius: 40,
@@ -24,88 +25,105 @@ const configuracioBoto = Object.assign({}, configuracioVidre, {
   button: true,
   opacity: 0.65,
   edgeHighlight: 0.15,
-  specular: 0.15,
-  tintStrength: 0,
 });
 
-// Aplica el vidre a un element
-function aplicaVidre(element, root, defaults) {
-  let configuracio = configuracioVidre;
+function aplicaVidre(element, root, configuracio) {
+  if (element && root && element.parentElement === root) {
+    LiquidGlass.init({
+      root: root,
+      glassElements: [element],
+      defaults: configuracio || configuracioVidre,
+    });
 
-  if (defaults) {
-    configuracio = defaults;
+    element.classList.add('is-liquid');
   }
-
-  LiquidGlass.init({
-    root: root,
-    glassElements: [element],
-    defaults: configuracio,
-  });
-
-  element.classList.add('is-liquid');
 }
 
-// Login i registre
 function iniciaLogin(arrel) {
   const targeta = arrel.querySelector('[data-vidre]');
 
   if (targeta) {
-    aplicaVidre(targeta, targeta.parentElement);
+    aplicaVidre(targeta, targeta.parentElement, configuracioVidre);
 
     const camps = targeta.querySelectorAll('.field');
+
     camps.forEach(function (camp) {
-      aplicaVidre(camp, camp.parentElement);
+      aplicaVidre(camp, camp.parentElement, configuracioVidre);
     });
 
     const accions = targeta.querySelectorAll('.login-actions');
+
     accions.forEach(function (accio) {
-      aplicaVidre(accio, accio.parentElement);
+      aplicaVidre(accio, accio.parentElement, configuracioVidre);
     });
 
     const botoEnviar = targeta.querySelector('button.btn');
+
     if (botoEnviar) {
       aplicaVidre(botoEnviar, botoEnviar.parentElement, configuracioBoto);
     }
   }
 }
 
-// Dashboard de l'admin
 function iniciaAdmin(shell) {
-  const header = shell.querySelector('.admin-header[data-vidre]');
+  const elementsVidre = [];
+
+  const header = shell.querySelector(':scope > .admin-header[data-vidre]');
+
   if (header) {
-    aplicaVidre(header, shell);
+    elementsVidre.push(header);
   }
 
-  const panells = shell.querySelectorAll('.admin-panel');
+  const panells = shell.querySelectorAll(':scope > .admin-panel');
+
   panells.forEach(function (panell) {
-    aplicaVidre(panell, panell.parentElement);
+    elementsVidre.push(panell);
   });
 
-  const caixes = shell.querySelectorAll('.admin-panel__action');
-  caixes.forEach(function (caixa) {
-    aplicaVidre(caixa, caixa.parentElement);
-  });
+  if (elementsVidre.length > 0) {
+    LiquidGlass.init({
+      root: shell,
+      glassElements: elementsVidre,
+      defaults: configuracioVidre,
+    });
 
-  const botons = shell.querySelectorAll('.admin-panel__action .btn');
-  botons.forEach(function (boto) {
-    aplicaVidre(boto, boto.parentElement, configuracioBoto);
+    elementsVidre.forEach(function (element) {
+      element.classList.add('is-liquid');
+    });
+  }
+
+  panells.forEach(function (panell) {
+    const accio = panell.querySelector('.admin-panel__action');
+
+    if (accio) {
+      aplicaVidre(accio, panell, configuracioVidre);
+
+      const boto = accio.querySelector('.btn');
+
+      if (boto) {
+        aplicaVidre(boto, accio, configuracioBoto);
+      }
+    }
   });
 }
 
-// Decideix quina pàgina és
 function iniciaVidre() {
   const arrel = document.querySelector('[data-vidre-arrel]');
   const shell = document.querySelector('.admin-shell');
 
   if (arrel) {
     iniciaLogin(arrel);
-  } else if (shell) {
+  }
+
+  if (shell) {
     iniciaAdmin(shell);
   }
 }
 
 function alCarregar() {
-  requestAnimationFrame(iniciaVidre);
+  requestAnimationFrame(function () {
+    iniciaVidre();
+  });
 }
 
 if (document.readyState === 'complete') {

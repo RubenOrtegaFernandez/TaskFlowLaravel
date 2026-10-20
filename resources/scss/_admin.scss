@@ -1,10 +1,12 @@
+
 .admin-body {
   height: 100vh;
   overflow: hidden;
 }
 
 .admin-shell {
-  position: relative; // NUEVO: contexto para la imagen .vidre-fons
+  position: relative;
+  isolation: isolate;
   height: 100vh;
   padding: 24px 33px;
   display: flex;
@@ -12,13 +14,23 @@
   gap: 24px;
 }
 
-.admin-header {
-  position: relative; // NUEVO
-  z-index: 1;         // NUEVO: por encima de la imagen de fondo
-  background: transparent;
-  border-radius: 35px;
-  // box-shadow eliminada: la dibuja el cristal
+.admin-shell > .vidre-fons {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
 
+.admin-header {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 35px;
   box-sizing: border-box;
   padding: 17px 54px;
   display: grid;
@@ -26,13 +38,11 @@
   align-items: center;
   gap: 20px;
 
-  &__logo {
-    img {
-      display: block;
-      width: 231px;
-      height: 34px;
-      object-fit: contain;
-    }
+  &__logo img {
+    display: block;
+    width: 231px;
+    height: 34px;
+    object-fit: contain;
   }
 
   &__title {
@@ -79,8 +89,7 @@
 }
 
 .admin-main {
-  position: relative; // NUEVO
-  z-index: 1;         // NUEVO
+  position: relative;
   flex: 1;
   min-height: 0;
   display: grid;
@@ -89,15 +98,13 @@
 }
 
 .admin-panel {
-  @include targeta(rgba($color-clar, 0.2));
-
-  // NUEVO: el cristal lo dibuja LiquidGlass (igual que .login-card)
   position: relative;
+  isolation: isolate;
+  min-width: 0;
   background: transparent;
   border: none;
   box-shadow: none;
   border-radius: $radi-vidre;
-
   padding: 20px 41px 30px;
   display: flex;
   flex-direction: column;
@@ -129,30 +136,33 @@
   }
 
   &__action {
-    @include caixa-admin(rgba($color-blanc, 0.3));
-
-    // NUEVO: igual que .field y .login-actions
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    border-radius: 24px;
-
+    width: 100%;
+    max-width: 507px;
     min-height: 82px;
+    margin-top: auto;
     padding: 16px 14px 16px 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    margin-top: auto;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 24px;
 
-    width: 100%;
-    max-width: 507px;
+    .btn {
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
   }
 
   &__action-text {
+    position: relative;
+    z-index: 1;
     color: $color-clar;
     font-family: $font-cos;
     font-size: 20px;
@@ -170,6 +180,7 @@
 
   .admin-shell {
     height: auto;
+    min-height: 100vh;
     padding: 24px 20px 40px;
   }
 

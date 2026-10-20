@@ -279,6 +279,7 @@
 
 .admin-shell {
   position: relative;
+  isolation: isolate;
   height: 100vh;
   padding: 24px 33px;
   display: flex;
@@ -286,10 +287,23 @@
   gap: 24px;
 }
 
+.admin-shell > .vidre-fons {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  pointer-events: none;
+}
+
 .admin-header {
   position: relative;
   z-index: 1;
   background: transparent;
+  border: none;
+  box-shadow: none;
   border-radius: 35px;
   box-sizing: border-box;
   padding: 17px 54px;
@@ -346,7 +360,6 @@
 
 .admin-main {
   position: relative;
-  z-index: 1;
   flex: 1;
   min-height: 0;
   display: grid;
@@ -355,10 +368,9 @@
 }
 
 .admin-panel {
-  background: rgba(234, 248, 255, 0.2);
-  border-radius: 35px;
-  box-shadow: 0 0 4px 2px rgba(12, 30, 39, 0.25);
   position: relative;
+  isolation: isolate;
+  min-width: 0;
   background: transparent;
   border: none;
   box-shadow: none;
@@ -392,28 +404,31 @@
   text-align: center;
 }
 .admin-panel__action {
-  background-color: rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 24px;
-  box-shadow: 8px 8px 4px rgba(12, 30, 39, 0.22);
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  border-radius: 24px;
+  width: 100%;
+  max-width: 507px;
   min-height: 82px;
+  margin-top: auto;
   padding: 16px 14px 16px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-top: auto;
-  width: 100%;
-  max-width: 507px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 24px;
+}
+.admin-panel__action .btn {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
 }
 .admin-panel__action-text {
+  position: relative;
+  z-index: 1;
   color: #eaf8ff;
   font-family: "Libre Franklin", sans-serif;
   font-size: 20px;
@@ -429,6 +444,7 @@
   }
   .admin-shell {
     height: auto;
+    min-height: 100vh;
     padding: 24px 20px 40px;
   }
   .admin-header {

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -15,12 +16,16 @@
     @include('partials.icons')
 
     <div class="admin-shell">
-        <img class="vidre-fons" src="{{ asset('img/background2.jpg') }}" alt="" aria-hidden="true">
+        <img
+            class="vidre-fons"
+            src="{{ asset('img/background2.jpg') }}"
+            alt=""
+            aria-hidden="true"
+        >
 
         @include('components.encapcalament-dashboard')
 
         <main class="admin-main">
-            <img class="vidre-fons" src="{{ asset('img/background2.jpg') }}" alt="" aria-hidden="true">
             @yield('content')
         </main>
     </div>
