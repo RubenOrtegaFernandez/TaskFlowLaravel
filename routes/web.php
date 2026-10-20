@@ -31,7 +31,22 @@ Route::get('/dashboard/admin', function () {
 
 Route::get('/dashboard/cap', fn () => view('dashboardCap'))->name('dashboardcap.index');
 
-Route::get('/dashboard/treballador', fn () => view('dashboardTreballador'))->name('dashboardtreballador.index');
+Route::get('/dashboard/treballador', function () {
+    $tasques = \App\Models\Tasca::where('id_usr_assignat', Auth::id())
+        ->orderBy('data_final')
+        ->get();
+
+    $urgents = $tasques->where('prioritat', 'urgent');
+    $pendents = $tasques->where('estat', 'pendent');
+    $finalitzades = $tasques->whereIn('estat', ['fet', 'revisat']);
+
+    return view('dashboardTreballador', compact(
+        'tasques',
+        'urgents',
+        'pendents',
+        'finalitzades'
+    ));
+})->name('dashboardtreballador.index');
 
 Route::get('/categories', fn () => 'Categories')->name('categoria.index');
 

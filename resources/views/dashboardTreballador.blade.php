@@ -13,11 +13,16 @@
     @if (session('status'))
         <p class="admin-panel__description">{{ session('status') }}</p>
     @endif
+
 <section class="admin-panel admin-panel--highlight">
     <h2 class="admin-panel__title">Tasques Urgents</h2>
 
     <div class="admin-panel__content admin-panel__content--simple">
-        <p class="admin-panel__description">Aquí es mostraran les teves tasques a punt de finalitzar.</p>
+        <ul>
+            @foreach ($urgents as $tasca)
+                <li>{{ $tasca->nom_tas }}</li>
+            @endforeach
+        </ul>
     </div>
 </section>
 
@@ -25,7 +30,11 @@
     <h2 class="admin-panel__title">Tasques Pendents</h2>
 
     <div class="admin-panel__content admin-panel__content--simple">
-        <p class="admin-panel__description">Aquí es mostraran les tasques que tens assignades.</p>
+        <ul>
+            @foreach ($pendents as $tasca)
+                <li>{{ $tasca->nom_tas }}</li>
+            @endforeach
+        </ul>
     </div>
 </section>
 
@@ -33,7 +42,11 @@
     <h2 class="admin-panel__title">Tasques Finalitzades</h2>
 
     <div class="admin-panel__content admin-panel__content--simple">
-        <p class="admin-panel__description">Aquí es mostraran les tasques que has finalitzat.</p>
+        <ul>
+            @foreach ($finalitzades as $tasca)
+                <li>{{ $tasca->nom_tas }}</li>
+            @endforeach
+        </ul>
     </div>
 </section>
 @endsection
