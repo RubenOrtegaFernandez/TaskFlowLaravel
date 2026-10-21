@@ -36,7 +36,11 @@
     <h2 class="admin-panel__title">Treballadors</h2>
 
     <div class="admin-panel__content admin-panel__content--simple">
-        <p class="admin-panel__description">Aquí es mostraran els treballadors que pertanyen al teu departament.</p>
+        @forelse ($treballadors as $treballador)
+            <p class="admin-panel__description">{{ $treballador->nom_usu }}</p>
+        @empty
+            <p class="admin-panel__description">Encara no hi ha treballadors al teu departament.</p>
+        @endforelse
     </div>
 </section>
 @endsection

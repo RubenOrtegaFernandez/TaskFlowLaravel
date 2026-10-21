@@ -30,7 +30,22 @@ Route::get('/dashboard/admin', function () {
 })->name('dashboardadmin.index');
 
 
-Route::get('/dashboard/cap', fn () => view('dashboardCap'))->name('dashboardcap.index');
+Route::get('/dashboard/cap', function () {
+    $resultado = null;
+
+    if (Auth::check() && Auth::user()->rol_tipus === 'cap') {
+        $treballadors = \App\Models\Usuari::where('rol_tipus', 'client')
+            ->where('id_dep', Auth::user()->id_dep)
+            ->orderBy('nom_usu')
+            ->get();
+
+        $resultado = view('dashboardCap', compact('treballadors'));
+    } else {
+        $resultado = redirect('/login')->with('error', 'Logeate como cap per poder entrar.');
+    }
+
+    return $resultado;
+})->name('dashboardcap.index');
 
 Route::get('/dashboard/treballador', function () {
     $tasques = \App\Models\Tasca::where('id_usr_assignat', Auth::id())
@@ -49,11 +64,7 @@ Route::get('/dashboard/treballador', function () {
     ));
 })->name('dashboardtreballador.index');
 
-Route::get('/tasca/llistat-tasques', [ControladorTasques::class, 'index'])->name('tasca.index');
-
 Route::get('/tasca/{tasca}', [ControladorTasques::class, 'show'])->name('tasca.show');
-
-Route::get('/categories', fn () => 'Categories')->name('categoria.index');
 
 Route::get('/tasca/llistat-tasques', [ControladorTasques::class, 'index'])->name('tasca.index');
 
@@ -84,3 +95,6 @@ Route::post('/restablir-contrasenya/{token}', [ControladorRecuperacio::class, 'r
 Route::view('/registre', 'registreTaskFlow')->name('registre');
 
 Route::post('/registre', [ControladorRegistre::class, 'registrarUsuari']);
+
+Route::post('/tasca/{tasca}/fet', [ControladorTasques::class, 'marcarFet'])->name('tasca.fet');
+Route::post('/tasca/{tasca}/revisar', [ControladorTasques::class, 'marcarRevisat'])->name('tasca.revisar');

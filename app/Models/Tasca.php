@@ -25,6 +25,11 @@ class Tasca extends Model
         'id_usr_assignat'
     ];
 
+    protected $casts = [
+        'data_inici' => 'datetime',
+        'data_final' => 'datetime',
+    ];
+
     public function creador()
     {
         return $this->belongsTo(Usuari::class, 'id_usr_creador', 'id_correu');

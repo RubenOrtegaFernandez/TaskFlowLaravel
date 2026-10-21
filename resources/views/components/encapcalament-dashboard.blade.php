@@ -8,7 +8,7 @@
     <nav class="admin-header__nav">
         @hasSection('header-nav')
             @yield('header-nav')
-        @else
+        @elseif (! View::hasSection('sense-nav'))
             <a class="admin-header__link" href="{{ route('tasca.index') }}">TASQUES</a>
             <a class="admin-header__link" href="{{ route('departament.index') }}">DEPARTAMENTS</a>
             <a class="admin-header__link" href="{{ route('usuari.index') }}">TREBALLADORS</a>

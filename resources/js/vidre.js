@@ -27,6 +27,16 @@ const configuracioBoto = Object.assign({}, configuracioVidre, {
   edgeHighlight: 0.15,
 });
 
+
+const configuracioTasca = Object.assign({}, configuracioVidre, {
+  cornerRadius: 24,
+  zRadius: 24,
+  opacity: 0.75,
+  blurAmount: 2,
+  refraction: 1,
+  edgeHighlight: 0.4,
+});
+
 function aplicaVidre(element, root, configuracio) {
   if (element && root && element.parentElement === root) {
     LiquidGlass.init({
@@ -65,47 +75,68 @@ function iniciaLogin(arrel) {
   }
 }
 
-function iniciaAdmin(shell) {
-  const elementsVidre = [];
 
+
+function iniciaAdmin(shell) {
   const header = shell.querySelector(':scope > .admin-header[data-vidre]');
+  const main = shell.querySelector(':scope > .admin-main');
 
   if (header) {
-    elementsVidre.push(header);
-  }
-
-  const panells = shell.querySelectorAll(':scope > .admin-panel');
-
-  panells.forEach(function (panell) {
-    elementsVidre.push(panell);
-  });
-
-  if (elementsVidre.length > 0) {
     LiquidGlass.init({
       root: shell,
-      glassElements: elementsVidre,
+      glassElements: [header],
       defaults: configuracioVidre,
     });
 
-    elementsVidre.forEach(function (element) {
-      element.classList.add('is-liquid');
-    });
+    header.classList.add('is-liquid');
   }
 
-  panells.forEach(function (panell) {
-    const accio = panell.querySelector('.admin-panel__action');
+  if (main) {
+    const panells = main.querySelectorAll(':scope > .admin-panel');
 
-    if (accio) {
-      aplicaVidre(accio, panell, configuracioVidre);
+    if (panells.length > 0) {
+      LiquidGlass.init({
+        root: main,
+        glassElements: Array.from(panells),
+        defaults: configuracioVidre,
+      });
 
-      const boto = accio.querySelector('.btn');
+      panells.forEach(function (panell) {
+        panell.classList.add('is-liquid');
+      });
+    }
+
+    panells.forEach(function (panell) {
+      const boto = panell.querySelector('.admin-panel__action .btn');
 
       if (boto) {
-        aplicaVidre(boto, accio, configuracioBoto);
+        aplicaVidre(boto, boto.parentElement, configuracioBoto);
       }
-    }
-  });
+    });
+
+    panells.forEach(function (panell) {
+      const contingut = panell.querySelector(':scope > .admin-panel__content');
+
+      if (contingut) {
+        const targetes = contingut.querySelectorAll(':scope > .tasca');
+
+        if (targetes.length > 0) {
+          LiquidGlass.init({
+            root: contingut,
+            glassElements: Array.from(targetes),
+            defaults: configuracioTasca,
+          });
+
+          targetes.forEach(function (targeta) {
+            targeta.classList.add('is-liquid');
+          });
+        }
+      }
+    });
+  }
 }
+
+
 
 function iniciaVidre() {
   const arrel = document.querySelector('[data-vidre-arrel]');

@@ -122,4 +122,59 @@ class ControladorTasques
 
     return $esValid;
     }
+
+   
+    public function marcarFet(Tasca $tasca)
+    {
+        $resultat = null;
+
+        if (!Auth::check()) {
+
+            $resultat = redirect()->route('login');
+
+        } elseif (Auth::user()->rol_tipus === 'client'
+            && $tasca->id_usr_assignat === Auth::id()
+            && $tasca->estat !== 'fet'
+            && $tasca->estat !== 'revisat') {
+
+            $tasca->update([
+                'estat' => 'fet',
+                'data_final' => now(),
+            ]);
+
+            $resultat = back()->with('status', 'Tasca marcada com a feta.');
+
+        } else {
+
+            $resultat = back()->with('error', 'No pots modificar aquesta tasca.');
+        }
+
+        return $resultat;
+    }
+
+    public function marcarRevisat(Tasca $tasca)
+    {
+        $resultat = null;
+
+        if (!Auth::check()) {
+
+            $resultat = redirect()->route('login');
+
+        } elseif (Auth::user()->rol_tipus === 'cap'
+            && $tasca->id_dep_assignat === Auth::user()->id_dep
+            && $tasca->estat === 'fet') {
+
+            $tasca->update([
+                'estat' => 'revisat',
+            ]);
+
+            $resultat = back()->with('status', 'Tasca revisada.');
+
+        } else {
+
+            $resultat = back()->with('error', 'No pots revisar aquesta tasca.');
+        }
+
+        return $resultat;
+    }
 }
