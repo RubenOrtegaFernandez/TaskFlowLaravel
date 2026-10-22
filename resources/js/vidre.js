@@ -166,6 +166,14 @@ function iniciaAdmin(shell) {
   }
 }
 
+function iniciaDetallTasca() {
+  const fitxa = document.querySelector('.llistat--detall');
+
+  if (fitxa) {
+    aplicaVidre(fitxa, fitxa.parentElement, configuracioTasca);
+  }
+}
+
 function iniciaCreaTasca() {
   const targeta = document.querySelector('.tasca-card[data-vidre]');
 
@@ -206,6 +214,7 @@ function iniciaVidre() {
   }
 
   iniciaCreaTasca();
+  iniciaDetallTasca();
 }
 
 function alCarregar() {

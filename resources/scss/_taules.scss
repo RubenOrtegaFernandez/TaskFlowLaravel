@@ -1,22 +1,47 @@
+
 .llistat {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
-    color: #eaf8ff;
+    color: $color-clar;
 
     th,
     td {
-        color: #eaf8ff;
-        padding: 10px 12px;
+        color: $color-clar;
+        padding: 16px 12px;
         text-align: center;
         vertical-align: middle;
         overflow-wrap: anywhere;
         word-break: break-word;
     }
 
+    thead {
+        background: rgba($color-blanc, 0.12);
+    }
+
     th {
-        font-weight: 600;
-        width: 10%;
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        border-bottom: 2px solid rgba($color-blanc, 0.65);
+    }
+
+    tbody tr {
+        border-bottom: 1px solid rgba($color-blanc, 0.55);
+        transition: background 0.2s ease;
+    }
+
+    tbody tr:hover {
+        background: rgba($color-blanc, 0.10);
+    }
+
+    tbody tr:last-child {
+        border-bottom: 2px solid rgba($color-blanc, 0.35);
+    }
+
+    td {
+        font-size: 14px;
+        font-weight: 300;
     }
 
     .col-accions {
@@ -26,48 +51,73 @@
 }
 
 // ---------- Detall d'una tasca ----------
-.admin-main > .tasca-detall {
-    place-self: start center;
+
+.tasca-detall {
     width: 100%;
-    max-width: 760px;
+    max-width: 900px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 24px;
+    color: $color-clar;
 }
 
+
 .llistat.llistat--detall {
-    display: block;
     width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
 
-    tbody {
-        display: block;
-    }
+    tbody tr {
+        border-bottom: 1px solid rgba($color-blanc, 0.18);
+        transition: background 0.2s ease;
 
-    tr {
-        display: grid;
-        grid-template-columns: 35% 1fr;
-        align-items: center;
-        margin-bottom: 12px;
-        border-radius: 24px;
-
-        // una si una no
-        &:nth-child(odd) {
-            @include caixa;
+        &:hover {
+            background: rgba($color-blanc, 0.07);
         }
-    }
 
-    th {
-        width: auto;
-        font-weight: 700;
-    }
-
-    td {
-        font-weight: 300;
+        &:last-child {
+            border-bottom: none;
+        }
     }
 
     th,
     td {
-        padding: 14px 20px;
+        padding: 15px 24px;
+        text-align: left;
+        border: none;
+    }
+
+    th {
+        width: 32%;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.7px;
+        text-transform: uppercase;
+        color: rgba($color-clar, 0.75);
+    }
+
+    td {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+}
+
+
+.tasca__boto {
+    align-self: flex-start;
+    padding: 12px 20px;
+    border: 1px solid rgba($color-blanc, 0.30);
+    border-radius: 12px;
+    background: rgba($color-blanc, 0.12);
+    color: $color-clar;
+    text-decoration: none;
+    transition: background 0.2s ease;
+
+    &:hover {
+        background: rgba($color-blanc, 0.22);
     }
 }

@@ -3,7 +3,7 @@
 <table class="llistat">
     <thead>
         <tr>
-            <th>Nom</th>
+            <th>NOM</th>
             <th>Descripció</th>
             <th>Data Inici</th>
             <th>Data Final</th>
@@ -12,7 +12,7 @@
             <th>Categoria</th>
             <th>Departament</th>
             <th>Creador</th>
-            <th colspan="3">Accions</th>
+            <th>Accions</th>
         </tr>
     </thead>
     <tbody>
@@ -30,7 +30,7 @@
                 <td class="col-accions">
                     <a href="{{ route('tasca.show', $tasca) }}" title="Veure">
                         <svg class="field__icon" aria-hidden="true">
-                            <use xlink:href="#icon-ull"></use>
+                            <use xlink:href="#icon-eliminar"></use>
                         </svg>
                     </a>
                     <a href="{{ route('tasca.show', $tasca) }}" title="Veure">
@@ -40,7 +40,7 @@
                     </a>
                     <a href="{{ route('tasca.show', $tasca) }}" title="Veure">
                         <svg class="field__icon" aria-hidden="true">
-                            <use xlink:href="#icon-ull"></use>
+                            <use xlink:href="#icon-editar"></use>
                         </svg>
                     </a>
                 </td>

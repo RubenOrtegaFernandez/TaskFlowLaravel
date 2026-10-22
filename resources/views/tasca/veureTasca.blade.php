@@ -6,6 +6,7 @@
 @section('content')
 <div class="tasca-detall">
     <table class="llistat llistat--detall">
+            
         <tbody>
             <tr>
                 <th>Nom</th>

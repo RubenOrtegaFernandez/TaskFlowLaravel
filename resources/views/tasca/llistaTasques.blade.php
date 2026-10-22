@@ -13,8 +13,8 @@
 
 @section('content')
 <section class="admin-panel llista-tasques">
-    <h2 class="admin-panel__title">Llistat de tasques</h2>
-
+    <h2 class="admin-panel__title">LLISTAT DE TASQUES</h2>
+    
     @if (session('status'))
         <p class="admin-panel__description">{{ session('status') }}</p>
     @endif

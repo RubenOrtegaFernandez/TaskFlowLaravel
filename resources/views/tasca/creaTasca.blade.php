@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-
+    
     @include('components.formulario-crea-tasca')
 
 @endsection
