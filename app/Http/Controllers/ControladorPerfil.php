@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Models\Usuari;
+use Illuminate\Support\Facades\Hash;
 
 class ControladorPerfil
 {
@@ -15,7 +17,7 @@ class ControladorPerfil
         ]);
     }
 
-        public function actualitzarFoto(Request $request){
+    public function actualitzarFoto(Request $request){
         $request->validate([
             'foto' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
@@ -46,5 +48,27 @@ class ControladorPerfil
         $usuari->save();
 
         return redirect()->route('ajustes')->with('exit', 'Foto actualitzada.');
+    }
+
+    public function actualitzarContrasenya(Request $request)
+    {
+        $usuari = Auth::user();
+
+        $request->validate([
+            'contrasenya_actual' => ['required'],
+            'contrasenya_nova'   => ['required', 'min:8', 'confirmed'],
+        ],  ['contrasenya_actual.required' => 
+                'Has d\'escriure la contrasenya actual.',
+                'contrasenya_nova.required'   => 'Has d\'escriure la nova contrasenya.',
+                'contrasenya_nova.min'        => 'La nova contrasenya ha de tenir almenys 8 caràcters.',
+                'contrasenya_nova.confirmed'  => 'Les contrasenyes no coincideixen.',]);
+
+        if (!Hash::check($request->contrasenya_actual, $usuari->getAuthPassword())) {
+            return back()->withErrors(['contrasenya_actual' => 'La contrasenya actual no és correcta.']);
+        }
+
+        Usuari::where('id_correu', $usuari->id_correu)->update(['contrasenya' => Hash::make($request->contrasenya_nova)]);
+
+        return redirect()->route('ajustes')->with('exit_contrasenya', 'Contrasenya actualitzada.');
     }
 }

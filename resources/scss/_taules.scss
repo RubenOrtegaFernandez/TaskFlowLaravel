@@ -2,11 +2,11 @@
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
-    color: $color-clar;
+    color: #eaf8ff;
 
     th,
     td {
-        color: $color-clar;
+        color: #eaf8ff;
         padding: 10px 12px;
         text-align: center;
         vertical-align: middle;
@@ -15,12 +15,59 @@
     }
 
     th {
-        text-align: center;
         font-weight: 600;
         width: 10%;
     }
+
     .col-accions {
         width: 10%;
-        white-space: nowrap;   // No permiet salts de línea
+        white-space: nowrap;
+    }
+}
+
+// ---------- Detall d'una tasca ----------
+.admin-main > .tasca-detall {
+    place-self: start center;
+    width: 100%;
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.llistat.llistat--detall {
+    display: block;
+    width: 100%;
+
+    tbody {
+        display: block;
+    }
+
+    tr {
+        display: grid;
+        grid-template-columns: 35% 1fr;
+        align-items: center;
+        margin-bottom: 12px;
+        border-radius: 24px;
+
+        // una si una no
+        &:nth-child(odd) {
+            @include caixa;
+        }
+    }
+
+    th {
+        width: auto;
+        font-weight: 700;
+    }
+
+    td {
+        font-weight: 300;
+    }
+
+    th,
+    td {
+        padding: 14px 20px;
     }
 }

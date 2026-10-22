@@ -65,9 +65,9 @@ Route::get('/dashboard/treballador', function () {
     ));
 })->name('dashboardtreballador.index');
 
-Route::get('/tasca/{tasca}', [ControladorTasques::class, 'show'])->name('tasca.show');
-
 Route::get('/tasca/llistat-tasques', [ControladorTasques::class, 'index'])->name('tasca.index');
+
+Route::get('/tasca/{tasca}', [ControladorTasques::class, 'show'])->whereNumber('tasca')->name('tasca.show');
 
 Route::get('/departaments', fn () => 'Departaments')->name('departament.index');
 
@@ -96,6 +96,8 @@ Route::post('/restablir-contrasenya/{token}', [ControladorRecuperacio::class, 'r
 Route::get('/ajustes', [ControladorPerfil::class, 'index'])->name('ajustes');
 
 Route::post('/ajustes/foto', [ControladorPerfil::class, 'actualitzarFoto'])->name('ajustes.foto');
+
+Route::post('/ajustes/contrasenya', [ControladorPerfil::class, 'actualitzarContrasenya'])->name('ajustes.contrasenya');
 
 Route::view('/registre', 'registreTaskFlow')->name('registre');
 
