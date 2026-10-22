@@ -1,29 +1,13 @@
-// Importa les variables
 @import 'variables';
-
-// Importa els mixins
 @import 'mixins';
-
-// Importa els estils de botons
 @import 'botons';
-
-// Importa els estils de l'encapçalament
 @import 'encapçalament';
-
-// Importa els estils del login
 @import 'login';
-
-// Importa els estils de l'admin
 @import 'admin';
-
-// Importa els estils de la creació de tasques
 @import 'crea_tasca';
-
-// Importa els estils del peu de pàgina
 @import 'peus_de_pàgina';
-
-// Importa els estils de taules y llistats
 @import 'taules';
+@import 'responsiut';
 
 * {
   box-sizing: border-box;
@@ -32,19 +16,6 @@
 html {
   min-height: 100%;
   overflow: hidden;
-}
-
-.login-wrap {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-// Marc de focus per a tots els elements (teclat)
-:focus-visible {
-  outline: 3px solid $color-primari;
-  outline-offset: 3px;
 }
 
 body {

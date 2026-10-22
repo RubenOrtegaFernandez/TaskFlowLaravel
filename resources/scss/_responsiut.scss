@@ -1,0 +1,181 @@
+@media (max-width: 680px) {
+  .login-card {
+    padding: 38px 24px 26px;
+  }
+
+  .login-title {
+    font-size: 44px;
+    line-height: 54px;
+  }
+
+  .field {
+    height: 68px;
+    gap: 16px;
+    padding: 0 18px;
+
+    &__input {
+      font-size: 20px;
+    }
+  }
+
+  .login-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 1400px) {
+  .tasca-card {
+    width: calc(100% - 40px);
+  }
+
+  .tasca-card__grid {
+    grid-template-columns: minmax(0, 451fr) minmax(0, 756fr);
+    gap: 32px;
+  }
+
+  .tasca-descripcio,
+  .tasca-treballadors {
+    width: 100%;
+  }
+
+  .tasca-dates {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .tasca-desplegables {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .admin-body {
+    height: auto;
+    overflow: auto;
+  }
+
+  .tasca-card {
+    width: 100%;
+    min-height: 0;
+    margin-top: 24px;
+    padding: 30px 20px;
+  }
+
+  .tasca-card__grid,
+  .tasca-desplegables {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .tasca-descripcio {
+    width: 100%;
+  }
+
+  .tasca-desplegables {
+    margin: 20px 0 0;
+  }
+
+  .tasca-accions {
+    margin: 20px 0 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .tasca-card {
+    padding: 24px 16px;
+  }
+
+  .tasca-dates {
+    grid-template-columns: 1fr;
+  }
+
+  .tasca-data {
+    height: 220px;
+  }
+
+  .tasca-accions {
+    margin: 20px 0 0;
+  }
+
+  .btn--enviar {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 1040px) {
+  .admin-body {
+    height: auto;
+    overflow: auto;
+  }
+
+  .admin-shell {
+    height: auto;
+    min-height: 100vh;
+    padding: 24px 20px 40px;
+  }
+
+  .admin-header {
+    grid-template-areas:
+      "logo avatar"
+      "title title"
+      "nav nav";
+    grid-template-columns: 1fr 69px;
+
+    &__title {
+      font-size: 42px;
+      line-height: 52px;
+    }
+
+    &__nav {
+      flex-wrap: wrap;
+    }
+  }
+}
+
+@media (max-width: 560px) {
+  .admin-header {
+    grid-template-areas:
+      "logo"
+      "title"
+      "nav"
+      "avatar";
+    grid-template-columns: 1fr;
+    justify-items: center;
+
+    &__title {
+      font-size: 34px;
+      line-height: 42px;
+    }
+
+    &__nav {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+  }
+
+  .admin-main {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-panel {
+    padding: 24px 20px 32px;
+
+    &__title {
+      font-size: 38px;
+      line-height: 46px;
+    }
+
+    &__action {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title', 'Veure Tasca · TaskFlow')
-@section('header-title', '')
+@section('header-title', 'TASCA')
 
 @section('content')
 <div class="tasca-detall">
