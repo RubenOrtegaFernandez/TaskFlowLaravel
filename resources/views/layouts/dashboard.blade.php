@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;700;800&family=Martian+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <script src="{{ asset('js/menuPerfil.js') }}"></script>
 </head>
 <body class="admin-body">
     @include('partials.icons')

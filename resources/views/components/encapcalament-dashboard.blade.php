@@ -16,5 +16,7 @@
         @endif
     </nav>
 
-    <img class="admin-header__avatar" src="{{ asset('img/default.png') }}" alt="Perfil">
+    <a href="{{ route('ajustes') }}" aria-label="Ajustes">
+        <img class="admin-header__avatar" src="{{ asset(Auth::user()->foto_perfil ?? 'img/default.png') }}" alt="Perfil">
+    </a>
 </header>

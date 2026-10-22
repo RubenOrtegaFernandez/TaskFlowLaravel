@@ -4,6 +4,7 @@ use App\Http\Controllers\ControladorLogin;
 use App\Http\Controllers\ControladorRegistre;
 use App\Http\Controllers\ControladorTasques;
 use App\Http\Controllers\ControladorRecuperacio;
+use App\Http\Controllers\ControladorPerfil;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -91,6 +92,10 @@ Route::get('/restablir-contrasenya/{token}', [ControladorRecuperacio::class, 'mo
 
 Route::post('/restablir-contrasenya/{token}', [ControladorRecuperacio::class, 'restablir'])
     ->name('contrasenya.actualitzar');
+
+Route::get('/ajustes', [ControladorPerfil::class, 'index'])->name('ajustes');
+
+Route::post('/ajustes/foto', [ControladorPerfil::class, 'actualitzarFoto'])->name('ajustes.foto');
 
 Route::view('/registre', 'registreTaskFlow')->name('registre');
 

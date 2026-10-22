@@ -1,0 +1,49 @@
+.perfil {
+    position: relative;
+    display: inline-block;
+
+    &__toggle {
+        display: block;
+        padding: 0;
+        border: 0;
+        background: none;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    &__avatar {
+        display: block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    &__menu {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        z-index: 1000;
+        min-width: 160px;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+
+        &[hidden] {
+            display: none;
+        }
+    }
+
+    &__item {
+        display: block;
+        padding: 10px 14px;
+        color: #222;
+        text-decoration: none;
+
+        &:hover {
+            background: #f3f3f3;
+        }
+    }
+}
