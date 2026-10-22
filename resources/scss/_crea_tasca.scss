@@ -8,19 +8,23 @@
 }
 
 .tasca-card {
-  zoom: 0.8;
-}
-
-.tasca-card {
-  @include targeta(rgba($color-clar, 0.2));
+  position: relative;
+  isolation: isolate;
   box-sizing: border-box;
-  width: 1660px;
-  min-height: 808px;
-  margin: 35px auto 0;
-  padding: 46px 77px 30px 20px;
+  width: 1328px;
+  min-height: 646px;
+  margin: 28px auto 0;
+  padding: 37px 62px 24px 16px;
   align-self: start;
-  font: 100 21px/25px $font-cos;
-  letter-spacing: -0.84px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 40px;
+  font-family: $font-cos;
+  font-weight: 100;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: -0.67px;
   color: $color-clar;
 
   input,
@@ -42,7 +46,7 @@
   }
 
   &__header {
-    margin: 0 0 24px 12px;
+    margin: 0 0 19px 10px;
 
     p {
       margin: 0;
@@ -51,93 +55,102 @@
 
     small {
       display: block;
-      margin-top: 8px;
-      font-size: 16px;
+      margin-top: 6px;
+      font-size: 13px;
       color: #ff8080;
     }
   }
 
   &__grid {
     display: grid;
-    grid-template-columns: 564px 945px;
-    gap: 54px;
+    grid-template-columns: 451px 756px;
+    gap: 43px;
   }
 
   &__col {
+    position: relative; /* root del vidrio */
     display: flex;
     flex-direction: column;
-    gap: 17px;
+    gap: 14px;
     min-width: 0;
   }
 }
 
 .tasca-caixa {
-  @include caixa;
+  position: relative;
+  isolation: isolate;
   box-sizing: border-box;
-  height: 50px;
+  height: 40px;
   display: flex;
   align-items: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 16px;
 
   input[type='text'] {
-    padding: 0 24px 0 34px;
+    padding: 0 19px 0 27px;
   }
 
   &:focus-within {
-    outline: 3px solid $color-clar;
+    outline: 2px solid $color-clar;
   }
 }
 
 .tasca-descripcio {
-  width: 945px;
-  height: 185px;
+  width: 756px;
+  height: 148px;
 
   textarea {
-    padding: 12px 24px;
+    padding: 10px 19px;
   }
 }
 
 .tasca-dates {
+  position: relative; /* root del vidrio */
   display: grid;
-  grid-template-columns: 266px 266px;
-  gap: 32px;
+  grid-template-columns: 213px 213px;
+  gap: 26px;
 }
 
 .tasca-data {
-  height: 265px;
-  padding-top: 14px;
+  height: 212px;
+  padding-top: 11px;
   flex-direction: column;
 }
 
 .tasca-treballadors {
-  width: 564px;
-  height: 259px;
-  padding: 9px 8px 9px 16px;
+  width: 451px;
+  height: 207px;
+  padding: 7px 6px 7px 13px;
   flex-direction: column;
   align-items: stretch;
-  gap: 8px;
+  gap: 6px;
 
   label {
-    @include caixa;
-    height: 40px;
+    box-sizing: border-box;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 16px;
   }
 
   div {
-    @include caixa;
+    box-sizing: border-box;
     flex: 1;
     min-height: 0;
+    border-radius: 16px;
   }
 
   select {
-    padding: 8px;
+    padding: 6px;
     overflow-y: auto;
     scrollbar-color: rgba($color-clar, 0.5) transparent;
   }
 
   option {
-    padding: 6px 16px;
+    padding: 5px 13px;
   }
 
   option:checked {
@@ -148,16 +161,16 @@
 
 .tasca-desplegables {
   display: grid;
-  grid-template-columns: 286px 266px 266px;
-  gap: 28px;
-  margin: 7px 0 0 36px;
+  grid-template-columns: 229px 213px 213px;
+  gap: 22px;
+  margin: 6px 0 0 29px;
 }
 
 .tasca-desplegable {
-  position: relative;
+  border-radius: 20px;
 
   select {
-    padding: 0 64px 0 16px;
+    padding: 0 51px 0 13px;
     appearance: none;
     cursor: pointer;
   }
@@ -167,37 +180,55 @@
   }
 
   span {
-    @include targeta(rgba($color-clar, 0.2));
     position: absolute;
-    top: 5px;
-    right: 8px;
-    width: 40px;
-    height: 40px;
+    top: 4px;
+    right: 6px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 16px;
     pointer-events: none;
   }
 
   svg {
-    width: 20px;
-    height: 10px;
+    width: 16px;
+    height: 8px;
   }
 }
 
-.btn--enviar {
-  width: 199px;
-  min-height: 58px;
-  margin: 30px 73px 0 auto;
+/* PROVISIONAL: cajas visibles para lo que aún no tiene vidrio.
+   Borrar cada regla cuando su elemento pase a ser vidrio en el JS. */
+.tasca-treballadors,
+.tasca-treballadors label,
+.tasca-treballadors div,
+.tasca-desplegable,
+.tasca-desplegable span {
+  background: rgba($color-clar, 0.15);
 }
 
-@media (max-width: 1700px) {
+.tasca-accions {
+  position: relative; /* root del vidrio */
+  display: flex;
+  justify-content: flex-end;
+  margin: 24px 58px 0 0;
+}
+
+.btn--enviar {
+  position: relative;
+  width: 159px;
+  min-height: 46px;
+  margin: 0;
+}
+
+@media (max-width: 1400px) {
   .tasca-card {
     width: calc(100% - 40px);
   }
 
   .tasca-card__grid {
-    grid-template-columns: minmax(0, 564fr) minmax(0, 945fr);
+    grid-template-columns: minmax(0, 451fr) minmax(0, 756fr);
     gap: 32px;
   }
 
@@ -245,8 +276,8 @@
     margin: 20px 0 0;
   }
 
-  .btn--enviar {
-    margin: 20px 0 0 auto;
+  .tasca-accions {
+    margin: 20px 0 0;
   }
 }
 
@@ -263,8 +294,11 @@
     height: 220px;
   }
 
+  .tasca-accions {
+    margin: 20px 0 0;
+  }
+
   .btn--enviar {
     width: 100%;
-    margin: 20px 0 0;
   }
 }

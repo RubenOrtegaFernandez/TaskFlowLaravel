@@ -70,6 +70,72 @@ class DatabaseSeeder extends Seeder
             'id_dep' => $informatica->id_dep,
         ]);
 
+                // CAPS que faltan (Informática y Administración ya tienen)
+        Usuari::create([
+            'nom_usu' => 'Laura',
+            'correu' => 'laura@taskflow.com',
+            'rol_tipus' => 'cap',
+            'contrasenya' => Hash::make('laura123'),
+            'id_dep' => $recursosHumans->id_dep,
+        ]);
+
+        Usuari::create([
+            'nom_usu' => 'Carlos',
+            'correu' => 'carlos@taskflow.com',
+            'rol_tipus' => 'cap',
+            'contrasenya' => Hash::make('carlos123'),
+            'id_dep' => $marketing->id_dep,
+        ]);
+
+        // CLIENTS (Informática ya tiene Pedro y Manolo)
+        Usuari::create([
+            'nom_usu' => 'Luis',
+            'correu' => 'luis@taskflow.com',
+            'rol_tipus' => 'client',
+            'contrasenya' => Hash::make('luis123'),
+            'id_dep' => $administracio->id_dep,
+        ]);
+
+        Usuari::create([
+            'nom_usu' => 'Marta',
+            'correu' => 'marta@taskflow.com',
+            'rol_tipus' => 'client',
+            'contrasenya' => Hash::make('marta123'),
+            'id_dep' => $administracio->id_dep,
+        ]);
+
+        Usuari::create([
+            'nom_usu' => 'Sergi',
+            'correu' => 'sergi@taskflow.com',
+            'rol_tipus' => 'client',
+            'contrasenya' => Hash::make('sergi123'),
+            'id_dep' => $recursosHumans->id_dep,
+        ]);
+
+        Usuari::create([
+            'nom_usu' => 'Elena',
+            'correu' => 'elena@taskflow.com',
+            'rol_tipus' => 'client',
+            'contrasenya' => Hash::make('elena123'),
+            'id_dep' => $recursosHumans->id_dep,
+        ]);
+
+        Usuari::create([
+            'nom_usu' => 'Pau',
+            'correu' => 'pau@taskflow.com',
+            'rol_tipus' => 'client',
+            'contrasenya' => Hash::make('pau123'),
+            'id_dep' => $marketing->id_dep,
+        ]);
+
+        Usuari::create([
+            'nom_usu' => 'Nuria',
+            'correu' => 'nuria@taskflow.com',
+            'rol_tipus' => 'client',
+            'contrasenya' => Hash::make('nuria123'),
+            'id_dep' => $marketing->id_dep,
+        ]);
+
         $this->call([
             TascaSeeder::class,
         ]);

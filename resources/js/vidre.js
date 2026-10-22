@@ -1,4 +1,3 @@
-
 import { LiquidGlass } from 'https://cdn.jsdelivr.net/npm/@ybouane/liquidglass@1.0.3/dist/index.js';
 
 const configuracioVidre = {
@@ -27,7 +26,6 @@ const configuracioBoto = Object.assign({}, configuracioVidre, {
   edgeHighlight: 0.15,
 });
 
-
 const configuracioTasca = Object.assign({}, configuracioVidre, {
   cornerRadius: 24,
   zRadius: 24,
@@ -35,6 +33,13 @@ const configuracioTasca = Object.assign({}, configuracioVidre, {
   blurAmount: 2,
   refraction: 1,
   edgeHighlight: 0.4,
+});
+
+const configuracioCaixa = Object.assign({}, configuracioVidre, {
+  cornerRadius: 16,
+  zRadius: 16,
+  opacity: 0.6,
+  blurAmount: 1,
 });
 
 function aplicaVidre(element, root, configuracio) {
@@ -47,6 +52,33 @@ function aplicaVidre(element, root, configuracio) {
 
     element.classList.add('is-liquid');
   }
+}
+
+function aplicaVidreGrup(elements, configuracio) {
+  const perPare = new Map();
+
+  elements.forEach(function (element) {
+    const pare = element.parentElement;
+
+    if (pare) {
+      if (!perPare.has(pare)) {
+        perPare.set(pare, []);
+      }
+      perPare.get(pare).push(element);
+    }
+  });
+
+  perPare.forEach(function (fills, pare) {
+    LiquidGlass.init({
+      root: pare,
+      glassElements: fills,
+      defaults: configuracio || configuracioVidre,
+    });
+
+    fills.forEach(function (fill) {
+      fill.classList.add('is-liquid');
+    });
+  });
 }
 
 function iniciaLogin(arrel) {
@@ -74,8 +106,6 @@ function iniciaLogin(arrel) {
     }
   }
 }
-
-
 
 function iniciaAdmin(shell) {
   const header = shell.querySelector(':scope > .admin-header[data-vidre]');
@@ -136,7 +166,32 @@ function iniciaAdmin(shell) {
   }
 }
 
+function iniciaCreaTasca() {
+  const targeta = document.querySelector('.tasca-card[data-vidre]');
 
+  if (targeta) {
+    aplicaVidre(targeta, targeta.parentElement, configuracioVidre);
+
+    // nom i descripció (root: cada .tasca-card__col)
+    aplicaVidreGrup(
+      Array.from(targeta.querySelectorAll('.tasca-card__col > .tasca-caixa:not(.tasca-treballadors)')),
+      configuracioCaixa
+    );
+
+    // dates (root: .tasca-dates)
+    aplicaVidreGrup(
+      Array.from(targeta.querySelectorAll('.tasca-dates > .tasca-data')),
+      configuracioCaixa
+    );
+
+    // botó (root: .tasca-accions)
+    const botoEnviar = targeta.querySelector('.tasca-accions > button.btn--enviar');
+
+    if (botoEnviar) {
+      aplicaVidre(botoEnviar, botoEnviar.parentElement, configuracioBoto);
+    }
+  }
+}
 
 function iniciaVidre() {
   const arrel = document.querySelector('[data-vidre-arrel]');
@@ -149,6 +204,8 @@ function iniciaVidre() {
   if (shell) {
     iniciaAdmin(shell);
   }
+
+  iniciaCreaTasca();
 }
 
 function alCarregar() {

@@ -1,4 +1,4 @@
-<form class="tasca-card" method="POST" action="{{ route('tasca.store') }}">
+<form class="tasca-card" data-vidre method="POST" action="{{ route('tasca.store') }}">
     @csrf
 
     <div class="tasca-card__header">
@@ -91,7 +91,9 @@
                 </div>
             </div>
 
-            <button class="btn btn--enviar" type="submit">Enviar</button>
+            <div class="tasca-accions">
+                <button class="btn btn--enviar" type="submit">Enviar</button>
+            </div>
         </div>
     </div>
 </form>
