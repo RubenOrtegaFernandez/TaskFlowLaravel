@@ -1,70 +1,23 @@
 <?php
-
+//php artisan serve --host=0.0.0.0
+//hacerlo para que quien quiera verlo pueda desde cualquier ordenador
 use App\Http\Controllers\ControladorLogin;
 use App\Http\Controllers\ControladorRegistre;
 use App\Http\Controllers\ControladorTasques;
 use App\Http\Controllers\ControladorDepartaments;
 use App\Http\Controllers\ControladorRecuperacio;
 use App\Http\Controllers\ControladorPerfil;
+use App\Http\Controllers\ControladorDashboard;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::resource('tasca', ControladorTasques::class)->only(['create', 'store']);
 
+Route::get('/dashboard/admin', [ControladorDashboard::class, 'admin'])->name('dashboardadmin.index');
 
-Route::get('/dashboard/admin', function () {
-    $destino = '/login';
-    $mensaje = null;
+Route::get('/dashboard/cap', [ControladorDashboard::class, 'cap'])->name('dashboardcap.index');
 
-    if (Auth::check() && Auth::user()->rol_tipus === 'admin') {
-        $destino = 'dashboardAdmin';
-    } else {
-        $mensaje = 'Logeate como admin para poder entrar.';
-    }
-
-    if ($destino === 'dashboardAdmin') {
-        $resultado = view($destino);
-    } else {
-        $resultado = redirect($destino)->with('error', $mensaje);
-    }
-
-    return $resultado;
-})->name('dashboardadmin.index');
-
-
-Route::get('/dashboard/cap', function () {
-    $resultado = null;
-
-    if (Auth::check() && Auth::user()->rol_tipus === 'cap') {
-        $treballadors = \App\Models\Usuari::where('rol_tipus', 'client')
-            ->where('id_dep', Auth::user()->id_dep)
-            ->orderBy('nom_usu')
-            ->get();
-
-        $resultado = view('dashboardCap', compact('treballadors'));
-    } else {
-        $resultado = redirect('/login')->with('error', 'Logeate como cap per poder entrar.');
-    }
-
-    return $resultado;
-})->name('dashboardcap.index');
-
-Route::get('/dashboard/treballador', function () {
-    $tasques = \App\Models\Tasca::where('id_usr_assignat', Auth::id())
-        ->orderBy('data_final')
-        ->get();
-
-    $urgents = $tasques->where('prioritat', 'urgent');
-    $pendents = $tasques->where('estat', 'pendent');
-    $finalitzades = $tasques->whereIn('estat', ['fet', 'revisat']);
-
-    return view('dashboardTreballador', compact(
-        'tasques',
-        'urgents',
-        'pendents',
-        'finalitzades'
-    ));
-})->name('dashboardtreballador.index');
+Route::get('/dashboard/treballador', [ControladorDashboard::class, 'treballador'])->name('dashboardtreballador.index');
 
 Route::get('/tasca/llistat-tasques', [ControladorTasques::class, 'validar'])->name('tasca.index');
 

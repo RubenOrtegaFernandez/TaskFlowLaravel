@@ -19,6 +19,9 @@
         <p class="admin-panel__description">{{ session('status') }}</p>
     @endif
 
+    <a href="{{ route('tasca.create') }}">
+        <button class="btn">Agregar</button>
+    </a>
     @include('components.taula-tasques')
 </section>
 @endsection
