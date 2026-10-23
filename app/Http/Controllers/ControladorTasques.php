@@ -8,11 +8,9 @@ use App\Models\Usuari;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ControladorTasques
-{
+class ControladorTasques{
 
-    public function create()
-    {
+    public function create(){
         $esValid = null;
 
         if (!Auth::check()) {
@@ -52,8 +50,15 @@ class ControladorTasques
         return view('tasca.veureTasca', compact('tasca'));
     }
 
-    public function store(Request $request)
-    {
+    public function edit(Tasca $tasca){
+        return view('tasca.editarTasca', compact('tasca'));
+    }
+
+    public function delete(Tasca $tasca){
+        return view('tasca.esborrarTasca', compact('tasca'));
+    }
+
+    public function store(Request $request){
         $esValid = null;
 
         if (!Auth::check()) {
@@ -95,37 +100,35 @@ class ControladorTasques
         return $esValid;
     }
 
-    public function index()
-    {
-    $esValid = null;
+    public function validar(){
+        $esValid = null;
 
-    if (!Auth::check()) {
+        if (!Auth::check()) {
 
-        $esValid = redirect()->route('login');
+            $esValid = redirect()->route('login');
 
-    } elseif (Auth::user()->rol_tipus === 'client') {
+        } elseif (Auth::user()->rol_tipus === 'client') {
 
-        $esValid = redirect()->route('dashboardtreballador.index');
+            $esValid = redirect()->route('dashboardtreballador.index');
 
-    } else {
+        } else {
 
-        $tasques = Tasca::orderBy('data_final');
+            $tasques = Tasca::orderBy('data_final');
 
-        if (Auth::user()->rol_tipus === 'cap') {
-            $tasques = Tasca::where('id_dep_assignat', Auth::user()->id_dep)->orderBy('data_final');
+            if (Auth::user()->rol_tipus === 'cap') {
+                $tasques = Tasca::where('id_dep_assignat', Auth::user()->id_dep)->orderBy('data_final');
+            }
+
+            $esValid = view('tasca.llistaTasques', array(
+                'tasques' => $tasques->get(),
+            ));
         }
 
-        $esValid = view('tasca.llistaTasques', array(
-            'tasques' => $tasques->get(),
-        ));
-    }
-
-    return $esValid;
+        return $esValid;
     }
 
    
-    public function marcarFet(Tasca $tasca)
-    {
+    public function marcarFet(Tasca $tasca){
         $resultat = null;
 
         if (!Auth::check()) {
@@ -152,8 +155,7 @@ class ControladorTasques
         return $resultat;
     }
 
-    public function marcarRevisat(Tasca $tasca)
-    {
+    public function marcarRevisat(Tasca $tasca){
         $resultat = null;
 
         if (!Auth::check()) {
@@ -178,3 +180,4 @@ class ControladorTasques
         return $resultat;
     }
 }
+?>

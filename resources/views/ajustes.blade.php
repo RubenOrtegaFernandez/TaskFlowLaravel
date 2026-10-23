@@ -3,7 +3,7 @@
 @section('header-title', 'Ajustes')
 
 @section('content')
-    <table style="align-self: start;">
+    <table style="align-self: start;" class="llistat">
         <thead>
             <tr>
                 <th><h2>Datos del perfil</h2></th>
@@ -27,7 +27,7 @@
                     <form action="{{ route('ajustes.foto') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="foto" accept="image/png,image/jpeg,image/webp" required>
-                        <button type="submit">Canviar foto</button>
+                        <button class="btn" type="submit">Canviar foto</button>
                     </form>
                 </td>
             </tr>
@@ -52,7 +52,7 @@
                         <input type="password" name="contrasenya_actual" placeholder="Contrasenya actual" required>
                         <input type="password" name="contrasenya_nova" placeholder="Nova contrasenya" required>
                         <input type="password" name="contrasenya_nova_confirmation" placeholder="Repeteix la nova contrasenya" required>
-                        <button type="submit">Canviar contrasenya</button>
+                        <button class="btn" type="submit">Canviar contrasenya</button>
                     </form>
                 </td>
             </tr>

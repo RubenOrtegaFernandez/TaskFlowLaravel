@@ -30,17 +30,17 @@
                 <td class="col-accions">
                     <a href="{{ route('tasca.show', $tasca) }}" title="Veure">
                         <svg class="field__icon" aria-hidden="true">
-                            <use xlink:href="#icon-eliminar"></use>
-                        </svg>
-                    </a>
-                    <a href="{{ route('tasca.show', $tasca) }}" title="Veure">
-                        <svg class="field__icon" aria-hidden="true">
                             <use xlink:href="#icon-ull"></use>
                         </svg>
                     </a>
-                    <a href="{{ route('tasca.show', $tasca) }}" title="Veure">
+                    <a href="{{ route('tasca.edit', $tasca) }}" title="Veure">
                         <svg class="field__icon" aria-hidden="true">
                             <use xlink:href="#icon-editar"></use>
+                        </svg>
+                    </a>
+                    <a href="{{ route('tasca.delete', $tasca) }}" title="Veure">
+                        <svg class="field__icon" aria-hidden="true">
+                            <use xlink:href="#icon-eliminar"></use>
                         </svg>
                     </a>
                 </td>

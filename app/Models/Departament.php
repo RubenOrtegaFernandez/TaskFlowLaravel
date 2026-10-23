@@ -13,7 +13,7 @@ class Departament extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'nom',
+        'nom_dep',
     ];
 
     public function usuaris()

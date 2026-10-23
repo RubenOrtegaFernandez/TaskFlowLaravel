@@ -21,6 +21,8 @@ class Usuari extends Authenticatable
         'id_dep',
     ];
 
+    protected $hidden = ['contrasenya'];
+
     public function departament()
     {
         return $this->belongsTo(Departament::class, 'id_dep', 'id_dep'); // belongsTo porque es N:1

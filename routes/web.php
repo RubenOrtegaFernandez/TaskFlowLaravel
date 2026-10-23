@@ -3,6 +3,7 @@
 use App\Http\Controllers\ControladorLogin;
 use App\Http\Controllers\ControladorRegistre;
 use App\Http\Controllers\ControladorTasques;
+use App\Http\Controllers\ControladorDepartaments;
 use App\Http\Controllers\ControladorRecuperacio;
 use App\Http\Controllers\ControladorPerfil;
 use Illuminate\Support\Facades\Route;
@@ -65,11 +66,15 @@ Route::get('/dashboard/treballador', function () {
     ));
 })->name('dashboardtreballador.index');
 
-Route::get('/tasca/llistat-tasques', [ControladorTasques::class, 'index'])->name('tasca.index');
+Route::get('/tasca/llistat-tasques', [ControladorTasques::class, 'validar'])->name('tasca.index');
 
 Route::get('/tasca/{tasca}', [ControladorTasques::class, 'show'])->whereNumber('tasca')->name('tasca.show');
 
-Route::get('/departaments', fn () => 'Departaments')->name('departament.index');
+Route::get('/tasca/{tasca}/editar', [ControladorTasques::class, 'edit'])->whereNumber('tasca')->name('tasca.edit');
+
+Route::get('/tasca/{tasca}/esborrar', [ControladorTasques::class, 'delete'])->whereNumber('tasca')->name('tasca.delete');
+
+Route::get('/departaments', [ControladorDepartaments::class, 'validar'])->name('departament.index');
 
 Route::get('/usuaris', fn () => 'Treballadors')->name('usuari.index');
 
