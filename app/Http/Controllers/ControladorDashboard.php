@@ -6,7 +6,7 @@ use App\Models\Tasca;
 use App\Models\Usuari;
 use Illuminate\Support\Facades\Auth;
 
-class ControladorDashboard extends Controller
+class ControladorDashboard
 {
     public function admin()
     {

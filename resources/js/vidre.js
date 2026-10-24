@@ -81,6 +81,20 @@ function aplicaVidreGrup(elements, configuracio) {
   });
 }
 
+// Si el root no té imatge de fons, n'hi clona una perquè el vidre tingui què refractar
+function asseguraFons(root) {
+  if (!root || root.querySelector(':scope > .vidre-fons')) {
+    return;
+  }
+
+  const origen = document.querySelector('img.vidre-fons');
+
+  if (origen) {
+    const fons = origen.cloneNode(true);
+    root.insertBefore(fons, root.firstChild);
+  }
+}
+
 function iniciaLogin(arrel) {
   const targeta = arrel.querySelector('[data-vidre]');
 
@@ -140,6 +154,7 @@ function iniciaAdmin(shell) {
       const boto = panell.querySelector('.admin-panel__action .btn');
 
       if (boto) {
+        asseguraFons(boto.parentElement);
         aplicaVidre(boto, boto.parentElement, configuracioBoto);
       }
     });

@@ -33,7 +33,7 @@
         Aquí es mostraran els departaments de la teva empresa.
     </p>
 
-    <div class="admin-panel__action">Puertos
+    <div class="admin-panel__action">
         <span class="admin-panel__action-text">
             Vols afegir departaments? fes-ho aquí
         </span>
