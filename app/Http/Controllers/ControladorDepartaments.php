@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Departament;
-use App\Models\Tasca;
-use App\Models\Usuari;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ControladorDepartaments{

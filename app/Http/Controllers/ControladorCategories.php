@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Departament;
-use App\Models\Tasca;
-use App\Models\Usuari;
-use Illuminate\Http\Request;
+use App\Models\Categories;
 use Illuminate\Support\Facades\Auth;
 
-class ControladorDepartaments{
+class ControladorCategories{
 
     public function validar(){
         $esValid = null;
@@ -27,10 +24,10 @@ class ControladorDepartaments{
 
         } else {
 
-            $departaments = Departament::orderBy('nom');
+            $categories = Categoria::orderBy('nom');
 
-            $esValid = view('departament.llistaDepartaments', array(
-                'departaments' => $departaments->get(),
+            $esValid = view('categories.llistaCategories', array(
+                'departaments' => $categories->get(),
             ));
         }
 

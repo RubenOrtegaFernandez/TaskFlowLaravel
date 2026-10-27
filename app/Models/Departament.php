@@ -3,21 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
-class Departament extends Model
+class Categoria extends Model
 {
-    protected $table = 'departaments';
+    protected $table = 'tasques';
 
-    protected $primaryKey = 'id_dep';
+    protected $primaryKey = 'id_tasca'; // cambia esto por el nombre real de tu clave primaria
 
     public $timestamps = false;
 
     protected $fillable = [
-        'nom_dep',
+        'categoria',
+        // el resto de tus campos
     ];
 
-    public function usuaris()
+    public static function categoriaOptions(): array
     {
-        return $this->hasMany(Usuari::class, 'id_dep', 'id_dep'); //hasMany porque es 1:N
+        $row = DB::selectOne("SHOW COLUMNS FROM tasques LIKE 'categoria'");
+
+        preg_match_all("/'([^']+)'/", $row->Type, $matches);
+
+        $opcions = $matches[1];
+
+        return $opcions;
     }
 }
