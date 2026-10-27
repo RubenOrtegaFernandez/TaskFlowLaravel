@@ -29,6 +29,10 @@ Route::get('/tasca/{tasca}/esborrar', [ControladorTasques::class, 'delete'])->wh
 
 Route::get('/departaments', [ControladorDepartaments::class, 'validar'])->name('departament.index');
 
+Route::get('/categories', [ControladorDepartaments::class, 'validar'])->name('categories.index');
+
+Route::get('/treballadors', [ControladorDepartaments::class, 'validar'])->name('treballadors.index');
+
 Route::get('/usuaris', fn () => 'Treballadors')->name('usuari.index');
 
 Route::get('/categories', fn () => 'Categories')->name('categoria.index');

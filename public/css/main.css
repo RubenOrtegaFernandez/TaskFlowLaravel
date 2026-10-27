@@ -259,23 +259,35 @@
 .admin-header {
   position: relative;
   z-index: 1;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 17px clamp(20px, 4vw, 54px);
+  border-radius: 35px;
   background: transparent;
   border: none;
   box-shadow: none;
-  border-radius: 35px;
-  box-sizing: border-box;
-  padding: 17px 54px;
-  display: grid;
-  grid-template-columns: 231px minmax(250px, 1fr) auto 69px;
+  align-self: stretch;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+  gap: 68px 88px;
+}
+.admin-header > * {
+  flex: 0 0 auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.admin-header__logo {
+  width: 280px;
 }
 .admin-header__logo img {
   display: block;
-  width: 231px;
-  height: 34px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  width: 100%;
+  height: auto;
+}
+.admin-header__logo {
+  align-items: center;
 }
 .admin-header__title {
   margin: 0;
@@ -291,14 +303,15 @@
 }
 .admin-header__nav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 8px 24px;
 }
 .admin-header__link {
   color: #eaf8ff;
   font-family: "Libre Franklin", sans-serif;
-  font-size: 29px;
+  font-size: 20px;
   font-weight: 600;
   line-height: 35px;
   letter-spacing: -2.03px;
@@ -309,6 +322,7 @@
   color: #7bc6eb;
 }
 .admin-header__avatar {
+  display: block;
   width: 69px;
   height: 69px;
   border-radius: 50%;
@@ -563,7 +577,7 @@
 }
 .tasca-card__header p {
   margin: 0;
-  font-weight: 300;
+  font-weight: 280;
 }
 .tasca-card__header small {
   display: block;
@@ -588,7 +602,7 @@
   position: relative;
   isolation: isolate;
   box-sizing: border-box;
-  height: 40px;
+  height: 30px;
   display: flex;
   align-items: center;
   background: transparent;
@@ -605,7 +619,7 @@
 
 .tasca-descripcio {
   width: 756px;
-  height: 148px;
+  height: 248px;
 }
 .tasca-descripcio textarea {
   padding: 10px 19px;
@@ -619,7 +633,7 @@
 }
 
 .tasca-data {
-  height: 212px;
+  height: 112px;
   padding-top: 11px;
   flex-direction: column;
 }
@@ -991,7 +1005,6 @@
 
 html {
   min-height: 100%;
-  overflow: hidden;
 }
 
 body {
