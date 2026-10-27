@@ -12,7 +12,7 @@
             <a class="admin-header__link" href="{{ route('tasca.index') }}">TASQUES</a>
             <a class="admin-header__link" href="{{ route('departament.index') }}">DEPARTAMENTS</a>
             <a class="admin-header__link" href="{{ route('usuari.index') }}">TREBALLADORS</a>
-            <a class="admin-header__link" href="{{ route('categoria.index') }}">CATEGORÍES</a>
+            <a class="admin-header__link" href="{{ route('categories.index') }}">CATEGORÍES</a>
         @endif
     </nav>
 

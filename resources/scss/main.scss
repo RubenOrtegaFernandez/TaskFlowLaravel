@@ -1,13 +1,13 @@
-@import 'variables';
-@import 'mixins';
-@import 'botons';
-@import 'encapçalament';
-@import 'login';
-@import 'admin';
-@import 'crea_tasca';
-@import 'peus_de_pàgina';
-@import 'taules';
-@import 'responsiut';
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'botons' as *;
+@use 'encapçalament' as *;
+@use 'login' as *;
+@use 'admin' as *;
+@use 'crea_tasca' as *;
+@use 'peus_de_pàgina' as *;
+@use 'taules' as *;
+@use 'responsiut' as *;
 
 * {
   box-sizing: border-box;

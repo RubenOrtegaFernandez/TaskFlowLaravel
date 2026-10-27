@@ -1,8 +1,11 @@
 
+@use 'variables' as *;
+
 .llistat {
     width: 100%;
     table-layout: fixed;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     color: $color-clar;
 
     th,
@@ -17,18 +20,18 @@
     }
 
     thead {
-        background: rgba($color-blanc, 0.12);
+        background: rgba($color-blanc, 0.08);
     }
 
     th {
         font-weight: 700;
         font-size: 14px;
         letter-spacing: 0.5px;
-        border-bottom: 2px solid rgba($color-blanc, 0.65);
+        border-bottom: 1px solid rgba($color-blanc, 0.32);
     }
 
     tbody tr {
-        border-bottom: 1px solid rgba($color-blanc, 0.55);
+        border-bottom: 1px solid rgba($color-blanc, 0.18);
         transition: background 0.2s ease;
     }
 
@@ -51,11 +54,121 @@
     }
 }
 
+.taula-tasques {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    border-radius: 24px;
+}
+
+.llistat--departaments {
+    th:nth-child(1) { width: 28%; }
+    th:nth-child(2) { width: 25%; }
+    th:nth-child(3) { width: 17%; }
+    th:nth-child(4) { width: 30%; }
+
+    .col-accions a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px;
+        border-radius: 10px;
+    }
+}
+
+.llistat--usuaris {
+    th:first-child { width: 78px; }
+    th:nth-child(2) { width: 14%; }
+    th:nth-child(3) { width: 20%; }
+    th:nth-child(4) { width: 15%; }
+    th:nth-child(5) { width: 15%; }
+    th:nth-child(6) { width: 13%; }
+    th:last-child { width: 150px; }
+
+    .usuari-taula__foto img {
+        display: block;
+        width: 48px;
+        height: 48px;
+        margin: 0 auto;
+        border: 1px solid rgba($color-blanc, 0.4);
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .col-accions a {
+        display: inline-flex;
+        width: 38px;
+        height: 38px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+    }
+}
+
+.usuaris-llista {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    align-items: stretch;
+    gap: 20px;
+    isolation: isolate;
+    border: 1px solid rgba($color-blanc, 0.24);
+    background: rgba($color-blanc, 0.075);
+    backdrop-filter: blur(14px) saturate(125%);
+    -webkit-backdrop-filter: blur(14px) saturate(125%);
+
+    > .taula-tasques {
+        flex: 1 1 auto;
+        min-height: 0;
+        align-self: stretch;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-color: rgba($color-clar, 0.4) transparent;
+        scrollbar-width: thin;
+
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        &::-webkit-scrollbar-track {
+            border-radius: 8px;
+            background: rgba($color-negre, 0.2);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border: 2px solid transparent;
+            border-radius: 8px;
+            background: rgba($color-clar, 0.5);
+            background-clip: padding-box;
+        }
+    }
+}
+
+.admin-main:has(.usuaris-llista) {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+}
+
+.llistat--usuaris thead {
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    background: rgba($color-blanc, 0.08);
+    backdrop-filter: blur(12px);
+}
+
 // ---------- Detall d'una tasca ----------
 
 .tasca-detall {
+    position: relative;
+    isolation: isolate;
     width: 100%;
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -63,62 +176,178 @@
     color: $color-clar;
 }
 
+.tasca-detall > .vidre-fons--font-render {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tasca-detall__superficie {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    padding: 16px 24px;
+    border-radius: 24px;
+}
 
 .llistat.llistat--detall {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    overflow: hidden;
+
+    caption {
+        padding: 8px 20px 18px;
+        color: rgba($color-clar, 0.72);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+        text-align: left;
+        text-transform: uppercase;
+    }
 
     tbody tr {
-        border-bottom: 1px solid rgba($color-blanc, 0.18);
-        transition: background 0.2s ease;
+        transition: background-color 0.2s ease;
 
         &:hover {
-            background: rgba($color-blanc, 0.07);
-        }
-
-        &:last-child {
-            border-bottom: none;
+            background-color: rgba($color-blanc, 0.07);
         }
     }
 
     th,
     td {
-        padding: 15px 24px;
+        padding: 15px 20px;
         text-align: left;
         border: none;
     }
 
     th {
-        width: 32%;
+        width: 30%;
         font-size: 12px;
         font-weight: 700;
-        letter-spacing: 0.7px;
+        letter-spacing: 0.6px;
         text-transform: uppercase;
         color: rgba($color-clar, 0.75);
     }
 
     td {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 400;
         line-height: 1.5;
         overflow-wrap: anywhere;
     }
+
+    tbody tr + tr th,
+    tbody tr + tr td {
+        border-top: 1px solid rgba($color-blanc, 0.16);
+    }
 }
 
+.tasca-detall .tasca__boto {
+    width: auto;
+    min-width: 220px;
+    align-self: flex-end;
+}
 
-.tasca__boto {
-    align-self: flex-start;
-    padding: 12px 20px;
-    border: 1px solid rgba($color-blanc, 0.30);
-    border-radius: 12px;
-    background: rgba($color-blanc, 0.12);
+.departament-detall__etiqueta {
+    margin: 0 20px 8px;
+    color: rgba($color-clar, 0.68);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.departament-detall__titol {
+    margin: 0 20px 24px;
     color: $color-clar;
-    text-decoration: none;
-    transition: background 0.2s ease;
+    font-family: $font-titol;
+    font-size: 34px;
+}
 
-    &:hover {
-        background: rgba($color-blanc, 0.22);
+.departament-detall__cap {
+    margin: 0 20px 28px;
+    padding: 16px 18px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 20px;
+    border-radius: 16px;
+    background: rgba($color-blanc, 0.07);
+
+    span {
+        color: rgba($color-clar, 0.72);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
     }
+
+    strong {
+        color: $color-clar;
+        font-size: 17px;
+    }
+}
+
+.departament-detall__subtitol {
+    margin: 0 20px 10px;
+    color: $color-clar;
+    font-size: 16px;
+}
+
+.departament-detall__taula {
+    th:first-child { width: 45%; }
+    th:last-child { width: 55%; }
+
+    th,
+    td {
+        text-align: left;
+    }
+}
+
+.departaments-llista > .btn {
+    width: auto;
+    min-width: 260px;
+}
+
+.usuari-detall__capcalera {
+    margin: 8px 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+
+    > img {
+        flex: 0 0 auto;
+        width: 104px;
+        height: 104px;
+        border: 2px solid rgba($color-blanc, 0.5);
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .departament-detall__etiqueta,
+    .departament-detall__titol {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .departament-detall__titol {
+        margin-bottom: 5px;
+    }
+
+    span {
+        color: rgba($color-clar, 0.72);
+        font-size: 14px;
+    }
+}
+
+.usuari-detall__taula tbody tr:last-child th,
+.usuari-detall__taula tbody tr:last-child td {
+    border-bottom: 0;
 }

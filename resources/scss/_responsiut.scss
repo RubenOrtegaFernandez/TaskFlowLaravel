@@ -31,11 +31,11 @@
 
 @media (max-width: 1400px) {
   .tasca-card {
-    width: calc(100% - 40px);
+    width: 100%;
   }
 
   .tasca-card__grid {
-    grid-template-columns: minmax(0, 451fr) minmax(0, 756fr);
+    grid-template-columns: minmax(0, 0.6fr) minmax(0, 1fr);
     gap: 32px;
   }
 
@@ -60,6 +60,7 @@
 
   .tasca-card {
     width: 100%;
+    min-width: 0;
     min-height: 0;
     margin-top: 24px;
     padding: 30px 20px;
@@ -84,28 +85,71 @@
   }
 }
 
+@media (max-width: 1200px) and (min-width: 1041px) {
+  .admin-header {
+    display: grid;
+    grid-template-areas:
+      "logo avatar"
+      "title title"
+      "nav nav";
+    grid-template-columns: minmax(0, 1fr) 56px;
+    justify-items: center;
+    gap: 10px 20px;
+
+    &__logo { grid-area: logo; justify-self: start; }
+    &__title { grid-area: title; font-size: 36px; line-height: 1.15; }
+    &__nav { grid-area: nav; }
+    &__avatar { width: 56px; height: 56px; }
+    > a:last-child { grid-area: avatar; justify-self: end; }
+  }
+}
+
 @media (max-width: 1040px) {
   .admin-body {
     height: auto;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .admin-shell {
     height: auto;
     min-height: 100vh;
+    min-width: 0;
     padding: 24px 20px 40px;
   }
 
+  .admin-main {
+    min-width: 0;
+  }
+
+  .admin-main:has(.usuaris-llista) {
+    grid-template-rows: auto;
+  }
+
+  .usuaris-llista {
+    height: min(68vh, 680px);
+    min-height: 260px;
+  }
+
   .admin-header {
+    display: grid;
+    gap: 12px 20px;
     grid-template-areas:
       "logo avatar"
       "title title"
       "nav nav";
-    grid-template-columns: 1fr 69px;
+    grid-template-columns: minmax(0, 1fr) 56px;
+    justify-items: center;
+
+    &__logo { grid-area: logo; justify-self: start; }
+    &__title { grid-area: title; }
+    &__nav { grid-area: nav; }
+    &__avatar { width: 56px; height: 56px; }
+    > a:last-child { grid-area: avatar; justify-self: end; }
 
     &__title {
-      font-size: 42px;
-      line-height: 52px;
+      font-size: 36px;
+      line-height: 1.15;
     }
 
     &__nav {
@@ -115,6 +159,34 @@
 }
 
 @media (max-width: 560px) {
+  .departament-detall__etiqueta,
+  .departament-detall__titol,
+  .departament-detall__cap,
+  .departament-detall__subtitol {
+    margin-right: 8px;
+    margin-left: 8px;
+  }
+
+  .departament-detall__titol {
+    font-size: 28px;
+  }
+
+  .departaments-llista > .btn {
+    width: 100%;
+  }
+
+  .tasca-eliminacio__card {
+    padding: 32px 20px 26px;
+
+    h2 {
+      font-size: 30px;
+    }
+  }
+
+  .tasca-eliminacio .btn--eliminar {
+    width: 100%;
+  }
+
   .tasca-card {
     padding: 24px 16px;
   }
@@ -129,20 +201,33 @@
 
   .tasca-accions {
     margin: 20px 0 0;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .btn--enviar {
     width: 100%;
   }
 
+  .tasca-accions .btn--tornar {
+    width: 100%;
+  }
+
   .admin-header {
+    grid-template-columns: 1fr;
     grid-template-areas:
       "logo"
       "title"
       "nav"
       "avatar";
-    grid-template-columns: 1fr;
     justify-items: center;
+
+    &__logo,
+    &__title,
+    &__nav,
+    &__avatar { justify-self: center; }
+
+    > a:last-child { justify-self: center; }
 
     &__title {
       font-size: 34px;
@@ -174,21 +259,92 @@
   }
 }
 
+@media (max-width: 900px) {
+  .llistat--usuaris {
+    display: block;
+    table-layout: auto;
+
+    thead { display: none; }
+    tbody { display: grid; gap: 12px; }
+
+    tr {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr);
+      gap: 5px 12px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    td {
+      display: block;
+      padding: 3px 0;
+      border: 0;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    td[data-label]::before {
+      display: block;
+      margin-bottom: 2px;
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      content: attr(data-label);
+    }
+
+    td.usuari-taula__foto {
+      grid-column: 1;
+      grid-row: 1 / span 6;
+      align-self: start;
+      padding-top: 5px;
+    }
+
+    .usuari-taula__foto img {
+      width: 50px;
+      height: 50px;
+    }
+
+    td:nth-child(2) { font-size: 17px; font-weight: 700; }
+    td:nth-child(7) { display: flex; flex-wrap: wrap; gap: 4px; }
+    td:nth-child(7)::before { width: 100%; }
+    tr:has(td[colspan]) { display: block; }
+  }
+
+  .usuari-form .tasca-card__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .usuari-detall__capcalera {
+    margin-right: 8px;
+    margin-left: 8px;
+    gap: 14px;
+
+    > img {
+      width: 78px;
+      height: 78px;
+    }
+  }
+}
+
 // ---------- Detall de tasca responsive ----------
 
 @media (max-width: 560px) {
-    .tasca-detall {
-        gap: 16px;
+    .tasca-detall__superficie {
+        padding: 12px;
     }
 
     .llistat.llistat--detall {
         th,
         td {
-            padding: 14px 12px;
+            padding: 12px;
         }
 
         th {
-            width: 40%;
+            width: 36%;
             font-size: 11px;
         }
 
@@ -197,9 +353,7 @@
         }
     }
 
-    .tasca__boto {
+    .tasca-detall .tasca__boto {
         width: 100%;
-        text-align: center;
-        box-sizing: border-box;
     }
 }

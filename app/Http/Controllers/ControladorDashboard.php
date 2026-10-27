@@ -10,7 +10,7 @@ class ControladorDashboard
 {
     public function admin()
     {
-        $resultado = redirect('/login')->with('error', 'Logeate como admin para poder entrar.');
+        $resultado = redirect('/login');
 
         if (Auth::check() && Auth::user()->rol_tipus === 'admin') {
             $resultado = view('dashboardAdmin');

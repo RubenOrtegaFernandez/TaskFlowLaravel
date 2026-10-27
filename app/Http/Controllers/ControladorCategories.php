@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
+use App\Models\Tasca;
 use Illuminate\Support\Facades\Auth;
 
 class ControladorCategories{
@@ -24,10 +24,13 @@ class ControladorCategories{
 
         } else {
 
-            $categories = Categoria::orderBy('nom');
+            $categories = Tasca::select('categoria')
+                ->distinct()
+                ->orderBy('categoria')
+                ->pluck('categoria');
 
             $esValid = view('categories.llistaCategories', array(
-                'departaments' => $categories->get(),
+                'categories' => $categories,
             ));
         }
 

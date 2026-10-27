@@ -5,7 +5,9 @@
 
 @section('content')
 <div class="tasca-detall">
+    <div class="tasca-detall__superficie" data-vidre-detall>
     <table class="llistat llistat--detall">
+        <caption>Detall de la tasca</caption>
             
         <tbody>
             <tr>
@@ -50,7 +52,8 @@
             </tr>
         </tbody>
     </table>
+    </div>
 
-    <a class="tasca__boto" href="{{ route('tasca.index') }}">Tornar al llistat</a>
+    <a class="btn tasca__boto" href="{{ route('tasca.index') }}">Tornar al llistat</a>
 </div>
 @endsection

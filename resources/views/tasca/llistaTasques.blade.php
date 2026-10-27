@@ -8,7 +8,7 @@
     <a class="admin-header__link" href="{{ route('dashboardadmin.index') }}">DASHBOARD</a>
     <a class="admin-header__link" href="{{ route('departament.index') }}">DEPARTAMENT</a>
     <a class="admin-header__link" href="{{ route('usuari.index') }}">TREBALLADORS</a>
-    <a class="admin-header__link" href="{{ route('categoria.index') }}">CATEGORIES</a>
+    <a class="admin-header__link" href="{{ route('categories.index') }}">CATEGORIES</a>
 @endsection
 
 @section('content')
@@ -19,9 +19,7 @@
         <p class="admin-panel__description">{{ session('status') }}</p>
     @endif
 
-    <a href="{{ route('tasca.create') }}">
-        <button class="btn">Agregar</button>
-    </a>
+    <a class="btn" href="{{ route('tasca.create') }}">Agregar</a>
     @include('components.taula-tasques')
 </section>
 @endsection

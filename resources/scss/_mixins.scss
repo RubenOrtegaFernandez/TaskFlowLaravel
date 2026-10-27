@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 // Centra un element (mixin del PDF)
 @mixin centrar-element {
   display: flex;

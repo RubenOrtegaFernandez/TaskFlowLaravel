@@ -8,7 +8,7 @@
     <a class="admin-header__link" href="{{ route('dashboardadmin.index') }}">DASHBOARD</a>
     <a class="admin-header__link" href="{{ route('departament.index') }}">DEPARTAMENT</a>
     <a class="admin-header__link" href="{{ route('usuari.index') }}">TREBALLADORS</a>
-    <a class="admin-header__link" href="{{ route('categoria.index') }}">CATEGORIES</a>
+    <a class="admin-header__link" href="{{ route('categories.index') }}">CATEGORIES</a>
 @endsection
 
 @section('content')

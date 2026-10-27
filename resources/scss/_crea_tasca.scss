@@ -1,12 +1,18 @@
+@use 'variables' as *;
+
 .admin-main:has(.tasca-card) {
+  min-width: 0;
+  overflow-x: clip;
   overflow-y: hidden;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .tasca-card {
   position: relative;
   isolation: isolate;
   box-sizing: border-box;
-  width: 1328px;
+  width: 100%;
+  max-width: min(1600px, 100%);
   min-height: 646px;
   margin: 28px auto 0;
   padding: 37px 62px 24px 16px;
@@ -58,7 +64,7 @@
 
   &__grid {
     display: grid;
-    grid-template-columns: 451px 756px;
+    grid-template-columns: minmax(0, 0.6fr) minmax(0, 1fr);
     gap: 43px;
   }
 
@@ -92,8 +98,22 @@
   }
 }
 
+.tasca-card__col > .vidre-fons--font-render,
+.tasca-dates > .vidre-fons--font-render,
+.tasca-desplegables > .vidre-fons--font-render,
+.tasca-accions > .vidre-fons--font-render {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .tasca-descripcio {
-  width: 756px;
+  width: 100%;
   height: 248px;
 
   textarea {
@@ -104,7 +124,7 @@
 .tasca-dates {
   position: relative; /* root del vidrio */
   display: grid;
-  grid-template-columns: 213px 213px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 26px;
 }
 
@@ -115,7 +135,7 @@
 }
 
 .tasca-treballadors {
-  width: 451px;
+  width: 100%;
   height: 207px;
   padding: 7px 6px 7px 13px;
   flex-direction: column;
@@ -155,8 +175,9 @@
 }
 
 .tasca-desplegables {
+  position: relative;
   display: grid;
-  grid-template-columns: 229px 213px 213px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
   margin: 6px 0 0 29px;
 }
@@ -176,7 +197,7 @@
 
   span {
     position: absolute;
-    top: 4px;
+    top: 50%;
     right: 6px;
     width: 32px;
     height: 32px;
@@ -185,28 +206,21 @@
     justify-content: center;
     border-radius: 16px;
     pointer-events: none;
+    transform: translateY(-50%);
   }
 
   svg {
+    display: block;
     width: 16px;
     height: 8px;
   }
-}
-
-/* PROVISIONAL: cajas visibles para lo que aún no tiene vidrio.
-   Borrar cada regla cuando su elemento pase a ser vidrio en el JS. */
-.tasca-treballadors,
-.tasca-treballadors label,
-.tasca-treballadors div,
-.tasca-desplegable,
-.tasca-desplegable span {
-  background: rgba($color-clar, 0.15);
 }
 
 .tasca-accions {
   position: relative; /* root del vidrio */
   display: flex;
   justify-content: flex-end;
+  gap: 12px;
   margin: 24px 58px 0 0;
 }
 
@@ -215,4 +229,250 @@
   width: 159px;
   min-height: 46px;
   margin: 0;
+}
+
+.tasca-accions .btn--tornar {
+  width: auto;
+  min-width: 220px;
+}
+
+.departament-form__nota,
+.departament-form__buit {
+  margin: 0;
+  color: rgba($color-clar, 0.72);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.departament-form {
+  margin-top: 0;
+
+  .btn--enviar {
+    width: auto;
+    min-width: 250px;
+    padding-inline: 24px;
+  }
+}
+
+.departament-form--edicio {
+  .tasca-caixa {
+    height: 42px;
+    font-size: 18px;
+  }
+
+  .departament-form__grup {
+    padding: 18px;
+  }
+
+  .departament-form__persona {
+    min-height: 46px;
+  }
+
+  .departament-form__persona span {
+    font-size: 15px;
+  }
+}
+
+.usuari-form {
+  .tasca-card__grid {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .tasca-card__grid > .vidre-fons--font-render {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .tasca-card__col {
+    isolation: isolate;
+    padding: 16px;
+    border-radius: 24px;
+    border: 1px solid rgba($color-blanc, 0.2);
+    background: rgba($color-blanc, 0.075);
+    backdrop-filter: blur(12px) saturate(125%);
+    -webkit-backdrop-filter: blur(12px) saturate(125%);
+  }
+
+  .tasca-card__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tasca-caixa {
+    min-height: 44px;
+    height: 44px;
+  }
+
+  .tasca-caixa input,
+  .tasca-caixa select {
+    padding-inline: 16px;
+  }
+}
+
+.usuari-form--cap .tasca-card__grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.usuari-form__camp {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: $color-clar;
+  font-size: 15px;
+  font-weight: 700;
+
+  > span small,
+  > small {
+    color: rgba($color-clar, 0.7);
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  > small {
+    color: #ff8080;
+  }
+}
+
+.usuari-form__nota {
+  margin: -4px 0 0;
+  color: rgba($color-clar, 0.72);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.departament-form__grup {
+  min-width: 0;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid rgba($color-clar, 0.18);
+  border-radius: 20px;
+
+  legend {
+    padding: 0 8px;
+    color: $color-clar;
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+.departament-form__llista {
+  max-height: 250px;
+  padding: 2px 4px 2px 2px;
+  display: grid;
+  gap: 7px;
+  overflow-y: auto;
+  scrollbar-color: rgba($color-clar, 0.45) transparent;
+}
+
+.departament-form__persona {
+  min-height: 42px;
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  background: rgba($color-clar, 0.07);
+  color: $color-clar;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: rgba($color-clar, 0.13);
+  }
+
+  input {
+    flex: 0 0 auto;
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    accent-color: $color-primari;
+  }
+
+  span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+}
+
+.tasca-eliminacio {
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 760px;
+  margin: 28px auto 0;
+  color: $color-clar;
+}
+
+.tasca-eliminacio > .vidre-fons--font-render {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tasca-eliminacio__card {
+  position: relative;
+  isolation: isolate;
+  padding: 44px 48px 38px;
+  border-radius: 32px;
+  text-align: center;
+
+  h2 {
+    margin: 0;
+    color: $color-clar;
+    font-family: $font-titol;
+    font-size: 38px;
+    line-height: 1.2;
+  }
+}
+
+.tasca-eliminacio__etiqueta {
+  margin: 0 0 14px;
+  color: rgba($color-clar, 0.7);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.tasca-eliminacio__missatge {
+  margin: 18px auto 0;
+  max-width: 520px;
+  color: rgba($color-clar, 0.86);
+  font-size: 17px;
+  line-height: 1.6;
+
+  strong {
+    color: $color-clar;
+  }
+}
+
+.tasca-eliminacio__accions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 30px 0 0;
+}
+
+.tasca-eliminacio {
+  .btn--eliminar {
+    width: 240px;
+
+    &:hover {
+      color: #f78b8b;
+    }
+  }
 }

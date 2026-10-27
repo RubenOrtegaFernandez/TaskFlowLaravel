@@ -1,9 +1,10 @@
 @props(['tasques'])
 
+<div class="taula-tasques" data-vidre-taula>
 <table class="llistat">
     <thead>
         <tr>
-            <th>NOM</th>
+            <th>Nom</th>
             <th>Descripció</th>
             <th>Estat</th>
             <th>Categoria</th>
@@ -38,3 +39,4 @@
         @endforeach
     </tbody>
 </table>
+</div>

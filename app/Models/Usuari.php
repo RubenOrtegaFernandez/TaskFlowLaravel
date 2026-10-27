@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Usuari extends Authenticatable
 {
@@ -26,6 +27,16 @@ class Usuari extends Authenticatable
     public function departament()
     {
         return $this->belongsTo(Departament::class, 'id_dep', 'id_dep'); // belongsTo porque es N:1
+    }
+
+    public function tasquesAssignades(): HasMany
+    {
+        return $this->hasMany(Tasca::class, 'id_usr_assignat', 'id_correu');
+    }
+
+    public function tasquesCreades(): HasMany
+    {
+        return $this->hasMany(Tasca::class, 'id_usr_creador', 'id_correu');
     }
 
     public function getAuthPassword()

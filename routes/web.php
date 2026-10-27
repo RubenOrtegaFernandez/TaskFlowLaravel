@@ -1,6 +1,7 @@
 <?php
-//php artisan serve --host=0.0.0.0
-//hacerlo para que quien quiera verlo pueda desde cualquier ordenador
+/*php artisan serve --host=0.0.0.0
+hacerlo para que quien quiera verlo pueda desde cualquier ordenador
+*/
 use App\Http\Controllers\ControladorLogin;
 use App\Http\Controllers\ControladorRegistre;
 use App\Http\Controllers\ControladorTasques;
@@ -8,8 +9,9 @@ use App\Http\Controllers\ControladorDepartaments;
 use App\Http\Controllers\ControladorRecuperacio;
 use App\Http\Controllers\ControladorPerfil;
 use App\Http\Controllers\ControladorDashboard;
+use App\Http\Controllers\ControladorCategories;
+use App\Http\Controllers\ControladorUsuaris;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 Route::resource('tasca', ControladorTasques::class)->only(['create', 'store']);
 
@@ -25,17 +27,42 @@ Route::get('/tasca/{tasca}', [ControladorTasques::class, 'show'])->whereNumber('
 
 Route::get('/tasca/{tasca}/editar', [ControladorTasques::class, 'edit'])->whereNumber('tasca')->name('tasca.edit');
 
+Route::post('/tasca/{tasca}/actualitzar', [ControladorTasques::class, 'update'])->whereNumber('tasca')->name('tasca.update');
+
 Route::get('/tasca/{tasca}/esborrar', [ControladorTasques::class, 'delete'])->whereNumber('tasca')->name('tasca.delete');
+
+Route::post('/tasca/{tasca}/esborrar', [ControladorTasques::class, 'destroy'])->whereNumber('tasca')->name('tasca.destroy');
 
 Route::get('/departaments', [ControladorDepartaments::class, 'validar'])->name('departament.index');
 
+Route::get('/departaments/crear', [ControladorDepartaments::class, 'create'])->name('departament.create');
+
+Route::post('/departaments', [ControladorDepartaments::class, 'store'])->name('departament.store');
+
+Route::get('/departaments/{departament}/editar', [ControladorDepartaments::class, 'edit'])->whereNumber('departament')->name('departament.edit');
+
+Route::post('/departaments/{departament}/actualitzar', [ControladorDepartaments::class, 'update'])->whereNumber('departament')->name('departament.update');
+
+Route::get('/departaments/{departament}/esborrar', [ControladorDepartaments::class, 'delete'])->whereNumber('departament')->name('departament.delete');
+
+Route::post('/departaments/{departament}/esborrar', [ControladorDepartaments::class, 'destroy'])->whereNumber('departament')->name('departament.destroy');
+
+Route::get('/departaments/{departament}', [ControladorDepartaments::class, 'show'])->whereNumber('departament')->name('departament.show');
+
 Route::get('/categories', [ControladorCategories::class, 'validar'])->name('categories.index');
 
-Route::get('/treballadors', [ControladorTreballadors::class, 'validar'])->name('treballadors.index');
+Route::get('/treballadors', fn () => 'Treballadors')->name('treballadors.index');
 
-Route::get('/usuaris', fn () => 'Treballadors')->name('usuari.index');
+Route::redirect('/usuaris', '/admin/usuaris');
 
-Route::get('/categories', fn () => 'Categories')->name('categoria.index');
+Route::prefix('admin/usuaris')->name('usuari.')->group(function () {
+    Route::get('/', [ControladorUsuaris::class, 'index'])->name('index');
+    Route::get('/{usuari}/editar', [ControladorUsuaris::class, 'edit'])->whereNumber('usuari')->name('edit');
+    Route::post('/{usuari}/actualitzar', [ControladorUsuaris::class, 'update'])->whereNumber('usuari')->name('update');
+    Route::get('/{usuari}/esborrar', [ControladorUsuaris::class, 'delete'])->whereNumber('usuari')->name('delete');
+    Route::post('/{usuari}/esborrar', [ControladorUsuaris::class, 'destroy'])->whereNumber('usuari')->name('destroy');
+    Route::get('/{usuari}', [ControladorUsuaris::class, 'show'])->whereNumber('usuari')->name('show');
+});
 
 Route::redirect('/', '/login');
 

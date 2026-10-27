@@ -1,8 +1,12 @@
 
-.btn {
+@use 'variables' as *;
+
+.btn,
+.tasca__boto {
+  box-sizing: border-box;
   flex-shrink: 0;
   width: 128px;
-  height: 49px;
+  min-height: 49px;
   padding: 0 16px;
   background: transparent;
   border: none;
@@ -16,11 +20,12 @@
   letter-spacing: 3.6px;
   text-transform: uppercase;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   transition: filter 0.2s ease;
+  text-decoration: none;
 
   &:focus,
   &:focus-visible {

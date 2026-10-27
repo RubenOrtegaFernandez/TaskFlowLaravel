@@ -20,7 +20,6 @@
         @yield('content')
     </main>
 
-    @include('partials.js-registre')
     @yield('scripts')
 </body>
 </html>
