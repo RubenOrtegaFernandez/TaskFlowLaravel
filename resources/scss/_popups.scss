@@ -1,0 +1,51 @@
+.missatge-popup {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 99999;
+    max-width: 400px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #000;
+    color: #fff;
+    border-left: 4px solid #2e7d32;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    animation: missatge-popup-in 0.3s ease;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.missatge-popup.is-hiding {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+.missatge-popup .admin-panel__description {
+    margin: 0;
+    flex: 1;
+    color: #fff;
+}
+
+.missatge-popup__close {
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
+    background: none;
+    border: none;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    color: #fff;
+    padding: 0 4px;
+}
+
+.missatge-popup__close:hover {
+    color: #ff5252;
+}
+
+@keyframes missatge-popup-in {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+}

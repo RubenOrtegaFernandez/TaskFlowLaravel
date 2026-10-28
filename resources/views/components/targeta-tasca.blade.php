@@ -32,7 +32,7 @@
 
     <div class="tasca__accions">
         <a class="tasca__boto" href="{{ route('tasca.show', $tasca) }}">
-            VEURE TASCA
+            VEURE
         </a>
 
         @if ($mode === 'treballador' && $tasca->estat !== 'fet' && $tasca->estat !== 'revisat')

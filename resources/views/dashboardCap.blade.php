@@ -3,9 +3,14 @@
 @section('title', 'Cap · TaskFlow')
 
 @section('content')
+
 @if (session('status'))
-    <p class="admin-panel__description">{{ session('status') }}</p>
+    <div class="missatge-popup" id="missatgePopup" role="alert" data-timeout="10000">
+        <p class="admin-panel__description">{{ session('status') }}</p>
+        <button type="button" class="missatge-popup__close" id="missatgePopupClose" aria-label="Cerrar">&times;</button>
+    </div>
 @endif
+
 <section class="admin-panel admin-panel--highlight">
     <h2 class="admin-panel__title">Tasques Urgents</h2>
 

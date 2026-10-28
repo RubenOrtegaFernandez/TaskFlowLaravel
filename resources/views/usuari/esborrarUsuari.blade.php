@@ -3,8 +3,14 @@
 @section('title', 'Esborrar usuari · TaskFlow')
 @section('header-title', 'TREBALLADORS')
 
+@php
+    $rutaDashboard = auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index');
+    $rutaLlistaUsuaris = auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.index') : route('usuari.index');
+    $rutaDestroyUsuari = auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.destroy', $usuari) : route('usuari.destroy', $usuari);
+@endphp
+
 @section('header-nav')
-    <a class="admin-header__link" href="{{ route('dashboardadmin.index') }}">DASHBOARD</a>
+    <a class="admin-header__link" href="{{ $rutaDashboard }}">DASHBOARD</a>
     <a class="admin-header__link" href="{{ route('tasca.index') }}">TASQUES</a>
     <a class="admin-header__link" href="{{ route('departament.index') }}">DEPARTAMENTS</a>
     <a class="admin-header__link" href="{{ route('categories.index') }}">CATEGORIES</a>
@@ -22,10 +28,10 @@
             @endif
         </p>
 
-        <form method="POST" action="{{ route('usuari.destroy', $usuari) }}">
+        <form method="POST" action="{{ $rutaDestroyUsuari }}">
             @csrf
             <div class="tasca-accions tasca-eliminacio__accions">
-                <a class="btn btn--tornar" href="{{ route('usuari.index') }}">Cancel·lar</a>
+                <a class="btn btn--tornar" href="{{ $rutaLlistaUsuaris }}">Cancel·lar</a>
                 <button class="btn btn--eliminar" type="submit">Esborrar usuari</button>
             </div>
         </form>

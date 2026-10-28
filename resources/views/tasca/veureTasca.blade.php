@@ -2,6 +2,7 @@
 
 @section('title', 'Veure Tasca · TaskFlow')
 @section('header-title', 'TASCA')
+@section('sense-nav', 'si')
 
 @section('content')
 <div class="tasca-detall">

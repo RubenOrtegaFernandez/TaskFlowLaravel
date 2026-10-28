@@ -70,7 +70,6 @@ class DatabaseSeeder extends Seeder
             'id_dep' => $informatica->id_dep,
         ]);
 
-                // CAPS que faltan (Informática y Administración ya tienen)
         Usuari::create([
             'nom_usu' => 'Laura',
             'correu' => 'laura@taskflow.com',
@@ -87,7 +86,6 @@ class DatabaseSeeder extends Seeder
             'id_dep' => $marketing->id_dep,
         ]);
 
-        // CLIENTS (Informática ya tiene Pedro y Manolo)
         Usuari::create([
             'nom_usu' => 'Luis',
             'correu' => 'luis@taskflow.com',

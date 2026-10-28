@@ -1,4 +1,3 @@
-
 <section class="admin-panel admin-panel--highlight">
     <h2 class="admin-panel__title">Tasques Urgents</h2>
     <p class="admin-panel__description">
@@ -9,7 +8,7 @@
         <span class="admin-panel__action-text">
             Vols afegir tasques? fes-ho aquí
         </span>
-        <a href="{{ route('tasca.create') }}" class="btn">Afegir</a>
+        <a href="/tasca/create" class="btn">Afegir</a>
     </div>
 </section>
 
@@ -23,7 +22,7 @@
         <span class="admin-panel__action-text">
             Vols afegir categories? fes-ho aquí
         </span>
-        <a href="{{ route('tasca.create') }}" class="btn">Afegir</a>
+        <a href="/categoria/create" class="btn">Afegir</a>
     </div>
 </section>
 
@@ -37,6 +36,6 @@
         <span class="admin-panel__action-text">
             Vols afegir departaments? fes-ho aquí
         </span>
-        <a href="{{ route('tasca.create') }}" class="btn">Afegir</a>
+        <a href="/departament/create" class="btn">Afegir</a>
     </div>
 </section>

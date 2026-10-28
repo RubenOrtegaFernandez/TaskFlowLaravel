@@ -12,6 +12,8 @@ use App\Http\Controllers\ControladorDashboard;
 use App\Http\Controllers\ControladorCategories;
 use App\Http\Controllers\ControladorUsuaris;
 use Illuminate\Support\Facades\Route;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 Route::resource('tasca', ControladorTasques::class)->only(['create', 'store']);
 
@@ -35,17 +37,17 @@ Route::post('/tasca/{tasca}/esborrar', [ControladorTasques::class, 'destroy'])->
 
 Route::get('/departaments', [ControladorDepartaments::class, 'validar'])->name('departament.index');
 
-Route::get('/departaments/crear', [ControladorDepartaments::class, 'create'])->name('departament.create');
+Route::get('/departament/create', [ControladorDepartaments::class, 'create'])->name('departament.create');
 
-Route::post('/departaments', [ControladorDepartaments::class, 'store'])->name('departament.store');
+Route::post('/departament', [ControladorDepartaments::class, 'store'])->name('departament.store');
 
-Route::get('/departaments/{departament}/editar', [ControladorDepartaments::class, 'edit'])->whereNumber('departament')->name('departament.edit');
+Route::get('/departament/{departament}/editar', [ControladorDepartaments::class, 'edit'])->whereNumber('departament')->name('departament.edit');
 
-Route::post('/departaments/{departament}/actualitzar', [ControladorDepartaments::class, 'update'])->whereNumber('departament')->name('departament.update');
+Route::post('/departament/{departament}/actualitzar', [ControladorDepartaments::class, 'update'])->whereNumber('departament')->name('departament.update');
 
-Route::get('/departaments/{departament}/esborrar', [ControladorDepartaments::class, 'delete'])->whereNumber('departament')->name('departament.delete');
+Route::get('/departament/{departament}/esborrar', [ControladorDepartaments::class, 'delete'])->whereNumber('departament')->name('departament.delete');
 
-Route::post('/departaments/{departament}/esborrar', [ControladorDepartaments::class, 'destroy'])->whereNumber('departament')->name('departament.destroy');
+Route::post('/departament/{departament}/esborrar', [ControladorDepartaments::class, 'destroy'])->whereNumber('departament')->name('departament.destroy');
 
 Route::get('/departaments/{departament}', [ControladorDepartaments::class, 'show'])->whereNumber('departament')->name('departament.show');
 
@@ -62,6 +64,15 @@ Route::prefix('admin/usuaris')->name('usuari.')->group(function () {
     Route::get('/{usuari}/esborrar', [ControladorUsuaris::class, 'delete'])->whereNumber('usuari')->name('delete');
     Route::post('/{usuari}/esborrar', [ControladorUsuaris::class, 'destroy'])->whereNumber('usuari')->name('destroy');
     Route::get('/{usuari}', [ControladorUsuaris::class, 'show'])->whereNumber('usuari')->name('show');
+});
+
+Route::prefix('cap')->name('cap.')->group(function () {
+    Route::get('/usuaris', [ControladorUsuaris::class, 'index'])->name('usuaris.index');
+    Route::get('/usuaris/{usuari}/editar', [ControladorUsuaris::class, 'edit'])->whereNumber('usuari')->name('usuaris.edit');
+    Route::post('/usuaris/{usuari}/actualitzar', [ControladorUsuaris::class, 'update'])->whereNumber('usuari')->name('usuaris.update');
+    Route::get('/usuaris/{usuari}/esborrar', [ControladorUsuaris::class, 'delete'])->whereNumber('usuari')->name('usuaris.delete');
+    Route::post('/usuaris/{usuari}/esborrar', [ControladorUsuaris::class, 'destroy'])->whereNumber('usuari')->name('usuaris.destroy');
+    Route::get('/usuaris/{usuari}', [ControladorUsuaris::class, 'show'])->whereNumber('usuari')->name('usuaris.show');
 });
 
 Route::redirect('/', '/login');
@@ -91,6 +102,10 @@ Route::post('/ajustes/contrasenya', [ControladorPerfil::class, 'actualitzarContr
 Route::view('/registre', 'registreTaskFlow')->name('registre');
 
 Route::post('/registre', [ControladorRegistre::class, 'registrarUsuari']);
+
+Route::get('/users/export', function () {
+    return Excel::download(new TasquesExpor, 'usuaris.xlsx');
+})->name('users.export');
 
 Route::post('/tasca/{tasca}/fet', [ControladorTasques::class, 'marcarFet'])->name('tasca.fet');
 Route::post('/tasca/{tasca}/revisar', [ControladorTasques::class, 'marcarRevisat'])->name('tasca.revisar');

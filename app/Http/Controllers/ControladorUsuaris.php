@@ -143,7 +143,8 @@ class ControladorUsuaris
                 }
 
                 $usuari->save();
-                $resposta = redirect()->route('usuari.index')->with('status', 'Usuari actualitzat correctament.');
+                $rutaUsuariIndex = Auth::user()->rol_tipus === 'cap' ? 'cap.usuaris.index' : 'usuari.index';
+                $resposta = redirect()->route($rutaUsuariIndex)->with('status', 'Usuari actualitzat correctament.');
             }
         }
 
@@ -159,7 +160,8 @@ class ControladorUsuaris
         } elseif (Auth::user()->rol_tipus !== 'admin') {
             $resposta = redirect()->route(Auth::user()->rol_tipus === 'cap' ? 'dashboardcap.index' : 'dashboardtreballador.index');
         } elseif (Auth::id() == $usuari->id_correu) {
-            $resposta = redirect()->route('usuari.index')->with('error', 'No pots esborrar el teu propi usuari.');
+            $rutaUsuariIndex = Auth::user()->rol_tipus === 'cap' ? 'cap.usuaris.index' : 'usuari.index';
+            $resposta = redirect()->route($rutaUsuariIndex)->with('error', 'No pots esborrar el teu propi usuari.');
         } else {
             $usuari->load('departament');
             $resposta = view('usuari.esborrarUsuari', compact('usuari'));
@@ -177,7 +179,8 @@ class ControladorUsuaris
         } elseif (Auth::user()->rol_tipus !== 'admin') {
             $resposta = redirect()->route(Auth::user()->rol_tipus === 'cap' ? 'dashboardcap.index' : 'dashboardtreballador.index');
         } elseif (Auth::id() == $usuari->id_correu) {
-            $resposta = redirect()->route('usuari.index')->with('error', 'No pots esborrar el teu propi usuari.');
+            $rutaUsuariIndex = Auth::user()->rol_tipus === 'cap' ? 'cap.usuaris.index' : 'usuari.index';
+            $resposta = redirect()->route($rutaUsuariIndex)->with('error', 'No pots esborrar el teu propi usuari.');
         } else {
             DB::transaction(function () use ($usuari) {
                 Tasca::where('id_usr_assignat', $usuari->id_correu)->update(['id_usr_assignat' => null]);
@@ -185,7 +188,8 @@ class ControladorUsuaris
                 $usuari->delete();
             });
 
-            $resposta = redirect()->route('usuari.index')->with('status', 'Usuari esborrat. Les tasques s’han conservat.');
+            $rutaUsuariIndex = Auth::user()->rol_tipus === 'cap' ? 'cap.usuaris.index' : 'usuari.index';
+            $resposta = redirect()->route($rutaUsuariIndex)->with('status', 'Usuari esborrat. Les tasques s’han conservat.');
         }
 
         return $resposta;

@@ -3,6 +3,10 @@
 @section('title', $usuari->nom_usu . ' · TaskFlow')
 @section('header-title', 'TREBALLADORS')
 
+@php
+    $rutaLlistaUsuaris = auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.index') : route('usuari.index');
+@endphp
+
 @section('header-nav')
     <a class="admin-header__link" href="{{ auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index') }}">DASHBOARD</a>
     <a class="admin-header__link" href="{{ route('tasca.index') }}">TASQUES</a>
@@ -34,7 +38,7 @@
     </section>
 
     <div class="tasca-accions">
-        <a class="btn btn--tornar" href="{{ route('usuari.index') }}">Tornar al llistat</a>
+        <a class="btn btn--tornar" href="{{ $rutaLlistaUsuaris }}">Tornar al llistat</a>
     </div>
 </div>
 @endsection

@@ -4,7 +4,11 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/js/vidre.js', 'resources/js/registre.js'],
+            input: [
+                'resources/js/vidre.js',
+                'resources/js/registre.js',
+                'resources/js/popups.js',
+            ],
             refresh: true,
         }),
     ],

@@ -11,7 +11,12 @@
 @endsection
 
 @section('content')
-<form class="tasca-card usuari-form{{ $administrador ? '' : ' usuari-form--cap' }}" data-vidre method="POST" action="{{ route('usuari.update', $usuari) }}">
+@php
+    $rutaLlistaUsuaris = auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.index') : route('usuari.index');
+    $rutaUpdateUsuari = auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.update', $usuari) : route('usuari.update', $usuari);
+@endphp
+
+<form class="tasca-card usuari-form{{ $administrador ? '' : ' usuari-form--cap' }}" data-vidre method="POST" action="{{ $rutaUpdateUsuari }}">
     @csrf
 
     <div class="tasca-card__header">
@@ -86,7 +91,7 @@
     </div>
 
     <div class="tasca-accions">
-        <a class="btn btn--tornar" href="{{ route('usuari.index') }}">Tornar al llistat</a>
+        <a class="btn btn--tornar" href="{{ $rutaLlistaUsuaris }}">Tornar al llistat</a>
         <button class="btn btn--enviar" type="submit">Desar canvis</button>
     </div>
 </form>

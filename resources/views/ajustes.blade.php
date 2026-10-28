@@ -1,6 +1,10 @@
 @extends('layouts.dashboard')
 
-@section('header-title', 'Ajustes')
+@section ('title', 'Ajustes · TaskFlow')
+
+@section('header-title', 'AJUSTES')
+
+@section ('sense-nav', 'si')
 
 @section('content')
     <table style="align-self: start;" class="llistat">
@@ -24,7 +28,7 @@
 
                     <img src="{{ asset($usuari->foto_perfil ?: 'img/default.png') }}" alt="Foto actual" width="96" height="96">
 
-                    <form action="{{ route('ajustes.foto') }}" method="POST" enctype="multipart/form-data">
+                   <form class="ajustes-form" action="{{ route('ajustes.foto') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="foto" accept="image/png,image/jpeg,image/webp" required>
                         <button class="btn" type="submit">Canviar foto</button>
@@ -47,7 +51,7 @@
                         <p>{{ $message }}</p>
                     @enderror
 
-                    <form action="{{ route('ajustes.contrasenya') }}" method="POST">
+                    <form class="ajustes-form" action="{{ route('ajustes.contrasenya') }}" method="POST">
                         @csrf
                         <input type="password" name="contrasenya_actual" placeholder="Contrasenya actual" required>
                         <input type="password" name="contrasenya_nova" placeholder="Nova contrasenya" required>

@@ -102,7 +102,7 @@
                     <a class="btn btn--tornar" href="{{ route('tasca.index') }}">Tornar al llistat</a>
                     <button class="btn btn--enviar" type="submit">Desar canvis</button>
                 @else
-                    <a class="btn btn--tornar" href="{{ route('tasca.index') }}">Tornar enrere</a>
+                    <a class="btn btn--tornar" href="{{ route('dashboardadmin.index') }}">Tornar enrere</a>
                     <button class="btn btn--enviar" type="submit">Enviar</button>
                 @endif
             </div>
