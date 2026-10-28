@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Departament;
+use App\Models\Categoria;
 use App\Models\Tasca;
 use App\Models\Usuari;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ControladorTasques{
 
-    public function create(){
+    public function create(Request $request){
         $esValid = null;
 
         if (!Auth::check()) {
@@ -33,13 +34,16 @@ class ControladorTasques{
                 $departaments = Departament::where('id_dep', $usuari->id_dep);
             }
 
-            $categories = array('General', 'Disseny', 'Desenvolupament', 'Administració');
+            $categories = Categoria::orderBy('nom')->pluck('nom')->all();
+
+            $prioritatFixa = $request->query('prioritat') === 'urgent';
 
             $esValid = view('tasca.creaTasca', array(
                 'rol'          => $usuari->rol_tipus,
                 'treballadors' => $treballadors->orderBy('nom_usu')->get(),
                 'departaments' => $departaments->orderBy('nom')->get(),
                 'categories'   => $categories,
+                'prioritatFixa' => $prioritatFixa,
             ));
         }
 
@@ -69,7 +73,7 @@ class ControladorTasques{
                 $departaments = Departament::where('id_dep', $usuari->id_dep);
             }
 
-            $categories = array('General', 'Disseny', 'Desenvolupament', 'Administració');
+            $categories = Categoria::orderBy('nom')->pluck('nom')->all();
 
             $esValid = view('tasca.editarTasca', array(
                 'tasca' => $tasca,
@@ -128,18 +132,24 @@ class ControladorTasques{
 
         } else {
 
-            $dades = request()->validate([
+            $prioritatFixa = $request->query('prioritat') === 'urgent';
+
+            $dades = $request->validate([
                 'nom_tas'         => 'required|max:25',
                 'descripcio'      => 'required|max:255',
                 'data_inici'      => 'required|date',
                 'data_final'      => 'nullable|date|after_or_equal:data_inici',
-                'prioritat'       => 'required|in:baixa,mitja,alta,urgent',
-                'categoria'       => 'required|max:25',
+                'prioritat'       => $prioritatFixa ? 'prohibited' : 'required|in:baixa,mitja,alta,urgent',
+                'categoria'       => 'required|exists:categories,nom',
                 'id_dep_assignat' => 'nullable|exists:departaments,id_dep',
                 'id_usr_assignat' => 'nullable|exists:usuaris,id_correu',
             ]);
 
             $dades['id_usr_creador'] = Auth::id();
+
+            if ($prioritatFixa) {
+                $dades['prioritat'] = 'urgent';
+            }
 
             // Un cap només pot assignar al seu propi departament
             if (Auth::user()->rol_tipus === 'cap') {
@@ -173,7 +183,7 @@ class ControladorTasques{
                 'data_inici'      => 'required|date',
                 'data_final'      => 'nullable|date|after_or_equal:data_inici',
                 'prioritat'       => 'required|in:baixa,mitja,alta,urgent',
-                'categoria'       => 'required|max:25',
+                'categoria'       => 'required|exists:categories,nom',
                 'id_dep_assignat' => 'nullable|exists:departaments,id_dep',
                 'id_usr_assignat' => 'nullable|exists:usuaris,id_correu',
             ]);

@@ -1,6 +1,6 @@
 @php($tasca = $tasca ?? null)
 
-<form class="tasca-card" data-vidre method="POST" action="{{ $tasca ? route('tasca.update', $tasca) : route('tasca.store') }}">
+<form class="tasca-card" data-vidre method="POST" action="{{ $tasca ? route('tasca.update', $tasca) : route('tasca.store', ($prioritatFixa ?? false) ? ['prioritat' => 'urgent'] : []) }}">
     @csrf
 
     <div class="tasca-card__header">
@@ -81,20 +81,26 @@
                     </span>
                 </div>
 
-                <div class="tasca-caixa tasca-desplegable">
-                    <select name="prioritat" aria-label="Prioritat" required>
-                        <option value="" disabled @selected(! old('prioritat', $tasca->prioritat ?? null))>Prioritat</option>
-                        <option value="baixa" @selected(old('prioritat', $tasca->prioritat ?? null) == 'baixa')>Baixa</option>
-                        <option value="mitja" @selected(old('prioritat', $tasca->prioritat ?? null) == 'mitja')>Mitjana</option>
-                        <option value="alta" @selected(old('prioritat', $tasca->prioritat ?? null) == 'alta')>Alta</option>
-                        <option value="urgent" @selected(old('prioritat', $tasca->prioritat ?? null) == 'urgent')>Urgent</option>
-                    </select>
-                    <span>
-                        <svg aria-hidden="true">
-                            <use xlink:href="#icon-fletxa"></use>
-                        </svg>
-                    </span>
-                </div>
+                @if (!$tasca && ($prioritatFixa ?? false))
+                    <div class="tasca-caixa tasca-prioritat-fixa" role="status" aria-label="Prioritat: Urgent">
+                        Urgent
+                    </div>
+                @else
+                    <div class="tasca-caixa tasca-desplegable">
+                        <select name="prioritat" aria-label="Prioritat" required>
+                            <option value="" disabled @selected(! old('prioritat', $tasca->prioritat ?? null))>Prioritat</option>
+                            <option value="baixa" @selected(old('prioritat', $tasca->prioritat ?? null) == 'baixa')>Baixa</option>
+                            <option value="mitja" @selected(old('prioritat', $tasca->prioritat ?? null) == 'mitja')>Mitjana</option>
+                            <option value="alta" @selected(old('prioritat', $tasca->prioritat ?? null) == 'alta')>Alta</option>
+                            <option value="urgent" @selected(old('prioritat', $tasca->prioritat ?? null) == 'urgent')>Urgent</option>
+                        </select>
+                        <span>
+                            <svg aria-hidden="true">
+                                <use xlink:href="#icon-fletxa"></use>
+                            </svg>
+                        </span>
+                    </div>
+                @endif
             </div>
 
             <div class="tasca-accions">

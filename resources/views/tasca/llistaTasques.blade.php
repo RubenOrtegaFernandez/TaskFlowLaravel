@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Tasques · TaskFlow')
+@section('title', 'Tasques')
 
 @section('header-title', 'Tasques')
 
@@ -23,8 +23,7 @@
     @if (session('status'))
         <p class="admin-panel__description">{{ session('status') }}</p>
     @endif
-    <a href="{{ route('users.export') }}" style="display: inline-block; background-color: #28a745; color: white;
-        padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-bottom: 15px;">
+    <a class="btn btn--exportar" href="{{ route('tasques.export') }}">
         📊 Descarregar Excel
     </a>
 

@@ -35,7 +35,7 @@ class ControladorDepartaments
         return $esValid;
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $esValid = null;
 
@@ -44,7 +44,10 @@ class ControladorDepartaments
         } elseif (Auth::user()->rol_tipus !== 'admin') {
             $esValid = redirect()->route(Auth::user()->rol_tipus === 'cap' ? 'dashboardcap.index' : 'dashboardtreballador.index');
         } else {
-            $esValid = view('departament.crearDepartament', $this->dadesFormulari());
+            $origen = $request->query('origen') === 'dashboard' ? 'dashboard' : 'list';
+            $dadesFormulari = $this->dadesFormulari();
+            $dadesFormulari['origen'] = $origen;
+            $esValid = view('departament.crearDepartament', $dadesFormulari);
         }
 
         return $esValid;
@@ -59,6 +62,7 @@ class ControladorDepartaments
         } elseif (Auth::user()->rol_tipus !== 'admin') {
             $esValid = redirect()->route(Auth::user()->rol_tipus === 'cap' ? 'dashboardcap.index' : 'dashboardtreballador.index');
         } else {
+            $origen = $request->query('origen') === 'dashboard' ? 'dashboard' : 'list';
             $dades = $request->validate([
                 'nom' => 'required|string|max:25',
                 'id_cap' => ['nullable', Rule::exists('usuaris', 'id_correu')->where('rol_tipus', 'cap')],
@@ -81,7 +85,8 @@ class ControladorDepartaments
                 }
             });
 
-            $esValid = redirect()->route('departament.index')->with('status', 'Departament creat correctament.');
+            $rutaTornada = $origen === 'dashboard' ? 'dashboardadmin.index' : 'departament.index';
+            $esValid = redirect()->route($rutaTornada)->with('status', 'Departament creat correctament.');
         }
 
         return $esValid;
@@ -251,6 +256,7 @@ class ControladorDepartaments
 
         return [
             'departament' => $departament,
+            'origen' => 'list',
             'caps' => Usuari::with('departament')->where('rol_tipus', 'cap')->orderBy('nom_usu')->get(),
             'treballadorsActuals' => $treballadorsActuals,
             'treballadorsDisponibles' => $treballadorsDisponibles->orderBy('nom_usu')->get(),

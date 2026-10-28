@@ -1,5 +1,3 @@
-@props(['tasques'])
-
 <table class="llistat">
     <thead>
         <tr>
@@ -7,10 +5,12 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($categories as $category)
+        @forelse ($categories as $category)
             <tr>
                 <td>{{ $category->nom }}</td>
             </tr>
-        @endforeach
+        @empty
+            <tr><td>Encara no hi ha categories.</td></tr>
+        @endforelse
     </tbody>
 </table>

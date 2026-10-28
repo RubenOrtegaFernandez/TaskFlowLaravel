@@ -4,7 +4,7 @@
     $capActual = $departament?->cap;
 @endphp
 
-<form class="tasca-card departament-form{{ $departament ? ' departament-form--edicio' : '' }}" data-vidre method="POST" action="{{ $departament ? route('departament.update', $departament) : route('departament.store') }}">
+<form class="tasca-card departament-form{{ $departament ? ' departament-form--edicio' : '' }}" data-vidre method="POST" action="{{ $departament ? route('departament.update', $departament) : route('departament.store', $origen === 'dashboard' ? ['origen' => 'dashboard'] : []) }}">
     @csrf
 
     <div class="tasca-card__header">
@@ -86,7 +86,7 @@
     </div>
 
     <div class="tasca-accions">
-        <a class="btn btn--tornar" href="{{ route('departament.index') }}">Tornar enrere</a>
+        <a class="btn btn--tornar" href="{{ $origen === 'dashboard' ? route('dashboardadmin.index') : route('departament.index') }}">Tornar enrere</a>
         <button class="btn btn--enviar" type="submit">{{ $departament ? 'Desar canvis' : 'Crear departament' }}</button>
     </div>
 </form>

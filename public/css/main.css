@@ -37,6 +37,13 @@
   filter: brightness(1.15);
 }
 
+.btn--exportar {
+  width: auto;
+  min-width: 270px;
+  padding-inline: 24px;
+  white-space: nowrap;
+}
+
 .header {
   width: 100%;
   padding: 20px 20px 0;
@@ -62,8 +69,7 @@
   z-index: 0;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   pointer-events: none;
 }
 
@@ -157,17 +163,12 @@
   letter-spacing: -1.04px;
   color: #eaf8ff;
 }
-.field__input::-moz-placeholder {
-  color: #eaf8ff;
-  opacity: 1;
-}
 .field__input::placeholder {
   color: #eaf8ff;
   opacity: 1;
 }
 .field__input:-webkit-autofill, .field__input:-webkit-autofill:hover, .field__input:-webkit-autofill:focus, .field__input:-webkit-autofill:active {
   -webkit-text-fill-color: #eaf8ff;
-  -webkit-transition: background-color 9999s ease-in-out 0s;
   transition: background-color 9999s ease-in-out 0s;
   box-shadow: 0 0 0 1000px transparent inset;
 }
@@ -256,8 +257,7 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   pointer-events: none;
 }
 
@@ -333,8 +333,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .admin-header > a:last-child {
@@ -359,8 +358,7 @@
   z-index: -1;
   width: 100vw;
   height: 100vh;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   pointer-events: none;
 }
 
@@ -384,8 +382,7 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -475,8 +472,7 @@
   z-index: -2;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   pointer-events: none;
   border-radius: inherit;
 }
@@ -561,10 +557,6 @@
   border: 0;
   resize: none;
 }
-.tasca-card ::-moz-placeholder {
-  color: #eaf8ff;
-  opacity: 1;
-}
 .tasca-card ::placeholder {
   color: #eaf8ff;
   opacity: 1;
@@ -623,8 +615,7 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -698,9 +689,7 @@
 }
 .tasca-desplegable select {
   padding: 0 51px 0 13px;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   cursor: pointer;
 }
 .tasca-desplegable option {
@@ -723,6 +712,12 @@
   display: block;
   width: 16px;
   height: 8px;
+}
+
+.tasca-prioritat-fixa {
+  justify-content: flex-start;
+  padding-inline: 13px;
+  border-radius: 20px;
 }
 
 .tasca-accions {
@@ -786,8 +781,7 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -806,10 +800,80 @@
 .usuari-form .tasca-caixa {
   min-height: 44px;
   height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.045);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.usuari-form .tasca-caixa:focus-within {
+  border-color: rgba(234, 248, 255, 0.8);
+  background: rgba(255, 255, 255, 0.09);
+  outline: 2px solid rgba(234, 248, 255, 0.28);
+  outline-offset: 2px;
+}
+.usuari-form .tasca-caixa input {
+  padding-inline: 13px;
 }
 .usuari-form .tasca-caixa input,
 .usuari-form .tasca-caixa select {
   padding-inline: 16px;
+}
+
+.categoria-form {
+  max-width: 760px;
+  min-height: 0;
+  margin-top: 0;
+  padding: 38px 48px 32px;
+}
+.categoria-form .tasca-card__grid {
+  position: relative;
+  isolation: isolate;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+.categoria-form .tasca-card__grid > .vidre-fons--font-render {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+}
+.categoria-form .tasca-card__col {
+  position: relative;
+  isolation: isolate;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.075);
+  backdrop-filter: blur(12px) saturate(125%);
+  -webkit-backdrop-filter: blur(12px) saturate(125%);
+}
+.categoria-form .tasca-caixa {
+  min-height: 44px;
+  height: 44px;
+}
+.categoria-form .tasca-accions {
+  margin: 24px 0 0;
+  gap: 16px;
+}
+.categoria-form .btn--enviar {
+  width: auto;
+  min-width: 220px;
+  padding-inline: 24px;
+}
+
+.categoria-form__camp {
+  color: #eaf8ff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.categoria-form__error {
+  color: #ff8080;
+  font-size: 13px;
 }
 
 .usuari-form--cap .tasca-card__grid {
@@ -909,8 +973,7 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -1070,8 +1133,7 @@
   margin: 0 auto;
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .llistat--usuaris .col-accions a {
   display: inline-flex;
@@ -1152,8 +1214,7 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -1291,8 +1352,7 @@
   height: 104px;
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .usuari-detall__capcalera .departament-detall__etiqueta,
 .usuari-detall__capcalera .departament-detall__titol {
@@ -1739,3 +1799,5 @@ body {
   flex: 1;
   padding: 36px 20px 42px;
 }
+
+/*# sourceMappingURL=main.css.map */

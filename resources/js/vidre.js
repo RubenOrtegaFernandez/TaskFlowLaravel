@@ -230,7 +230,7 @@ function iniciaCreaTasca() {
   if (targeta) {
     aplicaVidre(targeta, targeta.parentElement, configuracioVidre);
 
-    if (!targeta.classList.contains('usuari-form')) {
+    if (!targeta.classList.contains('usuari-form') && !targeta.classList.contains('categoria-form')) {
       // nom i descripció (root: cada .tasca-card__col)
       const caixes = Array.from(targeta.querySelectorAll('.tasca-caixa:not(.tasca-data)'));
       const arrelsCaixes = new Set();
@@ -272,6 +272,20 @@ function iniciaColumnesUsuaris() {
     if (graella) {
       asseguraFons(graella);
       aplicaVidreGrup(columnes, configuracioTasca);
+    }
+  }
+}
+
+function iniciaColumnesCategoria() {
+  const formulari = document.querySelector('.categoria-form[data-vidre]');
+
+  if (formulari) {
+    const graella = formulari.querySelector('.tasca-card__grid');
+    const columnes = Array.from(formulari.querySelectorAll('.tasca-card__col'));
+
+    if (graella) {
+      asseguraFons(graella);
+      aplicaVidreGrup(columnes, configuracioTaula);
     }
   }
 }
@@ -333,6 +347,7 @@ function iniciaVidre() {
 
   iniciaCreaTasca();
   iniciaColumnesUsuaris();
+  iniciaColumnesCategoria();
   iniciaCampsDepartament();
   iniciaDetallTasca();
   iniciaConfirmacioEliminacio();

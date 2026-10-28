@@ -12,7 +12,7 @@ use App\Http\Controllers\ControladorDashboard;
 use App\Http\Controllers\ControladorCategories;
 use App\Http\Controllers\ControladorUsuaris;
 use Illuminate\Support\Facades\Route;
-use App\Exports\UsersExport;
+use App\Exports\TasquesExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 Route::resource('tasca', ControladorTasques::class)->only(['create', 'store']);
@@ -52,6 +52,10 @@ Route::post('/departament/{departament}/esborrar', [ControladorDepartaments::cla
 Route::get('/departaments/{departament}', [ControladorDepartaments::class, 'show'])->whereNumber('departament')->name('departament.show');
 
 Route::get('/categories', [ControladorCategories::class, 'validar'])->name('categories.index');
+
+Route::get('/categoria/create', [ControladorCategories::class, 'create'])->name('categories.create');
+
+Route::post('/categoria', [ControladorCategories::class, 'store'])->name('categories.store');
 
 Route::get('/treballadors', fn () => 'Treballadors')->name('treballadors.index');
 
@@ -103,9 +107,9 @@ Route::view('/registre', 'registreTaskFlow')->name('registre');
 
 Route::post('/registre', [ControladorRegistre::class, 'registrarUsuari']);
 
-Route::get('/users/export', function () {
-    return Excel::download(new TasquesExpor, 'usuaris.xlsx');
-})->name('users.export');
+Route::get('/tasques/export', function () {
+    return Excel::download(new TasquesExport, 'tasques.xlsx');
+})->name('tasques.export');
 
 Route::post('/tasca/{tasca}/fet', [ControladorTasques::class, 'marcarFet'])->name('tasca.fet');
 Route::post('/tasca/{tasca}/revisar', [ControladorTasques::class, 'marcarRevisat'])->name('tasca.revisar');

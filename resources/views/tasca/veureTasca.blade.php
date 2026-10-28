@@ -2,7 +2,18 @@
 
 @section('title', 'Veure Tasca · TaskFlow')
 @section('header-title', 'TASCA')
-@section('sense-nav', 'si')
+
+@php
+    $rutaDashboard = auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index');
+    $rutaTreballadors = auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.index') : route('usuari.index');
+@endphp
+
+@section('header-nav')
+    <a class="admin-header__link" href="{{ $rutaDashboard }}">DASHBOARD</a>
+    <a class="admin-header__link" href="{{ route('departament.index') }}">DEPARTAMENT</a>
+    <a class="admin-header__link" href="{{ $rutaTreballadors }}">TREBALLADORS</a>
+    <a class="admin-header__link" href="{{ route('categories.index') }}">CATEGORIES</a>
+@endsection
 
 @section('content')
 <div class="tasca-detall">

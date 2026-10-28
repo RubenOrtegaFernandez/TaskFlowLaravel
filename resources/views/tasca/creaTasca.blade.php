@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Afegir tasca · TaskFlow')
+@section('title', 'Afegir Tasca')
 
-@section('header-title', 'tasques')
+@section('header-title', 'Tasca')
 
 @php
     $rutaTreballadors = auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.index') : route('usuari.index');
