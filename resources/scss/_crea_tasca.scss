@@ -98,6 +98,23 @@
   }
 }
 
+.tasca-caixa--contrasenya {
+  height: 42px;
+  padding-right: 4px;
+
+  input[type='password'],
+  input[type='text'] {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0 10px 0 16px;
+  }
+
+  .password-toggle {
+    margin-left: auto;
+  }
+}
+
 .tasca-card__col > .vidre-fons--font-render,
 .tasca-dates > .vidre-fons--font-render,
 .tasca-desplegables > .vidre-fons--font-render,

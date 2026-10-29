@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/js/vidre.js',
                 'resources/js/registre.js',
                 'resources/js/popups.js',
+                'resources/js/esborrany.js',
             ],
             refresh: true,
         }),

@@ -27,7 +27,7 @@
         📊 Descarregar Excel
     </a>
 
-    <a class="btn" href="{{ route('tasca.create') }}">Agregar</a>
+    <a class="btn" href="{{ route('tasca.create', ['origen' => 'tasques']) }}">Agregar</a>
     @include('components.taula-tasques')
 </section>
 @endsection

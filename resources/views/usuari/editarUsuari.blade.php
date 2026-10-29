@@ -77,13 +77,13 @@
             @if ($administrador)
                 <label class="usuari-form__camp">
                     <span>Nova contrasenya <small>(opcional)</small></span>
-                    <div class="tasca-caixa"><input type="password" name="contrasenya_nova" autocomplete="new-password" minlength="8"></div>
+                    <div class="tasca-caixa tasca-caixa--contrasenya"><input id="usuari-contrasenya-nova" type="password" name="contrasenya_nova" autocomplete="new-password" minlength="8">@include('components.boto-ull-contrasenya', ['id' => 'usuari-contrasenya-nova'])</div>
                     @error('contrasenya_nova') <small>{{ $message }}</small> @enderror
                 </label>
 
                 <label class="usuari-form__camp">
                     <span>Repeteix la contrasenya</span>
-                    <div class="tasca-caixa"><input type="password" name="contrasenya_nova_confirmation" autocomplete="new-password" minlength="8"></div>
+                    <div class="tasca-caixa tasca-caixa--contrasenya"><input id="usuari-contrasenya-confirmacio" type="password" name="contrasenya_nova_confirmation" autocomplete="new-password" minlength="8">@include('components.boto-ull-contrasenya', ['id' => 'usuari-contrasenya-confirmacio'])</div>
                 </label>
                 <p class="usuari-form__nota">Deixa els camps de contrasenya buits per conservar l’actual.</p>
             @endif

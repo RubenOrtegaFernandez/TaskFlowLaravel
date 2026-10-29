@@ -35,12 +35,15 @@ class ControladorTasques{
             $categories = Categoria::orderBy('nom_cat')->pluck('nom_cat')->all();
 
             $prioritatFixa = $request->query('prioritat') === 'urgent';
+            $origen = $request->query('origen') === 'tasques' ? 'tasques' : 'dashboard';
 
             $esValid = view('tasca.creaTasca', array(
                 'rol'          => $usuari->rol_tipus,
                 'departaments' => $departaments->orderBy('nom')->get(),
                 'categories'   => $categories,
                 'prioritatFixa' => $prioritatFixa,
+                'origen' => $origen,
+                'tasca' => null,
             ));
         }
 
@@ -152,7 +155,10 @@ class ControladorTasques{
 
             Tasca::create($dades);
 
-            $rutaTornada = Auth::user()->rol_tipus === 'admin' ? 'dashboardadmin.index' : 'dashboardcap.index';
+            $origen = $request->query('origen') === 'tasques' ? 'tasques' : 'dashboard';
+            $rutaTornada = $origen === 'tasques'
+                ? 'tasca.index'
+                : (Auth::user()->rol_tipus === 'admin' ? 'dashboardadmin.index' : 'dashboardcap.index');
 
             $esValid = redirect()->route($rutaTornada)
                 ->with('status', 'Tasca creada correctament!');

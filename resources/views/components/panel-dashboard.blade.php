@@ -8,7 +8,7 @@
         <span class="admin-panel__action-text">
             Vols afegir tasques? fes-ho aquí
         </span>
-        <a href="{{ route('tasca.create', ['prioritat' => 'urgent']) }}" class="btn">Afegir</a>
+        <a href="{{ route('tasca.create', ['prioritat' => 'urgent', 'origen' => 'dashboard']) }}" class="btn">Afegir</a>
     </div>
 </section>
 

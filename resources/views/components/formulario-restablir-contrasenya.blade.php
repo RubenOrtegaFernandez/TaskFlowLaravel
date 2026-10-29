@@ -17,6 +17,7 @@
 
         <label class="field__label" for="contrasenya">Nova contrasenya</label>
         <input class="field__input" type="password" id="contrasenya" name="contrasenya" placeholder="Nova contrasenya" autocomplete="new-password" required>
+        @include('components.boto-ull-contrasenya', ['id' => 'contrasenya', 'class' => 'field__password-toggle'])
     </div>
 
     <div class="field">
@@ -26,6 +27,7 @@
 
         <label class="field__label" for="contrasenya_confirmation">Repeteix la contrasenya</label>
         <input class="field__input" type="password" id="contrasenya_confirmation" name="contrasenya_confirmation" placeholder="Repeteix la contrasenya" autocomplete="new-password" required>
+        @include('components.boto-ull-contrasenya', ['id' => 'contrasenya_confirmation', 'class' => 'field__password-toggle'])
     </div>
 
     @if ($errors->any())

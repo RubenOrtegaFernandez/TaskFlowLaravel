@@ -1,4 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
+  var botonsContrasenya = document.querySelectorAll('[data-password-toggle]');
+
+  botonsContrasenya.forEach(function (boto) {
+    var identificadorCamp = boto.getAttribute('aria-controls');
+    var campContrasenya = document.getElementById(identificadorCamp);
+
+    if (campContrasenya) {
+      boto.addEventListener('click', function () {
+        var esVisible = campContrasenya.type === 'text';
+        var icona = boto.querySelector('use');
+        var identificadorIcona = esVisible ? '#icon-ull-tancat' : '#icon-ull-obert';
+
+        campContrasenya.type = esVisible ? 'password' : 'text';
+        boto.setAttribute('aria-label', esVisible ? 'Mostrar contrasenya' : 'Ocultar contrasenya');
+        boto.setAttribute('aria-pressed', esVisible ? 'false' : 'true');
+        icona.setAttribute('href', identificadorIcona);
+        icona.setAttribute('xlink:href', identificadorIcona);
+      });
+    }
+  });
+
   var formLogin = document.getElementById('form-login');
 
   if (formLogin) {

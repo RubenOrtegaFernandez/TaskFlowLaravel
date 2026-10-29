@@ -33,6 +33,7 @@
 
         <label class="field__label" for="password">Contrasenya</label>
         <input class="field__input" type="password" id="password" name="contrasenya" placeholder="Contrasenya" autocomplete="new-password">
+        @include('components.boto-ull-contrasenya', ['id' => 'password', 'class' => 'field__password-toggle'])
     </div>
 
     <div class="login-actions enviar-altern">

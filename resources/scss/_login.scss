@@ -43,6 +43,38 @@
   box-shadow: none;
 }
 
+.password-toggle {
+  box-sizing: border-box;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: $color-clar;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid $color-clar;
+    outline-offset: 2px;
+  }
+
+  &:hover {
+    background: rgba($color-blanc, 0.12);
+  }
+
+  &__icon {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+}
+
 .login-title {
   margin: 0;
   font-family: $font-titol;
@@ -130,6 +162,13 @@
       border: none;
       box-shadow: none;
     }
+  }
+
+  &__password-toggle {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    padding: 7px;
   }
 }
 

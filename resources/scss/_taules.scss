@@ -373,3 +373,220 @@
         padding-inline: 24px;
     }
 }
+
+.ajustes-panel {
+    grid-column: 1 / -1;
+    align-self: start;
+    width: 100%;
+    max-width: 1180px;
+    justify-self: center;
+    gap: 10px;
+    padding: 14px 28px 16px;
+    overflow: hidden;
+
+    &__capcalera {
+        position: relative;
+        isolation: isolate;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        > .vidre-fons--font-render {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .admin-panel__title {
+            margin: 0;
+            text-align: left;
+            font-size: 36px;
+            line-height: 1.15;
+        }
+
+        .btn--tornar {
+            width: auto;
+            min-width: 280px;
+            min-height: 48px;
+            padding-inline: 22px;
+            white-space: nowrap;
+            font-size: 15px;
+            letter-spacing: 1.5px;
+        }
+    }
+}
+
+.ajustes__taula {
+    border-spacing: 0 7px;
+
+    tbody tr,
+    tbody tr:hover {
+        background: transparent;
+    }
+
+    tbody tr:last-child {
+        border: 0;
+    }
+
+    td {
+        position: relative;
+        isolation: isolate;
+        padding: 0;
+        border: 0;
+        text-align: left;
+
+        > .vidre-fons--font-render {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+}
+
+.ajustes__seccio {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 24px;
+    background: transparent;
+    color: $color-clar;
+
+    > h3 {
+        margin: 0 0 8px;
+        color: $color-clar;
+        font-size: 18px;
+    }
+}
+
+.ajustes__foto {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    > img {
+        display: block;
+        flex: 0 0 auto;
+        width: 76px;
+        height: 76px;
+        border: 2px solid rgba($color-blanc, 0.55);
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center;
+        background: rgba($color-negre, 0.22);
+    }
+}
+
+.ajustes-form {
+    position: relative;
+    isolation: isolate;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 560px;
+    gap: 8px;
+    margin-top: 0;
+
+    > .vidre-fons--font-render {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    label {
+        color: $color-clar;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    input[type="file"],
+    input[type="password"] {
+        width: 100%;
+        max-width: 440px;
+        min-height: 38px;
+        padding: 7px 10px;
+        border: 1px solid rgba($color-blanc, 0.38);
+        border-radius: 12px;
+        background: rgba($color-negre, 0.22);
+        color: $color-clar;
+        font: inherit;
+    }
+
+    input[type="file"]::file-selector-button {
+        margin-right: 10px;
+        padding: 7px 10px;
+        border: 1px solid rgba($color-blanc, 0.35);
+        border-radius: 8px;
+        background: rgba($color-blanc, 0.12);
+        color: $color-clar;
+        font: inherit;
+        cursor: pointer;
+    }
+
+    .btn {
+        align-self: flex-start;
+        min-height: 42px;
+        font-size: 14px;
+        letter-spacing: 1.5px;
+    }
+}
+
+.ajustes-form--contrasenya {
+    display: grid;
+    grid-template-columns: minmax(150px, 210px) minmax(0, 1fr);
+    align-items: center;
+    gap: 7px 16px;
+
+    .btn {
+        grid-column: 2;
+        justify-self: start;
+    }
+}
+
+.ajustes-form__password {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    align-items: center;
+
+    input[type="password"],
+    input[type="text"] {
+        padding-right: 48px;
+    }
+
+    .password-toggle {
+        position: absolute;
+        top: 50%;
+        right: 6px;
+        transform: translateY(-50%);
+    }
+}
+
+.ajustes__missatge,
+.ajustes__error {
+    margin: 0 0 12px;
+    color: $color-clar;
+    font-size: 14px;
+}
+
+.ajustes__error {
+    color: #ffd4d4;
+}

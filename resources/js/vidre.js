@@ -224,6 +224,23 @@ function iniciaTaulaTasques() {
   });
 }
 
+function iniciaAjustes() {
+  const seccions = Array.from(document.querySelectorAll('.ajustes__seccio'));
+  const arrels = new Set();
+
+  seccions.forEach(function (seccio) {
+    if (seccio.parentElement) {
+      arrels.add(seccio.parentElement);
+    }
+  });
+
+  arrels.forEach(function (arrel) {
+    asseguraFons(arrel);
+  });
+
+  aplicaVidreGrup(seccions, configuracioTaula);
+}
+
 function iniciaCreaTasca() {
   const targeta = document.querySelector('.tasca-card[data-vidre]');
 
@@ -325,6 +342,10 @@ function iniciaVidreBotons() {
   botons.forEach(function (boto) {
     const root = boto.parentElement;
 
+    if (root && root.closest('.ajustes-panel')) {
+      asseguraFons(root);
+    }
+
     if (root && (root.classList.contains('admin-panel__action') || root.classList.contains('tasca-accions'))) {
       asseguraFons(root);
     }
@@ -352,6 +373,7 @@ function iniciaVidre() {
   iniciaDetallTasca();
   iniciaConfirmacioEliminacio();
   iniciaTaulaTasques();
+  iniciaAjustes();
   iniciaVidreBotons();
 }
 

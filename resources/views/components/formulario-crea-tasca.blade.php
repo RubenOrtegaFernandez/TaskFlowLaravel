@@ -1,6 +1,5 @@
 @php($tasca = $tasca ?? null)
-
-<form class="tasca-card" data-vidre method="POST" action="{{ $tasca ? route('tasca.update', $tasca) : route('tasca.store', ($prioritatFixa ?? false) ? ['prioritat' => 'urgent'] : []) }}">
+<form class="tasca-card" data-vidre method="POST" action="{{ $tasca ? route('tasca.update', $tasca) : route('tasca.store', array_filter(['prioritat' => ($prioritatFixa ?? false) ? 'urgent' : null, 'origen' => $origen ?? 'dashboard'])) }}">
     @csrf
 
     <div class="tasca-card__header">
@@ -115,7 +114,7 @@
                     <a class="btn btn--tornar" href="{{ route('tasca.index') }}">Tornar al llistat</a>
                     <button class="btn btn--enviar" type="submit">Desar canvis</button>
                 @else
-                    <a class="btn btn--tornar" href="{{ route('dashboardadmin.index') }}">Tornar enrere</a>
+                    <a class="btn btn--tornar" href="{{ ($origen ?? 'dashboard') === 'tasques' ? route('tasca.index') : (auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index')) }}">Tornar enrere</a>
                     <button class="btn btn--enviar" type="submit">Enviar</button>
                 @endif
             </div>
