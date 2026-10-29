@@ -7,7 +7,7 @@
     <tbody>
         @forelse ($categories as $category)
             <tr>
-                <td>{{ $category->nom }}</td>
+                <td>{{ $category->nom_cat }}</td>
             </tr>
         @empty
             <tr><td>Encara no hi ha categories.</td></tr>

@@ -12,6 +12,8 @@ class Tasca extends Model
 
     public $timestamps = false;
 
+    public const CATEGORIES = ['valor1', 'valor2', 'valor3', 'valor4'];
+
     protected $fillable = [
         'estat',
         'nom_tas',

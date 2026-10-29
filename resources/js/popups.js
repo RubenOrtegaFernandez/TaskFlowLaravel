@@ -1,5 +1,3 @@
-console.log('popups.js cargado');
-
 document.addEventListener('DOMContentLoaded', () => {
     const popups = document.querySelectorAll('.missatge-popup');
     console.log('popups encontrados:', popups.length);

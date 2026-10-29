@@ -25,22 +25,19 @@ class ControladorTasques{
 
             $usuari = Auth::user();
 
-            $treballadors = Usuari::where('rol_tipus', 'client');
-            $departaments = Departament::orderBy('nom');
+            $departaments = Departament::with(['treballadors' => fn ($q) => $q->orderBy('nom_usu')])->orderBy('nom');
 
             // El cap només veu el seu departament i els seus treballadors
             if ($usuari->rol_tipus === 'cap') {
-                $treballadors = Usuari::where('rol_tipus', 'client')->where('id_dep', $usuari->id_dep);
-                $departaments = Departament::where('id_dep', $usuari->id_dep);
+                $departaments->where('id_dep', $usuari->id_dep);
             }
 
-            $categories = Categoria::orderBy('nom')->pluck('nom')->all();
+            $categories = Categoria::orderBy('nom_cat')->pluck('nom_cat')->all();
 
             $prioritatFixa = $request->query('prioritat') === 'urgent';
 
             $esValid = view('tasca.creaTasca', array(
                 'rol'          => $usuari->rol_tipus,
-                'treballadors' => $treballadors->orderBy('nom_usu')->get(),
                 'departaments' => $departaments->orderBy('nom')->get(),
                 'categories'   => $categories,
                 'prioritatFixa' => $prioritatFixa,
@@ -65,19 +62,16 @@ class ControladorTasques{
             $esValid = redirect()->route('dashboardcap.index');
         } else {
             $usuari = Auth::user();
-            $treballadors = Usuari::where('rol_tipus', 'client');
-            $departaments = Departament::orderBy('nom');
+            $departaments = Departament::with(['treballadors' => fn ($q) => $q->orderBy('nom_usu')])->orderBy('nom');
 
             if ($usuari->rol_tipus === 'cap') {
-                $treballadors = $treballadors->where('id_dep', $usuari->id_dep);
-                $departaments = Departament::where('id_dep', $usuari->id_dep);
+                $departaments->where('id_dep', $usuari->id_dep);
             }
 
-            $categories = Categoria::orderBy('nom')->pluck('nom')->all();
+            $categories = Categoria::orderBy('nom_cat')->pluck('nom_cat')->all();
 
             $esValid = view('tasca.editarTasca', array(
                 'tasca' => $tasca,
-                'treballadors' => $treballadors->orderBy('nom_usu')->get(),
                 'departaments' => $departaments->orderBy('nom')->get(),
                 'categories' => $categories,
             ));
@@ -140,7 +134,7 @@ class ControladorTasques{
                 'data_inici'      => 'required|date',
                 'data_final'      => 'nullable|date|after_or_equal:data_inici',
                 'prioritat'       => $prioritatFixa ? 'prohibited' : 'required|in:baixa,mitja,alta,urgent',
-                'categoria'       => 'required|exists:categories,nom',
+                'categoria'       => 'required|exists:categories,nom_cat',
                 'id_dep_assignat' => 'nullable|exists:departaments,id_dep',
                 'id_usr_assignat' => 'nullable|exists:usuaris,id_correu',
             ]);
@@ -183,7 +177,7 @@ class ControladorTasques{
                 'data_inici'      => 'required|date',
                 'data_final'      => 'nullable|date|after_or_equal:data_inici',
                 'prioritat'       => 'required|in:baixa,mitja,alta,urgent',
-                'categoria'       => 'required|exists:categories,nom',
+                'categoria'       => 'required|exists:categories,nom_cat',
                 'id_dep_assignat' => 'nullable|exists:departaments,id_dep',
                 'id_usr_assignat' => 'nullable|exists:usuaris,id_correu',
             ]);

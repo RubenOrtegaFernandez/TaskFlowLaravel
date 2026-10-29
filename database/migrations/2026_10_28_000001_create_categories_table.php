@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id('id_categoria');
-            $table->string('nom', 25)->unique();
+            $table->string('nom_cat', 25)->unique();
         });
 
         $categories = array_map(function ($nom) {
-            return ['nom' => $nom];
+            return ['nom_cat' => $nom];
         }, $this->categoriesInicials);
 
         DB::table('categories')->insert($categories);

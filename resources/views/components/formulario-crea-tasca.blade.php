@@ -39,8 +39,15 @@
                 <div>
                     <select id="id_usr_assignat" name="id_usr_assignat" size="5">
                         <option value="" @selected(! old('id_usr_assignat', $tasca->id_usr_assignat ?? null))>Sense assignar</option>
-                        @foreach ($treballadors as $treballador)
-                            <option value="{{ $treballador->id_correu }}" @selected(old('id_usr_assignat', $tasca->id_usr_assignat ?? null) == $treballador->id_correu)>{{ $treballador->nom_usu }}</option>
+
+                        @foreach ($departaments as $departament)
+                            @if ($departament->treballadors->isNotEmpty())
+                                <optgroup label="DEPARTAMENT {{ mb_strtoupper($departament->nom) }}">
+                                    @foreach ($departament->treballadors as $treballador)
+                                        <option value="{{ $treballador->id_correu }}" @selected(old('id_usr_assignat', $tasca->id_usr_assignat ?? null) == $treballador->id_correu)>{{ $treballador->nom_usu }}</option>
+                                    @endforeach
+                                </optgroup>
+                            @endif
                         @endforeach
                     </select>
                 </div>

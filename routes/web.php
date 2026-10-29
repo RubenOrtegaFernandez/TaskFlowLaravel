@@ -5,11 +5,11 @@ hacerlo para que quien quiera verlo pueda desde cualquier ordenador
 use App\Http\Controllers\ControladorLogin;
 use App\Http\Controllers\ControladorRegistre;
 use App\Http\Controllers\ControladorTasques;
+use App\Http\Controllers\ControladorCategories;
 use App\Http\Controllers\ControladorDepartaments;
 use App\Http\Controllers\ControladorRecuperacio;
 use App\Http\Controllers\ControladorPerfil;
 use App\Http\Controllers\ControladorDashboard;
-use App\Http\Controllers\ControladorCategories;
 use App\Http\Controllers\ControladorUsuaris;
 use Illuminate\Support\Facades\Route;
 use App\Exports\TasquesExport;
