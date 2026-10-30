@@ -17,7 +17,7 @@
 @endsection
 
 @section('content')
-<section class="admin-panel llista-tasques">
+<section class="admin-panel llista-tasques tasques-llista">
     <h2 class="admin-panel__title">LLISTAT DE TASQUES</h2>
     
     @if (session('status'))

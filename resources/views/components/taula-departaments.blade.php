@@ -1,4 +1,4 @@
-<div class="taula-tasques" data-vidre-taula>
+<div class="taula-tasques">
     <table class="llistat llistat--departaments">
         <thead>
             <tr>

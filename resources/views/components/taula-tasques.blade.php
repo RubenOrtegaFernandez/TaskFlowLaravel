@@ -1,6 +1,6 @@
 @props(['tasques'])
 
-<div class="taula-tasques" data-vidre-taula>
+<div class="taula-tasques">
 <table class="llistat">
     <thead>
         <tr>

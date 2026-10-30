@@ -131,16 +131,23 @@ class ControladorTasques{
 
             $prioritatFixa = $request->query('prioritat') === 'urgent';
 
-            $dades = $request->validate([
+            $regles = [
                 'nom_tas'         => 'required|max:25',
                 'descripcio'      => 'required|max:255',
                 'data_inici'      => 'required|date',
                 'data_final'      => 'nullable|date|after_or_equal:data_inici',
-                'prioritat'       => $prioritatFixa ? 'prohibited' : 'required|in:baixa,mitja,alta,urgent',
                 'categoria'       => 'required|exists:categories,nom_cat',
                 'id_dep_assignat' => 'nullable|exists:departaments,id_dep',
                 'id_usr_assignat' => 'nullable|exists:usuaris,id_correu',
-            ]);
+            ];
+
+            if ($prioritatFixa) {
+                $regles['prioritat'] = 'nullable|in:baixa,mitja,alta,urgent';
+            } else {
+                $regles['prioritat'] = 'required|in:baixa,mitja,alta,urgent';
+            }
+
+            $dades = $request->validate($regles);
 
             $dades['id_usr_creador'] = Auth::id();
 

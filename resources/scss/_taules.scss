@@ -1,5 +1,6 @@
 
 @use 'variables' as *;
+@use 'mixins' as *;
 
 .llistat {
     width: 100%;
@@ -45,7 +46,6 @@
 
     td {
         font-size: 18px;
-
     }
 
     .col-accions {
@@ -106,55 +106,43 @@
     }
 }
 
-.usuaris-llista {
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    overflow: hidden;
-    align-items: stretch;
-    gap: 20px;
-    isolation: isolate;
-    border: 1px solid rgba($color-blanc, 0.24);
-    background: rgba($color-blanc, 0.075);
-    backdrop-filter: blur(14px) saturate(125%);
-    -webkit-backdrop-filter: blur(14px) saturate(125%);
+// ---------- Llistats amb scroll ----------
 
-    > .taula-tasques {
-        flex: 1 1 auto;
-        min-height: 0;
-        align-self: stretch;
-        overflow-x: hidden;
-        overflow-y: auto;
-        overscroll-behavior: contain;
-        scrollbar-color: rgba($color-clar, 0.4) transparent;
-        scrollbar-width: thin;
+.usuaris-llista,
+.tasques-llista,
+.departaments-llista {
+    @include llista-scroll;
+}
 
-        &::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        &::-webkit-scrollbar-track {
-            border-radius: 8px;
-            background: rgba($color-negre, 0.2);
-        }
-
-        &::-webkit-scrollbar-thumb {
-            border: 2px solid transparent;
-            border-radius: 8px;
-            background: rgba($color-clar, 0.5);
-            background-clip: padding-box;
-        }
+.tasques-llista,
+.departaments-llista {
+    > .admin-panel__title,
+    > .admin-panel__description,
+    > .btn {
+        align-self: center;
     }
 }
 
+.usuaris-llista > .taula-tasques {
+    overflow-x: hidden;
+}
+
+.tasques-llista > .taula-tasques {
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+
+.admin-main:has(.tasques-llista),
+.admin-main:has(.departaments-llista),
 .admin-main:has(.usuaris-llista) {
     min-height: 0;
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: minmax(0, 1fr);
 }
 
-.llistat--usuaris thead {
+.usuaris-llista .llistat thead,
+.tasques-llista .llistat thead,
+.departaments-llista .llistat thead {
     position: sticky;
     z-index: 2;
     top: 0;

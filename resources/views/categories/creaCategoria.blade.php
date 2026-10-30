@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    <form class="tasca-card categoria-form" data-vidre method="POST" action="{{ route('categories.store') }}">
+    <form class="tasca-card categoria-form" data-vidre data-esborrany method="POST" action="{{ route('categories.store') }}">
         @csrf
 
         <div class="tasca-card__header">

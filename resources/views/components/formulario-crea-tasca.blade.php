@@ -88,7 +88,7 @@
                 </div>
 
                 @if (!$tasca && ($prioritatFixa ?? false))
-                    <div class="tasca-caixa tasca-prioritat-fixa" role="status" aria-label="Prioritat: Urgent">
+                    <div class="tasca-caixa tasca-prioritat-fixa" role="status" aria-label="Prioritat: Urgent" data-prioritat-fixa="urgent">
                         Urgent
                     </div>
                 @else

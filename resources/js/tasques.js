@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
           return form.elements[nom] ? form.elements[nom].value.trim() : '';
         };
 
+        var prioritatFixa = form.querySelector('[data-prioritat-fixa]') !== null || new URLSearchParams(window.location.search).get('prioritat') === 'urgent';
         var nomTasca = valor('nom_tas');
         var descripcio = valor('descripcio');
         var prioritat = valor('prioritat');
@@ -59,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
           missatge = 'La descripció és obligatòria.';
         } else if (descripcio.length < 10) {
           missatge = 'La descripció ha de tenir mínim 10 caràcters.';
-        } else if (prioritat === '') {
+        } else if (!prioritatFixa && prioritat === '') {
           missatge = 'Has de seleccionar una prioritat.';
         } else if (dataInici === '') {
           missatge = 'La data d’inici és obligatòria.';

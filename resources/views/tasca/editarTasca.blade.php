@@ -15,5 +15,5 @@
 @endsection
 
 @section('content')
-@include('components.formulario-crea-tasca', compact('tasca', 'treballadors', 'departaments', 'categories'))
+@include('components.formulario-crea-tasca', compact('tasca', 'departaments', 'categories'))
 @endsection

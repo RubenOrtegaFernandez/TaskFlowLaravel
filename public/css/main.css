@@ -1216,7 +1216,9 @@
   border-radius: 10px;
 }
 
-.usuaris-llista {
+.usuaris-llista,
+.tasques-llista,
+.departaments-llista {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -1230,37 +1232,68 @@
   backdrop-filter: blur(14px) saturate(125%);
   -webkit-backdrop-filter: blur(14px) saturate(125%);
 }
-.usuaris-llista > .taula-tasques {
+.usuaris-llista > .taula-tasques,
+.tasques-llista > .taula-tasques,
+.departaments-llista > .taula-tasques {
   flex: 1 1 auto;
   min-height: 0;
   align-self: stretch;
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-color: rgba(234, 248, 255, 0.4) transparent;
   scrollbar-width: thin;
 }
-.usuaris-llista > .taula-tasques::-webkit-scrollbar {
+.usuaris-llista > .taula-tasques::-webkit-scrollbar,
+.tasques-llista > .taula-tasques::-webkit-scrollbar,
+.departaments-llista > .taula-tasques::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
-.usuaris-llista > .taula-tasques::-webkit-scrollbar-track {
+.usuaris-llista > .taula-tasques::-webkit-scrollbar-track,
+.tasques-llista > .taula-tasques::-webkit-scrollbar-track,
+.departaments-llista > .taula-tasques::-webkit-scrollbar-track {
   border-radius: 8px;
   background: rgba(11, 18, 37, 0.2);
 }
-.usuaris-llista > .taula-tasques::-webkit-scrollbar-thumb {
+.usuaris-llista > .taula-tasques::-webkit-scrollbar-thumb,
+.tasques-llista > .taula-tasques::-webkit-scrollbar-thumb,
+.departaments-llista > .taula-tasques::-webkit-scrollbar-thumb {
   border: 2px solid transparent;
   border-radius: 8px;
   background: rgba(234, 248, 255, 0.5);
   background-clip: padding-box;
 }
 
+.tasques-llista > .admin-panel__title,
+.tasques-llista > .admin-panel__description,
+.tasques-llista > .btn,
+.departaments-llista > .admin-panel__title,
+.departaments-llista > .admin-panel__description,
+.departaments-llista > .btn {
+  align-self: center;
+}
+
+.usuaris-llista > .taula-tasques {
+  overflow-x: hidden;
+}
+
+.tasques-llista > .taula-tasques {
+  overflow-x: auto;
+  overflow-y: scroll;
+}
+
+.admin-main:has(.tasques-llista),
+.admin-main:has(.departaments-llista),
 .admin-main:has(.usuaris-llista) {
   min-height: 0;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr);
 }
 
-.llistat--usuaris thead {
+.usuaris-llista .llistat thead,
+.tasques-llista .llistat thead,
+.departaments-llista .llistat thead {
   position: sticky;
   z-index: 2;
   top: 0;
@@ -1840,10 +1873,14 @@
   .admin-main {
     min-width: 0;
   }
-  .admin-main:has(.usuaris-llista) {
+  .admin-main:has(.usuaris-llista),
+  .admin-main:has(.tasques-llista),
+  .admin-main:has(.departaments-llista) {
     grid-template-rows: auto;
   }
-  .usuaris-llista {
+  .usuaris-llista,
+  .tasques-llista,
+  .departaments-llista {
     height: min(68vh, 680px);
     min-height: 260px;
   }
