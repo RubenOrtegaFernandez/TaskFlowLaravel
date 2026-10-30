@@ -28,27 +28,27 @@ document.addEventListener('DOMContentLoaded', function () {
       var contrasenya = formLogin.elements['contrasenya'].value;
       var error = document.getElementById('error-login');
 
-      // Amaga el missatge d'error del servidor si l'usuari reintenta per JS
       var serverError = document.getElementById('error-server');
       if (serverError) {
         serverError.style.display = 'none';
       }
 
-      var mensaje = '';
+      var missatge = '';
 
       if (correu === '' || contrasenya === '') {
-        mensaje = 'Omple tots els camps.';
+        missatge = 'Omple tots els camps.';
       } else if (correu.indexOf('@') === -1) {
-        mensaje = 'El correu no és vàlid.';
+        missatge = 'El correu no és vàlid.';
       } else if (contrasenya.length < 8) {
-        mensaje = 'La contrasenya ha de tenir mínim 8 caràcters.';
+        missatge = 'La contrasenya ha de tenir mínim 8 caràcters.';
       }
 
-      if (mensaje !== '') {
+      if (missatge !== '') {
         e.preventDefault();
+
         if (error) {
-          error.textContent = mensaje;
-          error.style.color = 'red';
+          error.textContent = missatge;
+          error.style.color = '#ff5555';
           error.hidden = false;
         }
       }
@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var correu = formRegistre.elements['correu'].value.trim();
       var contrasenya = formRegistre.elements['contrasenya'].value;
       var error = document.getElementById('error-registre');
+
       var missatge = '';
 
       if (nom === '' || correu === '' || contrasenya === '') {
@@ -77,12 +78,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (missatge !== '') {
         e.preventDefault();
+
         if (error) {
           error.textContent = missatge;
-          error.style.color = 'red';
+          error.style.color = '#ff5555';
           error.hidden = false;
         }
       }
     });
   }
-});
+})

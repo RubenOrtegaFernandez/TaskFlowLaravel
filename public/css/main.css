@@ -69,7 +69,8 @@
   z-index: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   pointer-events: none;
 }
 
@@ -192,12 +193,17 @@
   letter-spacing: -1.04px;
   color: #eaf8ff;
 }
+.field__input::-moz-placeholder {
+  color: #eaf8ff;
+  opacity: 1;
+}
 .field__input::placeholder {
   color: #eaf8ff;
   opacity: 1;
 }
 .field__input:-webkit-autofill, .field__input:-webkit-autofill:hover, .field__input:-webkit-autofill:focus, .field__input:-webkit-autofill:active {
   -webkit-text-fill-color: #eaf8ff;
+  -webkit-transition: background-color 9999s ease-in-out 0s;
   transition: background-color 9999s ease-in-out 0s;
   box-shadow: 0 0 0 1000px transparent inset;
 }
@@ -292,7 +298,8 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   pointer-events: none;
 }
 
@@ -368,7 +375,8 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .admin-header > a:last-child {
@@ -393,7 +401,8 @@
   z-index: -1;
   width: 100vw;
   height: 100vh;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   pointer-events: none;
 }
 
@@ -417,7 +426,8 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -507,7 +517,8 @@
   z-index: -2;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   pointer-events: none;
   border-radius: inherit;
 }
@@ -592,6 +603,10 @@
   border: 0;
   resize: none;
 }
+.tasca-card ::-moz-placeholder {
+  color: #eaf8ff;
+  opacity: 1;
+}
 .tasca-card ::placeholder {
   color: #eaf8ff;
   opacity: 1;
@@ -665,7 +680,8 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -739,7 +755,9 @@
 }
 .tasca-desplegable select {
   padding: 0 51px 0 13px;
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   cursor: pointer;
 }
 .tasca-desplegable option {
@@ -831,7 +849,8 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -886,7 +905,8 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -1023,7 +1043,8 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -1183,7 +1204,8 @@
   margin: 0 auto;
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .llistat--usuaris .col-accions a {
   display: inline-flex;
@@ -1264,7 +1286,8 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -1402,7 +1425,8 @@
   height: 104px;
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .usuari-detall__capcalera .departament-detall__etiqueta,
 .usuari-detall__capcalera .departament-detall__titol {
@@ -1468,7 +1492,8 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -1511,7 +1536,8 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -1543,8 +1569,10 @@
   height: 76px;
   border: 2px solid rgba(255, 255, 255, 0.55);
   border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
   background: rgba(11, 18, 37, 0.22);
 }
 
@@ -1563,7 +1591,8 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: 0;
   pointer-events: none;
 }
@@ -2076,5 +2105,3 @@ body {
   flex: 1;
   padding: 36px 20px 42px;
 }
-
-/*# sourceMappingURL=main.css.map */

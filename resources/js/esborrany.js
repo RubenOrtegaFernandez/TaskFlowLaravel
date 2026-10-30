@@ -1,31 +1,39 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const formularis = document.querySelectorAll('form[data-esborrany]');
+document.addEventListener('DOMContentLoaded', function () {
+  var formularis = document.querySelectorAll('form[data-esborrany]');
 
-    formularis.forEach((form) => {
-        const clau = 'esborrany:' + form.getAttribute('action');
+  formularis.forEach(function (form) {
+    var clau = 'esborrany:' + form.getAttribute('action');
 
-        const camps = Array.from(form.querySelectorAll('input, select, textarea'))
-            .filter((c) => c.name && !['hidden', 'password', 'submit'].includes(c.type));
+    var camps = Array.from(form.querySelectorAll('input, select, textarea'))
+      .filter(function (camp) {
+        return camp.name && ['hidden', 'password', 'submit'].indexOf(camp.type) === -1;
+      });
 
-        const guardat = JSON.parse(localStorage.getItem(clau) || '{}');
-        camps.forEach((c) => {
-            if (guardat[c.name] && c.value === '') {
-                c.value = guardat[c.name];
-            }
-        });
+    var guardat = JSON.parse(localStorage.getItem(clau) || '{}');
 
-        const guardar = () => {
-            const dades = {};
-            camps.forEach((c) => {
-                if (c.value !== '') dades[c.name] = c.value;
-            });
-            localStorage.setItem(clau, JSON.stringify(dades));
-        };
-        form.addEventListener('input', guardar);
-        form.addEventListener('change', guardar);
-
-        form.addEventListener('submit', () => {
-            localStorage.removeItem(clau);
-        });
+    camps.forEach(function (camp) {
+      if (guardat[camp.name] && camp.value === '') {
+        camp.value = guardat[camp.name];
+      }
     });
-});
+
+    var guardar = function () {
+      var dades = {};
+
+      camps.forEach(function (camp) {
+        if (camp.value !== '') {
+          dades[camp.name] = camp.value;
+        }
+      });
+
+      localStorage.setItem(clau, JSON.stringify(dades));
+    };
+
+    form.addEventListener('input', guardar);
+    form.addEventListener('change', guardar);
+
+    form.addEventListener('submit', function () {
+      localStorage.removeItem(clau);
+    });
+  });
+})

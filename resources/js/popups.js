@@ -1,10 +1,17 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const popups = document.querySelectorAll('.missatge-popup');
-    console.log('popups encontrados:', popups.length);
+document.addEventListener('DOMContentLoaded', function () {
+  var popups = document.querySelectorAll('.missatge-popup');
 
-    popups.forEach((popup) => {
-        setTimeout(() => popup.remove(), 10000);
-        const btn = popup.querySelector('.missatge-popup__close');
-        if (btn) btn.addEventListener('click', () => popup.remove());
-    });
+  popups.forEach(function (popup) {
+    setTimeout(function () {
+      popup.remove();
+    }, 10000);
+
+    var btn = popup.querySelector('.missatge-popup__close');
+
+    if (btn) {
+      btn.addEventListener('click', function () {
+        popup.remove();
+      });
+    }
+  });
 });

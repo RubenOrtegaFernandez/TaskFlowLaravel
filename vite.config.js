@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/js/registre.js',
                 'resources/js/popups.js',
                 'resources/js/esborrany.js',
+                'resources/js/tasques.js',
             ],
             refresh: true,
         }),
