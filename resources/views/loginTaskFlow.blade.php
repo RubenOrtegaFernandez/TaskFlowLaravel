@@ -14,7 +14,3 @@
 
     @include('components.formulario-login')
 @endsection
-
-@section('scripts')
-    @include('partials.js-vidre')
-@endsection

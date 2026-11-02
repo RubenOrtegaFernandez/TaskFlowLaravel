@@ -20,7 +20,3 @@
         <p class="login-register">{{ session('error') }}</p>
     @endif
 @endsection
-
-@section('scripts')
-    @include('partials.js-vidre')
-@endsection

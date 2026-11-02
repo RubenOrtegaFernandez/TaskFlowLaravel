@@ -23,11 +23,13 @@
     @if (session('status'))
         <p class="admin-panel__description">{{ session('status') }}</p>
     @endif
+
+    @include('components.taula-tasques')
+
+    <a class="btn" href="{{ route('tasca.create', ['origen' => 'tasques']) }}">Agregar</a>
+
     <a class="btn btn--exportar" href="{{ route('tasques.export') }}">
         📊 Descarregar Excel
     </a>
-
-    <a class="btn" href="{{ route('tasca.create', ['origen' => 'tasques']) }}">Agregar</a>
-    @include('components.taula-tasques')
 </section>
 @endsection

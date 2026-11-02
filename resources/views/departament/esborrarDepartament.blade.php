@@ -6,12 +6,12 @@
 @section('header-nav')
     <a class="admin-header__link" href="{{ route('dashboardadmin.index') }}">DASHBOARD</a>
     <a class="admin-header__link" href="{{ route('tasca.index') }}">TASQUES</a>
-    <a class="admin-header__link" href="{{ route('treballadors.index') }}">TREBALLADORS</a>
+    <a class="admin-header__link" href="{{ route('usuari.index') }}">TREBALLADORS</a>
     <a class="admin-header__link" href="{{ route('categories.index') }}">CATEGORIES</a>
 @endsection
 
 @section('content')
-<section class="tasca-eliminacio" data-tasca-eliminacio>
+<section class="tasca-eliminacio" data-tasca-eliminacio data-esborrany novalidate>
     <div class="tasca-eliminacio__card">
         <p class="tasca-eliminacio__etiqueta">Confirmar eliminació</p>
         <h2>Vols esborrar aquest departament?</h2>

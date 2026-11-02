@@ -1,5 +1,9 @@
 @php($tasca = $tasca ?? null)
-<form class="tasca-card" data-vidre method="POST" action="{{ $tasca ? route('tasca.update', $tasca) : route('tasca.store', array_filter(['prioritat' => ($prioritatFixa ?? false) ? 'urgent' : null, 'origen' => $origen ?? 'dashboard'])) }}">
+<form class="tasca-card" data-vidre data-tasca novalidate
+      @if(!$tasca) data-esborrany @endif
+      @if($prioritatFixa ?? false) data-prioritat-fixa @endif
+      method="POST"
+      action="{{ $tasca ? route('tasca.update', $tasca) : route('tasca.store', array_filter(['prioritat' => ($prioritatFixa ?? false) ? 'urgent' : null, 'origen' => $origen ?? 'dashboard'])) }}">
     @csrf
 
     <div class="tasca-card__header">

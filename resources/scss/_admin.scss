@@ -126,6 +126,7 @@
   object-fit: cover;
   pointer-events: none;
 }
+
 .admin-panel {
   position: relative;
   isolation: auto;
@@ -187,6 +188,8 @@
     margin-top: auto;
     padding: 16px 14px 16px 18px;
     display: flex;
+    flex-shrink: 0;
+    margin-top: 0;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
@@ -216,11 +219,61 @@
    &__content {
     flex: 1;
     width: 100%;
+    max-height: 50%;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 46px;
+    padding-right: 8px;
+
+    > * {
+      flex-shrink: 0;
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, .35);
+      border-radius: 3px;
+    }
   }
+}
+
+.treballador-targeta {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 4px;
+    padding: 8px 14px;
+    background: rgb(238, 255, 0);
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
+    }
+
+    .perfil__avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    span {
+        flex: 1;
+        text-align: center;
+        font-weight: 600;
+    }
 }
 
 .tasca {

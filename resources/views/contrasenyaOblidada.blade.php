@@ -59,7 +59,3 @@
         </p>
     </form>
 @endsection
-
-@section('scripts')
-    @include('partials.js-vidre')
-@endsection

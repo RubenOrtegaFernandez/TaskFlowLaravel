@@ -17,7 +17,7 @@
 @endsection
 
 @section('content')
-<section class="tasca-eliminacio" data-tasca-eliminacio>
+<section class="tasca-eliminacio" data-tasca-eliminacio data-esborrany novalidate >
     <div class="tasca-eliminacio__card">
         <p class="tasca-eliminacio__etiqueta">Confirmar eliminació</p>
         <h2>Vols esborrar aquest usuari?</h2>

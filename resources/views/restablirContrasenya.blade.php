@@ -15,7 +15,3 @@
 
     @include('components.formulario-restablir-contrasenya')
 @endsection
-
-@section('scripts')
-    @include('partials.js-vidre')
-@endsection

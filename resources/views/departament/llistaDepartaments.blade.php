@@ -19,10 +19,11 @@
         <p class="admin-panel__description">{{ session('status') }}</p>
     @endif
 
+    @include('components.taula-departaments')
+
     @if (auth()->user()->rol_tipus === 'admin')
         <a class="btn" href="{{ route('departament.create') }}">Agregar departamento</a>
     @endif
 
-    @include('components.taula-departaments')
 </section>
 @endsection

@@ -15,12 +15,18 @@
     <h2 class="admin-panel__title">Tasques Urgents</h2>
 
     <div class="admin-panel__content">
-        <p class="admin-panel__description">Aquí es mostraran les tasques a punt de finalitzar.</p>
-
-        <div class="admin-panel__action">
-            <span class="admin-panel__action-text">Vols afegir tasques? fes-ho aquí</span>
-            <a href="{{ route('tasca.create', ['prioritat' => 'urgent', 'origen' => 'dashboard']) }}" class="btn">Afegir</a>
-        </div>
+        @forelse ($urgents as $tasca)
+            @include('components.targeta-tasca', [
+                'tasca' => $tasca,
+                'mode' => 'cap'
+            ])
+        @empty
+            <p class="admin-panel__description">No hi ha tasques urgents.</p>
+        @endforelse
+    </div>
+    <div class="admin-panel__action">
+        <span class="admin-panel__action-text">Vols afegir tasques? fes-ho aquí</span>
+        <a href="{{ route('tasca.create', ['prioritat' => 'urgent', 'origen' => 'dashboard']) }}" class="btn">Afegir</a>
     </div>
 </section>
 
@@ -28,12 +34,19 @@
     <h2 class="admin-panel__title admin-panel__title--compact">Tasques Pendents de Revisió</h2>
 
     <div class="admin-panel__content">
-        <p class="admin-panel__description">Aquí es mostraran les tasques finalitzades pendents de revisió.</p>
 
-        <div class="admin-panel__action">
-            <span class="admin-panel__action-text">Vols afegir tasques? fes-ho aquí</span>
-            <a href="{{ route('tasca.create', ['origen' => 'dashboard']) }}" class="btn">Afegir</a>
-        </div>
+        @forelse ($tasquesFetes as $tasca)
+            @include('components.targeta-tasca', [
+                'tasca' => $tasca,
+                'mode' => 'cap'
+            ])
+        @empty
+            <p class="admin-panel__description">No hi ha tasques finalitzades pendents de revisió.</p>
+        @endforelse
+    </div>
+    <div class="admin-panel__action">
+        <span class="admin-panel__action-text">Vols afegir tasques? fes-ho aquí</span>
+        <a href="{{ route('tasca.create', ['origen' => 'dashboard']) }}" class="btn">Afegir</a>
     </div>
 </section>
 
@@ -42,7 +55,13 @@
 
     <div class="admin-panel__content admin-panel__content--simple">
         @forelse ($treballadors as $treballador)
-            <p class="admin-panel__description">{{ $treballador->nom_usu }}</p>
+            <a href="{{ route('usuari.show', $treballador) }}" class="treballador-targeta">
+                <img
+                    class="perfil__avatar"
+                    src="{{ asset($treballador->img ?: 'img/default.png') }}"
+                    alt="Foto del perfil de {{ $treballador->nom_usu }}">
+                <span>{{ $treballador->nom_usu }}</span>
+            </a>
         @empty
             <p class="admin-panel__description">Encara no hi ha treballadors al teu departament.</p>
         @endforelse

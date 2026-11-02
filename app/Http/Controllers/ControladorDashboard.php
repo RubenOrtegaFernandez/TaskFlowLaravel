@@ -10,7 +10,7 @@ class ControladorDashboard
 {
     public function admin()
     {
-        $resultado = redirect('/login');
+        $resultado = redirect('/login')->with('error', 'Logeate como administrador per poder entrar.');
 
         if (Auth::check() && Auth::user()->rol_tipus === 'admin') {
             $resultado = view('dashboardAdmin');
@@ -29,7 +29,18 @@ class ControladorDashboard
                 ->orderBy('nom_usu')
                 ->get();
 
-            $resultado = view('dashboardCap', compact('treballadors'));
+            $tasquesFetes = Tasca::where('id_dep_assignat', Auth::user()->id_dep)
+                ->where('estat', 'fet')
+                ->orderBy('data_final')
+                ->get();
+
+            $urgents = Tasca::where('id_dep_assignat', Auth::user()->id_dep)
+                ->where('prioritat', 'urgent')
+                ->whereNotIn('estat', ['fet', 'revisat'])
+                ->orderBy('data_final')
+                ->get();
+
+            $resultado = view('dashboardCap', compact('treballadors', 'tasquesFetes', 'urgents'));
         }
 
         return $resultado;
@@ -41,9 +52,10 @@ class ControladorDashboard
             ->orderBy('data_final')
             ->get();
 
-        $urgents = $tasques->where('prioritat', 'urgent');
-        $pendents = $tasques->where('estat', 'pendent');
-        $finalitzades = $tasques->whereIn('estat', ['fet', 'revisat']);
+        $urgents = $tasques->where('prioritat', 'urgent')->where('estat', '!=', 'revisat');
+        $noUrgents = $tasques->where('prioritat', '!=', 'urgent');
+        $pendents = $noUrgents->where('estat', 'pendent');
+        $finalitzades = $noUrgents->whereIn('estat', ['fet', 'revisat']);
 
         return view('dashboardTreballador', compact(
             'tasques',
