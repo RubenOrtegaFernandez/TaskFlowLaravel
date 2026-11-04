@@ -1,7 +1,6 @@
 @props(['tasca', 'mode' => 'treballador'])
 
 <article class="tasca">
-    <img class="vidre-fons" src="{{ asset('img/background2.jpg') }}" alt="" aria-hidden="true">
     <h3 class="tasca__titol">{{ $tasca->nom_tas }}</h3>
 
     <div class="tasca__fila">

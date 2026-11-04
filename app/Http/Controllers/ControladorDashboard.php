@@ -3,17 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tasca;
+use App\Models\Categoria;
+use App\Models\Departament;
 use App\Models\Usuari;
 use Illuminate\Support\Facades\Auth;
 
 class ControladorDashboard
 {
-    public function admin()
-    {
+    public function admin(){
         $resultado = redirect('/login')->with('error', 'Logeate como administrador per poder entrar.');
 
         if (Auth::check() && Auth::user()->rol_tipus === 'admin') {
-            $resultado = view('dashboardAdmin');
+            $urgents = Tasca::where('prioritat', 'urgent')
+                ->whereNotIn('estat', ['fet', 'revisat'])
+                ->orderBy('data_final')
+                ->get();
+
+            $categories = Categoria::orderBy('nom_cat')->get();
+            $departaments = Departament::orderBy('nom')->get();
+
+            $resultado = view('dashboardAdmin', compact('urgents', 'categories', 'departaments'));
         }
 
         return $resultado;
@@ -46,22 +55,19 @@ class ControladorDashboard
         return $resultado;
     }
 
-    public function treballador()
-    {
+    public function treballador(){
         $tasques = Tasca::where('id_usr_assignat', Auth::id())
             ->orderBy('data_final')
             ->get();
 
-        $urgents = $tasques->where('prioritat', 'urgent')->where('estat', '!=', 'revisat');
-        $noUrgents = $tasques->where('prioritat', '!=', 'urgent');
-        $pendents = $noUrgents->where('estat', 'pendent');
-        $finalitzades = $noUrgents->whereIn('estat', ['fet', 'revisat']);
+        $acabades = ['fet', 'revisat'];
 
-        return view('dashboardTreballador', compact(
-            'tasques',
-            'urgents',
-            'pendents',
-            'finalitzades'
-        ));
+        $finalitzades = $tasques->whereIn('estat', $acabades);
+
+        $urgents = $tasques->where('prioritat', 'urgent')->whereNotIn('estat', $acabades);
+
+        $pendents = $tasques->where('prioritat', '!=', 'urgent')->whereNotIn('estat', $acabades);
+
+        return view('dashboardTreballador', compact('tasques', 'urgents', 'pendents', 'finalitzades'));
     }
 }

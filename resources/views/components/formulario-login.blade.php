@@ -24,10 +24,6 @@
 
     <div class="login-actions">
         <div class="login-actions__options">
-            <a class="login-actions__link" href="/contrasenya/oblidada">
-                Has oblidat la contrasenya?
-            </a>
-
             <label class="remember">
                 <input class="remember__check" type="checkbox" name="remember">
                 <span>Recorda'm en el dispositiu</span>
@@ -36,6 +32,10 @@
 
         <button class="btn" type="submit">Enviar</button>
     </div>
+
+    <a class="login-actions__link login-register" href="/contrasenya/oblidada">
+        Has oblidat la contrasenya?
+    </a>
 
     <p class="login-register">
         <a href="/registre">Registra't aquí</a>

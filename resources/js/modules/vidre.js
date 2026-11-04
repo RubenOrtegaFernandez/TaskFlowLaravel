@@ -164,7 +164,13 @@ export default class Vidre {
         const contingut = panell.querySelector(':scope > .admin-panel__content');
 
         if (contingut) {
-          this.aplicaVidreGrup(contingut.querySelectorAll(':scope > .tasca'), this._tasca);
+          this.asseguraFons(contingut);
+
+          const tasques = contingut.querySelectorAll(':scope > .tasca');
+          const targetes = contingut.querySelectorAll(':scope > .targeta-vidre');
+
+          this.aplicaVidreGrup(tasques, this._tasca);
+          this.aplicaVidreGrup(targetes, this._vidre);
         }
       });
     }

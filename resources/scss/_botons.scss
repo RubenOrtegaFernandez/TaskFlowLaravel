@@ -46,3 +46,14 @@
   padding-inline: 24px;
   white-space: nowrap;
 }
+
+.btn--canviar-contrasenya {
+  width: auto;
+  min-width: 220px;
+  padding-inline: 20px;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+}

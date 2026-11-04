@@ -20,5 +20,7 @@
     @endif
 
     @include('components.taula-categories')
+
+    <a class="btn" href="{{ route('categories.create', ['origen' => 'categoria']) }}">Agregar</a>
 </section>
 @endsection

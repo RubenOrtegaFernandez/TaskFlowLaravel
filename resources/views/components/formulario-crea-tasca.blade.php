@@ -117,6 +117,8 @@
                 @if ($tasca)
                     <a class="btn btn--tornar" href="{{ route('tasca.index') }}">Tornar al llistat</a>
                     <button class="btn btn--enviar" type="submit">Desar canvis</button>
+                    <a class="btn btn--tornar" href="{{ route('tasca.index') }}">Tornar al pistat</a>
+                    <button class="btn btn--enviar" type="submit">Desar canvis</button>
                 @else
                     <a class="btn btn--tornar" href="{{ ($origen ?? 'dashboard') === 'tasques' ? route('tasca.index') : (auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index')) }}">Tornar enrere</a>
                     <button class="btn btn--enviar" type="submit">Enviar</button>

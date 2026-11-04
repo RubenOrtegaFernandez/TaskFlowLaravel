@@ -2,62 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RecuperarContrasenyaMail;
 use App\Models\Usuari;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 
 class ControladorRecuperacio
 {
     public function mostrarFormulari()
     {
-        $esValid = view('contrasenyaOblidada');
-
-        return $esValid;
+        return view('contrasenyaOblidada');
     }
 
     public function enviarEnllac(Request $request)
     {
-        $request->validate([
-            'correu' => ['required', 'email'],
-        ]);
+        $request->validate(['correu' => ['required', 'email']]);
 
         $usuari = Usuari::where('correu', $request->correu)->first();
 
         if ($usuari) {
             $token = Password::broker()->createToken($usuari);
+            $enllac = url('/restablir-contrasenya/' . $token) . '?correu=' . urlencode($usuari->correu);
 
-            $enllac = url('/restablir-contrasenya/' . $token)
-                . '?correu=' . $usuari->correu;
-
-            $missatge = 'Recuperació de contrasenya: ' . $enllac;
-
-            Mail::raw($missatge, function ($mail) use ($usuari) {
-                $mail->to($usuari->correu);
-                $mail->subject('Recuperació de contrasenya');
-            });
+            Mail::to($usuari->correu)->send(new RecuperarContrasenyaMail($enllac));
         }
 
-        return back()->with(
-            'status',
-            'Si el correu existeix, rebràs les instruccions de recuperació.'
-        );
+        return back()->with('status', 'Si el correu existeix, rebràs les instruccions de recuperació.');
     }
 
-    public function mostrarRestabliment($token)
+    public function mostrarRestabliment(Request $request, $token)
     {
-        $correu = request('correu');
-        $usuari = Usuari::where('correu', $correu)->first();
-
-        if (!$usuari || !Password::broker()->tokenExists($usuari, $token)) {
-            $vista = redirect()->route('contrasenya.oblidada')
-                ->with('error', 'L’enllaç de recuperació no és vàlid o ha caducat.');
+        if ($this->tokenValid($request->query('correu'), $token)) {
+            $resposta = view('restablirContrasenya');
         } else {
-            $vista = view('restablirContrasenya');
+            $resposta = redirect()->route('contrasenya.oblidada')
+                ->with('error', 'L’enllaç de recuperació no és vàlid o ha caducat.');
         }
 
-        return $vista;
+        return $resposta;
     }
 
     public function restablir(Request $request, $token)
@@ -67,22 +51,28 @@ class ControladorRecuperacio
             'contrasenya' => ['required', 'min:8', 'confirmed'],
         ]);
 
-        $usuari = Usuari::where('correu', $request->correu)->first();
-
-        if ($usuari && Password::broker()->tokenExists($usuari, $token)) {
+        if ($this->tokenValid($request->correu, $token)) {
+            $usuari = Usuari::where('correu', $request->correu)->first();
             $usuari->contrasenya = Hash::make($request->contrasenya);
             $usuari->save();
 
             Password::broker()->deleteToken($usuari);
 
-            $vista = redirect()->route('login')
+            $resposta = redirect()->route('login')
                 ->with('status', 'La contrasenya s’ha canviat correctament.');
         } else {
-            $vista = back()->withErrors([
+            $resposta = back()->withErrors([
                 'correu' => 'L’enllaç de recuperació no és vàlid o ha caducat.',
             ]);
         }
 
-        return $vista;
+        return $resposta;
+    }
+
+    private function tokenValid($correu, $token)
+    {
+        $usuari = Usuari::where('correu', $correu)->first();
+
+        return $usuari && Password::broker()->tokenExists($usuari, $token);
     }
 }

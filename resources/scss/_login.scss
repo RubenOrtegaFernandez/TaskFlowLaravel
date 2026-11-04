@@ -186,13 +186,14 @@
   box-shadow: none;
 
   &--sol {
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   &__options {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    padding-left: 20px;
   }
 
   &__link {
@@ -242,5 +243,50 @@
   margin-top: 5px;
   pointer-events: none;
   text-align: center;
+}
 
+.mail-recovery-card {
+  min-height: auto;
+  justify-content: center;
+  gap: 18px;
+  padding: 42px 36px 32px;
+}
+
+.mail-recovery-title {
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.08em;
+}
+
+.mail-recovery-text {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.mail-recovery-actions {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0;
+}
+
+.btn--mail-recovery {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  padding: 14px 24px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  color: $color-clar;
+  background: rgba($color-primari, 0.9);
+  box-shadow: 0 10px 24px rgba($color-negre, 0.16);
+}
+
+.mail-recovery-signature {
+  margin-top: 8px;
+  font-weight: 600;
+  line-height: 1.7;
 }

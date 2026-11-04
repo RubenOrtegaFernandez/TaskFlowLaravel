@@ -53,9 +53,9 @@
 <section class="admin-panel">
     <h2 class="admin-panel__title">Treballadors</h2>
 
-    <div class="admin-panel__content admin-panel__content--simple">
+    <div class="admin-panel__content admin-panel__content--simple targeta-vidre">
         @forelse ($treballadors as $treballador)
-            <a href="{{ route('usuari.show', $treballador) }}" class="treballador-targeta">
+            <a href="{{ route('usuari.show', $treballador) }}">
                 <img
                     class="perfil__avatar"
                     src="{{ asset($treballador->img ?: 'img/default.png') }}"

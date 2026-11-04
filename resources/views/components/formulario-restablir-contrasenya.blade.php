@@ -43,7 +43,7 @@
     @endif
 
     <div class="login-actions login-actions--sol">
-        <button class="btn" type="submit">Canviar contrasenya</button>
+        <button class="btn btn--canviar-contrasenya" type="submit">CANVIAR CONTRASENYA</button>
     </div>
 
     <p class="login-register">
