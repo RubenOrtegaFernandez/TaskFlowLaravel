@@ -29,13 +29,15 @@ export default class Validador {
 }
 
   mostraError(nom, missatge) {
-    const camp = this._form.elements[nom];
-
+  const camp = this._form.elements[nom];
+  
     if (camp) {
       const error = document.createElement('span');
       error.className = 'error-camp';
       error.textContent = missatge;
-      camp.insertAdjacentElement('afterend', error);
+
+      const contenidor = camp.closest('.field') || camp;
+      contenidor.insertAdjacentElement('afterend', error);
     }
   }
 

@@ -15,4 +15,8 @@ class Categoria extends Model
     protected $fillable = [
         'nom_cat',
     ];
+
+    public function tasques(){
+        return $this->hasMany(Tasca::class, 'categoria', 'nom_cat');
+    }
 }

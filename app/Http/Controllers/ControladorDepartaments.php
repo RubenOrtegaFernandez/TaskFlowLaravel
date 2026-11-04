@@ -200,8 +200,7 @@ class ControladorDepartaments
         return $esValid;
     }
 
-    public function delete(Departament $departament)
-    {
+    public function delete(Departament $departament){
         $esValid = null;
 
         if (!Auth::check()) {

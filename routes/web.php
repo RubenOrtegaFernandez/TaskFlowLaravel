@@ -57,6 +57,14 @@ Route::get('/categoria/create', [ControladorCategories::class, 'create'])->name(
 
 Route::post('/categoria', [ControladorCategories::class, 'store'])->name('categories.store');
 
+Route::get('/categoria/{categoria}/editar', [ControladorCategories::class, 'edit'])->whereNumber('categoria')->name('categories.edit');
+
+Route::post('/categoria/{categoria}/actualitzar', [ControladorCategories::class, 'update'])->whereNumber('categoria')->name('categories.update');
+
+Route::get('/categoria/{categoria}/esborrar', [ControladorCategories::class, 'delete'])->whereNumber('categoria')->name('categories.delete');
+
+Route::post('/categoria/{categoria}/esborrar', [ControladorCategories::class, 'destroy'])->whereNumber('categoria')->name('categories.destroy');
+
 Route::get('/treballadors', fn () => 'Treballadors')->name('treballadors.index');
 
 Route::redirect('/usuaris', '/admin/usuaris');
