@@ -12,6 +12,7 @@ use App\Http\Controllers\ControladorPerfil;
 use App\Http\Controllers\ControladorDashboard;
 use App\Http\Controllers\ControladorUsuaris;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Exports\TasquesExport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -34,6 +35,8 @@ Route::post('/tasca/{tasca}/actualitzar', [ControladorTasques::class, 'update'])
 Route::get('/tasca/{tasca}/esborrar', [ControladorTasques::class, 'delete'])->whereNumber('tasca')->name('tasca.delete');
 
 Route::post('/tasca/{tasca}/esborrar', [ControladorTasques::class, 'destroy'])->whereNumber('tasca')->name('tasca.destroy');
+
+Route::post('/tasca/{tasca}/activar-desactivar', [ControladorTasques::class, 'canviarActiva'])->whereNumber('tasca')->name('tasca.canviar-activa');
 
 Route::get('/departaments', [ControladorDepartaments::class, 'validar'])->name('departament.index');
 
@@ -67,7 +70,15 @@ Route::post('/categoria/{categoria}/esborrar', [ControladorCategories::class, 'd
 
 Route::get('/treballadors', fn () => 'Treballadors')->name('treballadors.index');
 
-Route::redirect('/usuaris', '/admin/usuaris');
+Route::get('/usuaris', function () {
+    if (!Auth::check()) {
+        return redirect()->route('login');
+    }
+
+    return Auth::user()->rol_tipus === 'cap'
+        ? redirect()->route('cap.usuaris.index')
+        : redirect()->route('usuari.index');
+});
 
 Route::prefix('admin/usuaris')->name('usuari.')->group(function () {
     Route::get('/', [ControladorUsuaris::class, 'index'])->name('index');

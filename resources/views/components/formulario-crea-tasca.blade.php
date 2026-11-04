@@ -19,6 +19,10 @@
         @endif
     </div>
 
+    @if ($tasca)
+        <input type="hidden" name="origen" value="{{ $origen ?? 'dashboard' }}">
+    @endif
+
     <div class="tasca-card__grid">
         <div class="tasca-card__col">
             <div class="tasca-caixa">
@@ -115,9 +119,7 @@
 
             <div class="tasca-accions">
                 @if ($tasca)
-                    <a class="btn btn--tornar" href="{{ route('tasca.index') }}">Tornar al llistat</a>
-                    <button class="btn btn--enviar" type="submit">Desar canvis</button>
-                    <a class="btn btn--tornar" href="{{ route('tasca.index') }}">Tornar al pistat</a>
+                    <a class="btn btn--tornar" href="{{ ($origen ?? 'dashboard') === 'tasques' ? route('tasca.index') : (auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index')) }}">Tornar enrere</a>
                     <button class="btn btn--enviar" type="submit">Desar canvis</button>
                 @else
                     <a class="btn btn--tornar" href="{{ ($origen ?? 'dashboard') === 'tasques' ? route('tasca.index') : (auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index')) }}">Tornar enrere</a>

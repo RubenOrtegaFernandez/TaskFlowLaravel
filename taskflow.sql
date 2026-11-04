@@ -63,7 +63,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '0001_01_01_000002_create_usuaris_table', 1),
 (3, '0001_01_01_000003_create_tasques_table', 1),
 (4, '0001_01_01_000004_afegir_remember_token_a_usuaris', 2),
-(5, '0001_01_01_000005_create_password_reset_tokens_table', 3);
+(5, '0001_01_01_000005_create_password_reset_tokens_table', 3),
+(6, '2026_11_04_000001_add_activa_to_tasques_table', 4);
 
 -- --------------------------------------------------------
 
@@ -86,6 +87,7 @@ CREATE TABLE `password_reset_tokens` (
 CREATE TABLE `tasques` (
   `id_tas` bigint UNSIGNED NOT NULL,
   `estat` enum('pendent','en_curs','fet','revisat') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pendent',
+  `activa` tinyint(1) NOT NULL DEFAULT 1,
   `nom_tas` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `descripcio` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `data_inici` timestamp NOT NULL,

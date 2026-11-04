@@ -1,6 +1,12 @@
 @props(['tasca', 'mode' => 'treballador'])
 
-<article class="tasca">
+@php
+    $colorTasca = in_array($tasca->estat, ['fet', 'revisat'], true)
+        ? 'finalitzada'
+        : ($tasca->prioritat === 'urgent' ? 'urgent' : 'pendent');
+@endphp
+
+<article class="tasca tasca--{{ $colorTasca }}">
     <h3 class="tasca__titol">{{ $tasca->nom_tas }}</h3>
 
     <div class="tasca__fila">
@@ -12,7 +18,7 @@
         @endif
 
 
-        <span class="tasca__xip">
+        <span class="tasca__xip tasca__xip--{{ $tasca->prioritat }}">
             {{ ucfirst($tasca->prioritat) }}
         </span>
 
@@ -22,7 +28,11 @@
             </span>
         @endif
 
-        @if ($tasca->estat === 'revisat')
+        @if ($tasca->estat === 'fet')
+            <span class="tasca__xip tasca__xip--fet">
+                Fet
+            </span>
+        @elseif ($tasca->estat === 'revisat')
             <span class="tasca__xip tasca__xip--revisada">
                 Revisada
             </span>
@@ -30,11 +40,13 @@
     </div>
 
     <div class="tasca__accions">
-        <a class="tasca__boto" href="{{ route('tasca.show', $tasca) }}">
+        <a class="tasca__boto" href="{{ route('tasca.show', ['tasca' => $tasca, 'origen' => 'dashboard']) }}">
             VEURE
         </a>
 
-        @if ($mode === 'treballador' && $tasca->estat !== 'fet' && $tasca->estat !== 'revisat')
+        @if ($mode === 'treballador' && !$tasca->activa && $tasca->estat !== 'fet' && $tasca->estat !== 'revisat')
+            <p class="admin-panel__description">Aquesta tasca està desactivada.</p>
+        @elseif ($mode === 'treballador' && $tasca->estat !== 'fet' && $tasca->estat !== 'revisat')
             <form method="POST" action="{{ route('tasca.fet', $tasca) }}">
                 @csrf
 

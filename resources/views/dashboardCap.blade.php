@@ -53,9 +53,9 @@
 <section class="admin-panel">
     <h2 class="admin-panel__title">Treballadors</h2>
 
-    <div class="admin-panel__content admin-panel__content--simple targeta-vidre">
+    <div class="admin-panel__content admin-panel__content--simple">
         @forelse ($treballadors as $treballador)
-            <a href="{{ route('usuari.show', $treballador) }}">
+            <a class="treballador-targeta targeta-vidre is-liquid" href="{{ route('cap.usuaris.show', ['usuari' => $treballador, 'origen' => 'dashboard']) }}">
                 <img
                     class="perfil__avatar"
                     src="{{ asset($treballador->img ?: 'img/default.png') }}"
@@ -63,7 +63,9 @@
                 <span>{{ $treballador->nom_usu }}</span>
             </a>
         @empty
-            <p class="admin-panel__description">Encara no hi ha treballadors al teu departament.</p>
+            <div class="targeta-vidre is-liquid treballadors-buit" role="status">
+                Encara no hi ha treballadors assignats a aquest departament.
+            </div>
         @endforelse
     </div>
 </section>

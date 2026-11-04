@@ -54,7 +54,7 @@ class ControladorTasques{
         return view('tasca.veureTasca', compact('tasca'));
     }
 
-    public function edit(Tasca $tasca){
+    public function edit(Request $request, Tasca $tasca){
         $esValid = null;
 
         if (!Auth::check()) {
@@ -77,6 +77,7 @@ class ControladorTasques{
                 'tasca' => $tasca,
                 'departaments' => $departaments->orderBy('nom')->get(),
                 'categories' => $categories,
+                'origen' => $request->query('origen') === 'tasques' ? 'tasques' : 'dashboard',
             ));
         }
 
@@ -200,7 +201,11 @@ class ControladorTasques{
             }
 
             $tasca->update($dades);
-            $esValid = redirect()->route('tasca.index')->with('status', 'Tasca modificada correctament.');
+            $origen = $request->input('origen') === 'tasques' ? 'tasques' : 'dashboard';
+            $rutaTornada = $origen === 'tasques'
+                ? 'tasca.index'
+                : (Auth::user()->rol_tipus === 'admin' ? 'dashboardadmin.index' : 'dashboardcap.index');
+            $esValid = redirect()->route($rutaTornada)->with('status', 'Tasca modificada correctament.');
         }
 
         return $esValid;
@@ -233,6 +238,23 @@ class ControladorTasques{
         return $esValid;
     }
 
+    public function canviarActiva(Tasca $tasca){
+        $esValid = null;
+
+        if (!Auth::check()) {
+            $esValid = redirect()->route('login');
+        } elseif (Auth::user()->rol_tipus !== 'admin'
+            && (Auth::user()->rol_tipus !== 'cap' || $tasca->id_dep_assignat != Auth::user()->id_dep)) {
+            $esValid = back()->with('error', 'No pots modificar aquesta tasca.');
+        } else {
+            $tasca->update(['activa' => !$tasca->activa]);
+            $missatge = $tasca->activa ? 'Tasca activada correctament.' : 'Tasca desactivada correctament.';
+            $esValid = back()->with('status', $missatge);
+        }
+
+        return $esValid;
+    }
+
    
     public function marcarFet(Tasca $tasca){
         $resultat = null;
@@ -243,6 +265,7 @@ class ControladorTasques{
 
         } elseif (Auth::user()->rol_tipus === 'client'
             && $tasca->id_usr_assignat === Auth::id()
+            && $tasca->activa
             && $tasca->estat !== 'fet'
             && $tasca->estat !== 'revisat') {
 

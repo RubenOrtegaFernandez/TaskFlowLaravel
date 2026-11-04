@@ -23,6 +23,11 @@
                 <p class="admin-panel__description">No hi ha tasques urgents.</p>
             @endforelse
         </div>
+
+        <div class="admin-panel__action">
+            <span class="admin-panel__action-text">Vols afegir tasques? fes-ho aquí</span>
+            <a href="{{ route('tasca.create', ['prioritat' => 'urgent', 'origen' => 'dashboard']) }}" class="btn">Afegir</a>
+        </div>
     </section>
 
     <section class="admin-panel">
@@ -30,12 +35,17 @@
 
         <div class="admin-panel__content admin-panel__content--simple">
             @forelse ($categories as $categoria)
-                <div class="targeta-vidre is-liquid">
+                <div class="targeta-vidre targeta-vidre--adaptable is-liquid">
                     <span>{{ $categoria->nom_cat }}</span>
                 </div>
             @empty
                 <p class="admin-panel__description">Encara no hi ha categories.</p>
             @endforelse
+        </div>
+
+        <div class="admin-panel__action">
+            <span class="admin-panel__action-text">Vols afegir categories? fes-ho aquí</span>
+            <a href="{{ route('categories.create') }}" class="btn">Afegir</a>
         </div>
     </section>
 
@@ -44,12 +54,17 @@
 
         <div class="admin-panel__content admin-panel__content--simple">
             @forelse ($departaments as $departament)
-                <div class="targeta-vidre is-liquid">
+                <div class="targeta-vidre targeta-vidre--adaptable is-liquid">
                     <span>{{ $departament->nom }}</span>
                 </div>
             @empty
                 <p class="admin-panel__description">Encara no hi ha departaments.</p>
             @endforelse
+        </div>
+
+        <div class="admin-panel__action">
+            <span class="admin-panel__action-text">Vols afegir departaments? fes-ho aquí</span>
+            <a href="{{ route('departament.create', ['origen' => 'dashboard']) }}" class="btn">Afegir</a>
         </div>
     </section>
 @endsection

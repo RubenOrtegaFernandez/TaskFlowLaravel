@@ -23,6 +23,9 @@
     @if (session('status'))
         <p class="admin-panel__description">{{ session('status') }}</p>
     @endif
+    @if (session('error'))
+        <p class="admin-panel__description">{{ session('error') }}</p>
+    @endif
 
     @include('components.taula-tasques')
 

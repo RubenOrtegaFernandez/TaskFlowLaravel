@@ -16,6 +16,7 @@ class Tasca extends Model
 
     protected $fillable = [
         'estat',
+        'activa',
         'nom_tas',
         'descripcio',
         'data_inici',
@@ -30,6 +31,7 @@ class Tasca extends Model
     protected $casts = [
         'data_inici' => 'datetime',
         'data_final' => 'datetime',
+        'activa' => 'boolean',
     ];
 
     public function creador()

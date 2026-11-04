@@ -23,11 +23,11 @@
                     <td data-label="Cap">{{ $treballador->rol_tipus === 'cap' ? 'Aquest usuari és el cap' : ($treballador->departament?->cap?->nom_usu ?? 'Sense cap') }}</td>
                     <td data-label="Rol">{{ ['admin' => 'Administrador', 'cap' => 'Cap', 'client' => 'Treballador'][$treballador->rol_tipus] ?? $treballador->rol_tipus }}</td>
                     <td class="col-accions" data-label="Accions">
-                        <a href="{{ route('usuari.show', $treballador) }}" title="Veure usuari" aria-label="Veure {{ $treballador->nom_usu }}">
+                        <a href="{{ route(auth()->user()->rol_tipus === 'cap' ? 'cap.usuaris.show' : 'usuari.show', ['usuari' => $treballador, 'origen' => auth()->user()->rol_tipus === 'cap' ? 'cap-usuaris' : 'admin-usuaris']) }}" title="Veure usuari" aria-label="Veure {{ $treballador->nom_usu }}">
                             <svg class="field__icon" aria-hidden="true"><use xlink:href="#icon-ull"></use></svg>
                         </a>
                         @if (auth()->user()->rol_tipus === 'admin' || (auth()->user()->rol_tipus === 'cap' && $treballador->rol_tipus === 'client'))
-                            <a href="{{ route('usuari.edit', $treballador) }}" title="Modificar usuari" aria-label="Modificar {{ $treballador->nom_usu }}">
+                            <a href="{{ route(auth()->user()->rol_tipus === 'cap' ? 'cap.usuaris.edit' : 'usuari.edit', $treballador) }}" title="Modificar usuari" aria-label="Modificar {{ $treballador->nom_usu }}">
                                 <svg class="field__icon" aria-hidden="true"><use xlink:href="#icon-editar"></use></svg>
                             </a>
                         @endif

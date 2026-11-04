@@ -30,7 +30,7 @@ class ControladorDashboard
 
     public function cap()
     {
-        $resultado = redirect('/login')->with('error', 'Logeate como cap per poder entrar.');
+        $resultado = redirect('/login')->with('error', 'No tens permisos per entrar al dashboard del cap.');
 
         if (Auth::check() && Auth::user()->rol_tipus === 'cap') {
             $treballadors = Usuari::where('rol_tipus', 'client')

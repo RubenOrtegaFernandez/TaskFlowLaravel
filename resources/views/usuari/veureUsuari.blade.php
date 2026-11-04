@@ -4,7 +4,11 @@
 @section('header-title', 'TREBALLADORS')
 
 @php
-    $rutaLlistaUsuaris = auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.index') : route('usuari.index');
+    $rutaTornada = match ($origen ?? 'dashboard') {
+        'admin-usuaris' => route('usuari.index'),
+        'cap-usuaris' => route('cap.usuaris.index'),
+        default => auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index'),
+    };
 @endphp
 
 @section('header-nav')
@@ -38,7 +42,7 @@
     </section>
 
     <div class="tasca-accions">
-        <a class="btn btn--tornar" href="{{ $rutaLlistaUsuaris }}">Tornar al llistat</a>
+        <a class="btn btn--tornar" href="{{ $rutaTornada }}">{{ str_contains($origen ?? '', 'usuaris') ? 'Tornar al llistat' : 'Tornar al dashboard' }}</a>
     </div>
 </div>
 @endsection

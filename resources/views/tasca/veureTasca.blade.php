@@ -6,6 +6,7 @@
 @php
     $rutaDashboard = auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index');
     $rutaTreballadors = auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.index') : route('usuari.index');
+    $rutaTornada = request('origen') === 'tasques' ? route('tasca.index') : $rutaDashboard;
 @endphp
 
 @section('header-nav')
@@ -33,6 +34,10 @@
             <tr>
                 <th>Estat</th>
                 <td>{{ str_replace('_', ' ', $tasca->estat) }}</td>
+            </tr>
+            <tr>
+                <th>Disponibilitat</th>
+                <td>{{ $tasca->activa ? 'Activa' : 'Desactivada' }}</td>
             </tr>
             <tr>
                 <th>Prioritat</th>
@@ -66,6 +71,8 @@
     </table>
     </div>
 
-    <a class="btn tasca__boto" href="{{ route('tasca.index') }}">Tornar al llistat</a>
+    <a class="btn tasca__boto" href="{{ $rutaTornada }}">
+        {{ request('origen') === 'tasques' ? 'Tornar al llistat' : 'Tornar al dashboard' }}
+    </a>
 </div>
 @endsection

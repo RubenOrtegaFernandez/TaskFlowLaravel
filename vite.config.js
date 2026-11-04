@@ -8,8 +8,8 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    server: {
+    //server: {
         host: '192.168.12.34',
         cors: true,
-    },
+    //},
 });

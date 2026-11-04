@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 
 class ControladorUsuaris
 {
-    public function index()
+    public function index(Request $request)
     {
         $resposta = null;
 
@@ -21,6 +21,14 @@ class ControladorUsuaris
             $resposta = redirect()->route('login');
         } elseif (Auth::user()->rol_tipus === 'client') {
             $resposta = redirect()->route('dashboardtreballador.index');
+
+            if ($request->routeIs('usuari.index')) {
+                $resposta->with('error', 'Logeate como cap per poder entrar.');
+            }
+        } elseif (Auth::user()->rol_tipus === 'cap' && $request->routeIs('usuari.index')) {
+            $resposta = redirect()->route('cap.usuaris.index');
+        } elseif (Auth::user()->rol_tipus === 'admin' && $request->routeIs('cap.usuaris.index')) {
+            $resposta = redirect()->route('usuari.index');
         } else {
             $usuaris = Usuari::with(['departament.cap'])
                 ->orderBy('nom_usu');
@@ -42,7 +50,7 @@ class ControladorUsuaris
         return $resposta;
     }
 
-    public function show(Usuari $usuari)
+    public function show(Request $request, Usuari $usuari)
     {
         $resposta = null;
 
@@ -57,7 +65,10 @@ class ControladorUsuaris
             $resposta = redirect()->route('dashboardcap.index');
         } else {
             $usuari->load(['departament.cap'])->loadCount(['tasquesAssignades', 'tasquesCreades']);
-            $resposta = view('usuari.veureUsuari', compact('usuari'));
+            $origen = in_array($request->query('origen'), ['dashboard', 'admin-usuaris', 'cap-usuaris'], true)
+                ? $request->query('origen')
+                : 'dashboard';
+            $resposta = view('usuari.veureUsuari', compact('usuari', 'origen'));
         }
 
         return $resposta;

@@ -304,6 +304,21 @@
   background: transparent;
   box-shadow: 8px 8px 4px rgba(12, 30, 39, 0.22);
 
+  &--urgent {
+    background: rgba(255, 82, 82, 0.16);
+    border: 1px solid rgba(255, 130, 130, 0.32);
+  }
+
+  &--pendent {
+    background: rgba(255, 220, 80, 0.16);
+    border: 1px solid rgba(255, 230, 130, 0.3);
+  }
+
+  &--finalitzada {
+    background: rgba(85, 255, 85, 0.15);
+    border: 1px solid rgba(120, 255, 120, 0.3);
+  }
+
   > .vidre-fons {
     position: absolute;
     inset: 0;
@@ -350,6 +365,22 @@
     background: rgba(85, 255, 85, 0.15);
   }
 
+  &__xip--urgent {
+    background: rgba(255, 82, 82, 0.24);
+  }
+
+  &__xip--mitja {
+    background: rgba(255, 220, 80, 0.24);
+  }
+
+  &__xip--alta {
+    background: rgba(255, 145, 50, 0.25);
+  }
+
+  &__xip--fet {
+    background: rgba(85, 255, 85, 0.15);
+  }
+
   &__accions {
     display: flex;
     flex-wrap: wrap;
@@ -391,4 +422,18 @@
 
 .targeta-vidre.is-liquid {
   background: rgba(255, 255, 255, 0.08);
+}
+
+.targeta-vidre--adaptable {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.treballadors-buit {
+  width: fit-content;
+  max-width: 100%;
+  min-height: 0;
+  padding: 24px 28px;
+  font-size: 18px;
+  line-height: 1.5;
 }
