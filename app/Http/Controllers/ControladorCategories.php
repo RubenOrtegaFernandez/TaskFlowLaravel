@@ -31,8 +31,8 @@ class ControladorCategories
 
         if (!Auth::check()) {
             $esValid = redirect()->route('login');
-        } elseif (Auth::user()->rol_tipus !== 'admin') {
-            $esValid = redirect()->route(Auth::user()->rol_tipus === 'cap' ? 'dashboardcap.index' : 'dashboardtreballador.index');
+        } elseif (!in_array(Auth::user()->rol_tipus, ['admin', 'cap'], true)) {
+            $esValid = redirect()->route('dashboardtreballador.index');
         } else {
             $esValid = view('components.categories.creaCategoria');
         }
@@ -46,8 +46,8 @@ class ControladorCategories
 
         if (!Auth::check()) {
             $esValid = redirect()->route('login');
-        } elseif (Auth::user()->rol_tipus !== 'admin') {
-            $esValid = redirect()->route(Auth::user()->rol_tipus === 'cap' ? 'dashboardcap.index' : 'dashboardtreballador.index');
+        } elseif (!in_array(Auth::user()->rol_tipus, ['admin', 'cap'], true)) {
+            $esValid = redirect()->route('dashboardtreballador.index');
         } else {
             $dades = $request->validate([
                 'nom' => ['required', 'string', 'max:25', 'unique:categories,nom_cat'],
@@ -68,7 +68,7 @@ class ControladorCategories
 
         if (!Auth::check()) {
             $esValid = redirect()->route('login');
-        } elseif (Auth::user()->rol_tipus === 'client') {
+        } elseif (!in_array(Auth::user()->rol_tipus, ['admin', 'cap'], true)) {
             $esValid = redirect()->route('dashboardtreballador.index');
         } else {
             $esValid = view('components.categories.editarCategoria', compact('categoria'));
@@ -82,11 +82,11 @@ class ControladorCategories
 
         if (!Auth::check()) {
             $esValid = redirect()->route('login');
-        } elseif (Auth::user()->rol_tipus === 'client') {
+        } elseif (!in_array(Auth::user()->rol_tipus, ['admin', 'cap'], true)) {
             $esValid = redirect()->route('dashboardtreballador.index');
         } else {
             $categoria->loadCount('tasques');
-        $esValid = view('components.categories.esborrarCategoria', compact('categoria'));
+            $esValid = view('components.categories.esborrarCategoria', compact('categoria'));
         }
 
         return $esValid;
@@ -97,8 +97,8 @@ class ControladorCategories
 
         if (!Auth::check()) {
             $esValid = redirect()->route('login');
-        } elseif (Auth::user()->rol_tipus !== 'admin') {
-            $esValid = redirect()->route(Auth::user()->rol_tipus === 'cap' ? 'dashboardcap.index' : 'dashboardtreballador.index');
+        } elseif (!in_array(Auth::user()->rol_tipus, ['admin', 'cap'], true)) {
+            $esValid = redirect()->route('dashboardtreballador.index');
         } else {
             $dades = $request->validate([
                 'nom' => ['required', 'string', 'max:25', Rule::unique('categories', 'nom_cat')->ignore($categoria->id_categoria, 'id_categoria')],
@@ -119,8 +119,8 @@ class ControladorCategories
 
         if (!Auth::check()) {
             $esValid = redirect()->route('login');
-        } elseif (Auth::user()->rol_tipus !== 'admin') {
-            $esValid = redirect()->route(Auth::user()->rol_tipus === 'cap' ? 'dashboardcap.index' : 'dashboardtreballador.index');
+        } elseif (!in_array(Auth::user()->rol_tipus, ['admin', 'cap'], true)) {
+            $esValid = redirect()->route('dashboardtreballador.index');
         } else {
             try {
                 $categoria->delete();

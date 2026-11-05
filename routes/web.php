@@ -11,10 +11,9 @@ use App\Http\Controllers\ControladorRecuperacio;
 use App\Http\Controllers\ControladorPerfil;
 use App\Http\Controllers\ControladorDashboard;
 use App\Http\Controllers\ControladorUsuaris;
+use App\Http\Controllers\ControladorExports;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Exports\TasquesExport;
-use Maatwebsite\Excel\Facades\Excel;
 
 Route::resource('tasca', ControladorTasques::class)->only(['create', 'store']);
 
@@ -37,6 +36,8 @@ Route::get('/tasca/{tasca}/esborrar', [ControladorTasques::class, 'delete'])->wh
 Route::post('/tasca/{tasca}/esborrar', [ControladorTasques::class, 'destroy'])->whereNumber('tasca')->name('tasca.destroy');
 
 Route::post('/tasca/{tasca}/activar-desactivar', [ControladorTasques::class, 'canviarActiva'])->whereNumber('tasca')->name('tasca.canviar-activa');
+
+Route::get('/tasques/exportar', [ControladorExports::class, 'tasques'])->name('tasques.exportar')->middleware('auth');
 
 Route::get('/departaments', [ControladorDepartaments::class, 'validar'])->name('departament.index');
 
@@ -122,13 +123,15 @@ Route::post('/ajustes/foto', [ControladorPerfil::class, 'actualitzarFoto'])->nam
 
 Route::post('/ajustes/contrasenya', [ControladorPerfil::class, 'actualitzarContrasenya'])->name('ajustes.contrasenya');
 
+Route::post('/ajustes/logout', [ControladorPerfil::class, 'tancarSessio'])
+    ->middleware('auth')
+    ->name('ajustes.logout');
+
 Route::view('/registre', 'registreTaskFlow')->name('registre');
 
 Route::post('/registre', [ControladorRegistre::class, 'registrarUsuari']);
 
-Route::get('/tasques/export', function () {
-    return Excel::download(new TasquesExport, 'tasques.xlsx');
-})->name('tasques.export');
+Route::get('/tasques/export', [ControladorExports::class, 'tasques'])->name('tasques.export');
 
 Route::post('/tasca/{tasca}/fet', [ControladorTasques::class, 'marcarFet'])->name('tasca.fet');
 Route::post('/tasca/{tasca}/revisar', [ControladorTasques::class, 'marcarRevisat'])->name('tasca.revisar');

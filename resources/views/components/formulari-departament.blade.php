@@ -86,7 +86,7 @@
     </div>
 
     <div class="tasca-accions">
-        <a class="btn btn--tornar" href="{{ $origen === 'dashboard' ? route('dashboardadmin.index') : route('departament.index') }}">Tornar enrere</a>
+        <a class="btn btn--tornar" href="{{ $origen === 'dashboard' ? (auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index')) : route('departament.index') }}">Tornar enrere</a>
         <button class="btn btn--enviar" type="submit">{{ $departament ? 'Desar canvis' : 'Crear departament' }}</button>
     </div>
 </form>

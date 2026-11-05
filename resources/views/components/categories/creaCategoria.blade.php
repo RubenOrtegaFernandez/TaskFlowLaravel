@@ -4,7 +4,7 @@
 @section('header-title', 'CATEGORIES')
 
 @section('header-nav')
-    <a class="admin-header__link" href="{{ route('dashboardadmin.index') }}">DASHBOARD</a>
+    <a class="admin-header__link" href="{{ auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index') }}">DASHBOARD</a>
     <a class="admin-header__link" href="{{ route('tasca.index') }}">TASQUES</a>
     <a class="admin-header__link" href="{{ route('departament.index') }}">DEPARTAMENTS</a>
     <a class="admin-header__link" href="{{ auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.index') : route('usuari.index') }}">TREBALLADORS</a>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="tasca-accions">
-            <a class="btn btn--tornar" href="{{ route('dashboardadmin.index') }}">Tornar enrere</a>
+            <a class="btn btn--tornar" href="{{ auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index') }}">Tornar enrere</a>
             <button class="btn btn--enviar" type="submit">Crear categoria</button>
         </div>
     </form>

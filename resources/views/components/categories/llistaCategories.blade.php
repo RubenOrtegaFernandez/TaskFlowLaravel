@@ -4,15 +4,20 @@
 
 @section('header-title', 'Categories')
 
+@php
+    $rutaDashboard = auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index');
+    $rutaTreballadors = auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.index') : route('usuari.index');
+@endphp
+
 @section('header-nav')
-    <a class="admin-header__link" href="{{ route('dashboardadmin.index') }}">DASHBOARD</a>
+    <a class="admin-header__link" href="{{ auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index') }}">DASHBOARD</a>
     <a class="admin-header__link" href="{{ route('tasca.index') }}">TASQUES</a>
     <a class="admin-header__link" href="{{ route('departament.index') }}">DEPARTAMENTS</a>
     <a class="admin-header__link" href="{{ auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.index') : route('usuari.index') }}">TREBALLADORS</a>
 @endsection
 
 @section('content')
-<section class="admin-panel llista-tasques">
+<section class="admin-panel llista-tasques departaments-llista">
     <h2 class="admin-panel__title">CATEGORIES</h2>
     
     @if (session('status'))

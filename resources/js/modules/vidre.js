@@ -58,6 +58,20 @@ export default class Vidre {
     return element.getAttribute('data-vidre-inicialitzat') !== null;
   }
 
+  esExclos(element) {
+    let resultat = false;
+
+    if (element && (
+      element.closest('.ajustes-panel__accions') ||
+      element.closest('.ajustes-panel__logout-form') ||
+      element.closest('.ajustes-form button[type="submit"]')
+    )) {
+      resultat = true;
+    }
+
+    return resultat;
+  }
+
   marca(element) {
     element.classList.add('is-liquid');
     element.setAttribute('data-vidre-inicialitzat', 'true');
@@ -75,8 +89,22 @@ export default class Vidre {
     return resultat;
   }
 
+  netejaFonsAjustes() {
+    document.querySelectorAll('.ajustes-panel .vidre-fons--font-render, .ajustes-form .vidre-fons--font-render, .ajustes-panel__logout-form .vidre-fons--font-render, .ajustes__taula .vidre-fons--font-render').forEach((img) => img.remove());
+  }
+
   asseguraFons(root) {
-    if (root && !root.querySelector(':scope > .vidre-fons')) {
+    let haDeSortir = false;
+
+    if (!root) {
+      haDeSortir = true;
+    } else if (this.esExclos(root)) {
+      haDeSortir = true;
+    } else if (root.querySelector(':scope > .vidre-fons')) {
+      haDeSortir = true;
+    }
+
+    if (!haDeSortir) {
       const origen = document.querySelector('img.vidre-fons');
 
       if (origen) {
@@ -88,7 +116,7 @@ export default class Vidre {
   }
 
   aplicaVidre(element, root, configuracio) {
-    if (element && root && element.parentElement === root && !this.esInicialitzat(element)) {
+    if (element && root && !this.esExclos(element) && element.parentElement === root && !this.esInicialitzat(element)) {
       LiquidGlass.init({
         root: root,
         glassElements: [element],

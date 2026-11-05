@@ -31,7 +31,7 @@
 
     <a class="btn" href="{{ route('tasca.create', ['origen' => 'tasques']) }}">Agregar</a>
 
-    <a class="btn btn--exportar" href="{{ route('tasques.export') }}">
+    <a class="btn" href="{{ route('tasques.exportar') }}">
         📊 Descarregar Excel
     </a>
 </section>

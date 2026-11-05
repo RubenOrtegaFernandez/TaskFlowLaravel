@@ -4,8 +4,13 @@
 
 @section('header-title', 'Departaments')
 
+@php
+    $rutaDashboard = auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index');
+    $rutaTreballadors = auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.index') : route('usuari.index');
+@endphp
+
 @section('header-nav')
-    <a class="admin-header__link" href="{{ route('dashboardadmin.index') }}">DASHBOARD</a>
+    <a class="admin-header__link" href="{{ $rutaDashboard }}">DASHBOARD</a>
     <a class="admin-header__link" href="{{ route('tasca.index') }}">TASQUES</a>
     <a class="admin-header__link" href="{{ auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.index') : route('usuari.index') }}">TREBALLADORS</a>
     <a class="admin-header__link" href="{{ route('categories.index') }}">CATEGORIES</a>

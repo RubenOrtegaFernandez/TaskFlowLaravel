@@ -8,7 +8,13 @@
     <section class="admin-panel ajustes-panel">
         <div class="ajustes-panel__capcalera">
             <h2 class="admin-panel__title">Configuració del perfil</h2>
-            <a class="btn btn--tornar" href="{{ auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : (auth()->user()->rol_tipus === 'client' ? route('dashboardtreballador.index') : route('dashboardadmin.index')) }}">Tornar al dashboard</a>
+            <div class="ajustes-panel__accions">
+                <a class="btn btn--tornar" href="{{ empty(auth()->user()?->rol_tipus) ? route('login') : (auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : (auth()->user()->rol_tipus === 'client' ? route('dashboardtreballador.index') : route('dashboardadmin.index'))) }}">Tornar al dashboard</a>
+                <form class="ajustes-panel__logout-form" action="{{ route('ajustes.logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn ajustes-panel__logout-btn">TANCAR SESSIÓ</button>
+                </form>
+            </div>
         </div>
 
         <table class="llistat ajustes__taula">

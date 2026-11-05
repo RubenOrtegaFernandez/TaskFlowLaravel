@@ -4,6 +4,8 @@
 .btn,
 .tasca__boto {
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
   flex-shrink: 0;
   width: 128px;
   min-height: 49px;

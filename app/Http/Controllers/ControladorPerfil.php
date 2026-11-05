@@ -12,9 +12,9 @@ class ControladorPerfil
 {
     public function index()
     {
-        return view('ajustes', [
-            'usuari' => Auth::user(),
-        ]);
+        $usuari = Auth::user();
+
+        return (!$usuari || empty($usuari->rol_tipus)) ? redirect()->route('login') : view('ajustes', ['usuari' => $usuari]);
     }
 
     public function actualitzarFoto(Request $request){
@@ -70,5 +70,15 @@ class ControladorPerfil
         Usuari::where('id_correu', $usuari->id_correu)->update(['contrasenya' => Hash::make($request->contrasenya_nova)]);
 
         return redirect()->route('ajustes')->with('exit_contrasenya', 'Contrasenya actualitzada.');
+    }
+
+    public function tancarSessio(Request $request)
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
     }
 }
