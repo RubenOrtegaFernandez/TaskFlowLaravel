@@ -56,18 +56,30 @@ class ControladorDashboard
     }
 
     public function treballador(){
-        $tasques = Tasca::where('id_usr_assignat', Auth::id())
-            ->orderBy('data_final')
-            ->get();
+        $resultado = redirect()->route('login');
 
-        $acabades = ['fet', 'revisat'];
+        if (Auth::check() && Auth::user()->rol_tipus === 'client') {
+            $tasques = Tasca::where('id_usr_assignat', Auth::id())
+                ->orderBy('data_final')
+                ->get();
 
-        $finalitzades = $tasques->whereIn('estat', $acabades);
+            // Les tasques fetes o revisades queden separades de les que encara requereixen acció.
+            $acabades = ['fet', 'revisat'];
 
-        $urgents = $tasques->where('prioritat', 'urgent')->whereNotIn('estat', $acabades);
+            $finalitzades = $tasques->whereIn('estat', $acabades);
 
-        $pendents = $tasques->where('prioritat', '!=', 'urgent')->whereNotIn('estat', $acabades);
+            $urgents = $tasques->where('prioritat', 'urgent')->whereNotIn('estat', $acabades);
 
-        return view('dashboardTreballador', compact('tasques', 'urgents', 'pendents', 'finalitzades'));
+            $pendents = $tasques->where('prioritat', '!=', 'urgent')->whereNotIn('estat', $acabades);
+
+            $resultado = view('dashboardTreballador', compact('tasques', 'urgents', 'pendents', 'finalitzades'));
+        } elseif (Auth::check()) {
+            $rutaDashboard = Auth::user()->rol_tipus === 'admin'
+                ? 'dashboardadmin.index'
+                : 'dashboardcap.index';
+            $resultado = redirect()->route($rutaDashboard);
+        }
+
+        return $resultado;
     }
 }

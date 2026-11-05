@@ -4,17 +4,15 @@
 @section('header-title', 'TASCA')
 
 @php
-    $rutaDashboard = auth()->user()->rol_tipus === 'cap' ? route('dashboardcap.index') : route('dashboardadmin.index');
-    $rutaTreballadors = auth()->user()->rol_tipus === 'cap' ? route('cap.usuaris.index') : route('usuari.index');
+    $rutaDashboard = match (auth()->user()->rol_tipus) {
+        'cap' => route('dashboardcap.index'),
+        'client' => route('dashboardtreballador.index'),
+        default => route('dashboardadmin.index'),
+    };
     $rutaTornada = request('origen') === 'tasques' ? route('tasca.index') : $rutaDashboard;
 @endphp
 
-@section('header-nav')
-    <a class="admin-header__link" href="{{ $rutaDashboard }}">DASHBOARD</a>
-    <a class="admin-header__link" href="{{ route('departament.index') }}">DEPARTAMENT</a>
-    <a class="admin-header__link" href="{{ $rutaTreballadors }}">TREBALLADORS</a>
-    <a class="admin-header__link" href="{{ route('categories.index') }}">CATEGORIES</a>
-@endsection
+@section('sense-nav', 'si')
 
 @section('content')
 <div class="tasca-detall">

@@ -155,6 +155,7 @@ class ControladorDepartaments
             $treballadorsValids = true;
 
             if (!$esAdmin) {
+                // Un cap només pot afegir treballadors lliures o que ja pertanyin al seu departament.
                 $quantitatValida = Usuari::whereIn('id_correu', $idsTreballadors)
                     ->where('rol_tipus', 'client')
                     ->where(function ($consulta) use ($departament) {
@@ -170,6 +171,7 @@ class ControladorDepartaments
                     'treballadors' => 'Només pots afegir treballadors sense departament o del teu departament.',
                 ])->withInput();
             } else {
+                // El nom i les assignacions es guarden juntes perquè el departament no quedi a mig actualitzar.
                 DB::transaction(function () use ($departament, $dades, $idsTreballadors, $idCap, $esAdmin) {
                     $departament->update(['nom' => $dades['nom']]);
 
@@ -224,6 +226,7 @@ class ControladorDepartaments
         } elseif (Auth::user()->rol_tipus !== 'admin') {
             $esValid = redirect()->route(Auth::user()->rol_tipus === 'cap' ? 'dashboardcap.index' : 'dashboardtreballador.index');
         } else {
+            // Es desenllacen persones i tasques abans d'eliminar el departament per conservar-ne els registres.
             DB::transaction(function () use ($departament) {
                 Usuari::where('id_dep', $departament->id_dep)->update(['id_dep' => null]);
                 Tasca::where('id_dep_assignat', $departament->id_dep)->update(['id_dep_assignat' => null]);

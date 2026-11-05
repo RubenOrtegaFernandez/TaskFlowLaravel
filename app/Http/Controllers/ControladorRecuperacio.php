@@ -23,6 +23,7 @@ class ControladorRecuperacio
         $usuari = Usuari::where('correu', $request->correu)->first();
 
         if ($usuari) {
+            // El token queda associat al compte i només s'envia si l'adreça existeix.
             $token = Password::broker()->createToken($usuari);
             $enllac = url('/restablir-contrasenya/' . $token) . '?correu=' . urlencode($usuari->correu);
 
@@ -56,6 +57,7 @@ class ControladorRecuperacio
             $usuari->contrasenya = Hash::make($request->contrasenya);
             $usuari->save();
 
+            // En esborrar el token, l'enllaç deixa de poder-se reutilitzar.
             Password::broker()->deleteToken($usuari);
 
             $resposta = redirect()->route('login')

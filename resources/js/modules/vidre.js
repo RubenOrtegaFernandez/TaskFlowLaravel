@@ -96,6 +96,7 @@ export default class Vidre {
   asseguraFons(root) {
     let haDeSortir = false;
 
+    // El fons només es clona si l'arrel no en té cap i no està exclosa de l'efecte.
     if (!root) {
       haDeSortir = true;
     } else if (this.esExclos(root)) {

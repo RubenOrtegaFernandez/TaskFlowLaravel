@@ -51,7 +51,23 @@ class ControladorTasques{
     }
 
     public function show(Tasca $tasca){
-        return view('tasca.veureTasca', compact('tasca'));
+        $esValid = null;
+
+        // El detall queda limitat al departament del cap o a les tasques assignades al treballador.
+        if (!Auth::check()) {
+            $esValid = redirect()->route('login');
+        } elseif (Auth::user()->rol_tipus === 'client'
+            && $tasca->id_usr_assignat != Auth::id()) {
+            $esValid = redirect()->route('dashboardtreballador.index');
+        } elseif (Auth::user()->rol_tipus === 'cap'
+            && $tasca->id_dep_assignat != Auth::user()->id_dep) {
+            $esValid = redirect()->route('dashboardcap.index');
+        } else {
+            $tasca->load(['assignat', 'creador', 'departament']);
+            $esValid = view('tasca.veureTasca', compact('tasca'));
+        }
+
+        return $esValid;
     }
 
     public function edit(Request $request, Tasca $tasca){
@@ -153,6 +169,7 @@ class ControladorTasques{
             $dades['id_usr_creador'] = Auth::id();
 
             if ($prioritatFixa) {
+                // La prioritat urgent ve fixada des del dashboard i no depèn del valor enviat pel formulari.
                 $dades['prioritat'] = 'urgent';
             }
 
@@ -241,6 +258,7 @@ class ControladorTasques{
     public function canviarActiva(Tasca $tasca){
         $esValid = null;
 
+        // L'administrador pot canviar qualsevol tasca; el cap només les del seu departament.
         if (!Auth::check()) {
             $esValid = redirect()->route('login');
         } elseif (Auth::user()->rol_tipus !== 'admin'
@@ -259,6 +277,7 @@ class ControladorTasques{
     public function marcarFet(Tasca $tasca){
         $resultat = null;
 
+        // El treballador només pot acabar una tasca seva que estigui activa i encara no finalitzada.
         if (!Auth::check()) {
 
             $resultat = redirect()->route('login');
@@ -287,6 +306,7 @@ class ControladorTasques{
     public function marcarRevisat(Tasca $tasca){
         $resultat = null;
 
+        // Només el cap del departament pot revisar una tasca que el treballador ja ha marcat com a feta.
         if (!Auth::check()) {
 
             $resultat = redirect()->route('login');

@@ -32,6 +32,7 @@ class ControladorPerfil
         // 2. Borrar la anterior solo si era una foto personalizada
         $anterior = $usuari->foto_perfil;
 
+        // Només s'elimina un fitxer personalitzat dins la carpeta de perfils.
         if ($anterior
             && str_starts_with($anterior, 'img/perfils/')
             && !str_contains($anterior, '..')) {
@@ -53,6 +54,7 @@ class ControladorPerfil
     public function actualitzarContrasenya(Request $request)
     {
         $usuari = Auth::user();
+        $esValid = null;
 
         $request->validate([
             'contrasenya_actual' => ['required'],
@@ -64,12 +66,14 @@ class ControladorPerfil
                 'contrasenya_nova.confirmed'  => 'Les contrasenyes no coincideixen.',]);
 
         if (!Hash::check($request->contrasenya_actual, $usuari->getAuthPassword())) {
-            return back()->withErrors(['contrasenya_actual' => 'La contrasenya actual no és correcta.']);
+            $esValid = back()->withErrors(['contrasenya_actual' => 'La contrasenya actual no és correcta.']);
+        } else {
+            Usuari::where('id_correu', $usuari->id_correu)->update(['contrasenya' => Hash::make($request->contrasenya_nova)]);
+
+            $esValid = redirect()->route('ajustes')->with('exit_contrasenya', 'Contrasenya actualitzada.');
         }
 
-        Usuari::where('id_correu', $usuari->id_correu)->update(['contrasenya' => Hash::make($request->contrasenya_nova)]);
-
-        return redirect()->route('ajustes')->with('exit_contrasenya', 'Contrasenya actualitzada.');
+        return $esValid;
     }
 
     public function tancarSessio(Request $request)

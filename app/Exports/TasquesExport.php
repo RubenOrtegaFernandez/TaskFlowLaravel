@@ -4,12 +4,26 @@ namespace App\Exports;
 
 use App\Models\Tasca;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class TasquesExport
+class TasquesExport implements FromCollection, WithHeadings
 {
     public function collection(): Collection
     {
-        return Tasca::with(['assignat', 'creador', 'departament'])
+        $tasques = Tasca::with(['assignat', 'creador', 'departament']);
+
+        // Els caps només exporten les tasques del seu departament.
+        if (Auth::user()->rol_tipus === 'cap') {
+            if (! Auth::user()->id_dep) {
+                $tasques->whereRaw('1 = 0');
+            } else {
+                $tasques->where('id_dep_assignat', Auth::user()->id_dep);
+            }
+        }
+
+        $resultat = $tasques
             ->get()
             ->map(function ($tasca) {
                 return [
@@ -26,6 +40,8 @@ class TasquesExport
                     'Departament' => $tasca->departament->nom_dep ?? '',
                 ];
             });
+
+        return $resultat;
     }
 
     public function headings(): array

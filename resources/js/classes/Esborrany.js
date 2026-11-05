@@ -34,6 +34,7 @@ export default class Esborrany {
 
     if (dades) {
       this._camps.forEach((camp) => {
+        // Conservem els valors recuperats pel servidor després d'una validació fallida.
         if (dades[camp.name] && camp.value === '') {
           camp.value = dades[camp.name];
         }

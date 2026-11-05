@@ -33,6 +33,7 @@ class ControladorUsuaris
             $usuaris = Usuari::with(['departament.cap'])
                 ->orderBy('nom_usu');
 
+            // El cap només veu la seva plantilla; si no té departament, només pot veure el seu compte.
             if (Auth::user()->rol_tipus === 'cap') {
                 if (Auth::user()->id_dep) {
                     $usuaris->where('id_dep', Auth::user()->id_dep)
@@ -124,6 +125,7 @@ class ControladorUsuaris
 
             $dades = $request->validate($regles);
 
+            // Es manté un únic cap per departament i s'impedeix que l'administrador es revoqui el seu propi rol.
             $errorDepartament = null;
 
             if ($esAdministrador && Auth::id() == $usuari->id_correu && $dades['rol_tipus'] !== 'admin') {
@@ -193,6 +195,7 @@ class ControladorUsuaris
             $rutaUsuariIndex = Auth::user()->rol_tipus === 'cap' ? 'cap.usuaris.index' : 'usuari.index';
             $resposta = redirect()->route($rutaUsuariIndex)->with('error', 'No pots esborrar el teu propi usuari.');
         } else {
+            // Les tasques es conserven; només s'eliminen les referències a l'usuari abans d'esborrar-lo.
             DB::transaction(function () use ($usuari) {
                 Tasca::where('id_usr_assignat', $usuari->id_correu)->update(['id_usr_assignat' => null]);
                 Tasca::where('id_usr_creador', $usuari->id_correu)->update(['id_usr_creador' => null]);

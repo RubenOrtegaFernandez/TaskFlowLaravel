@@ -3,7 +3,7 @@
 
 @section('title', 'Treballador · TaskFlow')
 
-@section('header-title', 'TASQUES')
+@section('header-title', 'DASHBOARD')
 
 @section('sense-nav', 'si')
 

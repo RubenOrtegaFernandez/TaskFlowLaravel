@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Usuari extends Authenticatable
 {
+    use HasFactory;
+
     protected $table = 'usuaris';
 
     protected $primaryKey = 'id_correu';
@@ -41,11 +44,13 @@ class Usuari extends Authenticatable
 
     public function getAuthPassword()
     {
+        // El projecte desa la contrasenya a "contrasenya", no a la columna per defecte d'Laravel.
         return $this->contrasenya;
     }
 
     public function getEmailForPasswordReset()
     {
+        // Laravel utilitza aquest correu per associar el token de recuperació amb el compte.
         return $this->correu;
     }
 

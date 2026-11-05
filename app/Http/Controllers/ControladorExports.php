@@ -3,25 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Exports\TasquesExport;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ControladorExports extends Controller
 {
-    public function tasques()
+    public function tasques(): BinaryFileResponse|RedirectResponse
     {
-        $export = new TasquesExport;
-        $excel = new \PHPExcel();
-        $sheet = $excel->getActiveSheet();
-        $files = collect($export->collection())
-            ->map(fn ($fila) => array_values((array) $fila))
-            ->all();
+        $esValid = null;
 
-        $sheet->fromArray(array_merge([$export->headings()], $files));
+        // L'exportació general només està disponible per als rols de gestió.
+        if (! Auth::check()) {
+            $esValid = redirect()->route('login');
+        } elseif (Auth::user()->rol_tipus === 'client') {
+            $esValid = redirect()->route('dashboardtreballador.index');
+        } else {
+            $esValid = Excel::download(new TasquesExport, 'tasques.xlsx');
+        }
 
-        return response()->streamDownload(function () use ($excel) {
-            $writer = new \PHPExcel_Writer_Excel2007($excel);
-            $writer->save('php://output');
-        }, 'tasques.xlsx', [
-            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        ]);
+        return $esValid;
     }
 }

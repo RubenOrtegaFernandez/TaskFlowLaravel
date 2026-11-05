@@ -21,11 +21,11 @@ Route::get('/dashboard/admin', [ControladorDashboard::class, 'admin'])->name('da
 
 Route::get('/dashboard/cap', [ControladorDashboard::class, 'cap'])->name('dashboardcap.index');
 
-Route::get('/dashboard/treballador', [ControladorDashboard::class, 'treballador'])->name('dashboardtreballador.index');
+Route::get('/dashboard/treballador', [ControladorDashboard::class, 'treballador'])->name('dashboardtreballador.index')->middleware('auth');
 
 Route::get('/tasca/llistat-tasques', [ControladorTasques::class, 'validar'])->name('tasca.index');
 
-Route::get('/tasca/{tasca}', [ControladorTasques::class, 'show'])->whereNumber('tasca')->name('tasca.show');
+Route::get('/tasca/{tasca}', [ControladorTasques::class, 'show'])->whereNumber('tasca')->name('tasca.show')->middleware('auth');
 
 Route::get('/tasca/{tasca}/editar', [ControladorTasques::class, 'edit'])->whereNumber('tasca')->name('tasca.edit');
 
@@ -72,13 +72,18 @@ Route::post('/categoria/{categoria}/esborrar', [ControladorCategories::class, 'd
 Route::get('/treballadors', fn () => 'Treballadors')->name('treballadors.index');
 
 Route::get('/usuaris', function () {
+    $esValid = null;
+
     if (!Auth::check()) {
-        return redirect()->route('login');
+        $esValid = redirect()->route('login');
+    } else {
+        // El punt d'entrada conserva la destinació pròpia de cada rol.
+        $esValid = Auth::user()->rol_tipus === 'cap'
+            ? redirect()->route('cap.usuaris.index')
+            : redirect()->route('usuari.index');
     }
 
-    return Auth::user()->rol_tipus === 'cap'
-        ? redirect()->route('cap.usuaris.index')
-        : redirect()->route('usuari.index');
+    return $esValid;
 });
 
 Route::prefix('admin/usuaris')->name('usuari.')->group(function () {
@@ -131,7 +136,7 @@ Route::view('/registre', 'registreTaskFlow')->name('registre');
 
 Route::post('/registre', [ControladorRegistre::class, 'registrarUsuari']);
 
-Route::get('/tasques/export', [ControladorExports::class, 'tasques'])->name('tasques.export');
+Route::get('/tasques/export', [ControladorExports::class, 'tasques'])->name('tasques.export')->middleware('auth');
 
 Route::post('/tasca/{tasca}/fet', [ControladorTasques::class, 'marcarFet'])->name('tasca.fet');
 Route::post('/tasca/{tasca}/revisar', [ControladorTasques::class, 'marcarRevisat'])->name('tasca.revisar');
